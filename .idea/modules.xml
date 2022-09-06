@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/LaLigaPremier.iml" filepath="$PROJECT_DIR$/.idea/LaLigaPremier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laligapremier/laligapremier.iml" filepath="$PROJECT_DIR$/laligapremier/laligapremier.iml" />
+    </modules>
+  </component>
+</project>

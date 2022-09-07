@@ -32,7 +32,7 @@ public class Camiseta {
     @Column(name = "precio" , nullable = false)
     private Integer precio;
 
-    @Column(name = "imagen" , nullable = false)
+    @Column(name = "imagen")
     private String imagen;
 
     private static final long serialVersionUID = 1L;

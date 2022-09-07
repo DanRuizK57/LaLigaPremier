@@ -35,6 +35,6 @@ public class CamisetaServiceImpl implements ICamisetaService {
 
     @Override
     public void save(Camiseta camiseta) {
-        camisetaDao.save(camiseta)
+        camisetaDao.save(camiseta);
     }
 }

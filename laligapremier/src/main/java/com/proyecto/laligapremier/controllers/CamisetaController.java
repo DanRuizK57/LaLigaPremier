@@ -1,5 +1,4 @@
 package com.proyecto.laligapremier.controllers;
-
 import com.proyecto.laligapremier.service.ICamisetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,5 +20,16 @@ public class CamisetaController {
         return "index";
     }
 
+    @RequestMapping(name = "/selecciones" , method = RequestMethod.GET)
+    public String selecciones(Model model){
+        model.addAttribute("titulo" , "Listado de camisetas de selecciones");
+        model.addAttribute("camisetasSelecciones" , camisetaService.findAll());
+        return "selecciones";
+    }
 
+    public String equipos(Model model){
+        model.addAttribute("titulo" , "Listaod de camisetas de equipos");
+        model.addAttribute("camisetasEquipos" , camisetaService.findAll());
+        return "equipos";
+    }
 }

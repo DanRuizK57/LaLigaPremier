@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="es" xmlns:th="http://thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8" />
     <title>LaLiga Premier</title>
@@ -8,7 +8,9 @@
           rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
           crossorigin="anonymous">
+    <!-- Conexión CSS -->   
     <link rel="stylesheet" href="../../static/css/styles.css">
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../images/logo2.png">
 </head>
 <body>
@@ -39,11 +41,24 @@
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
                     <button class="btn btn-outline-primary" type="submit">🔍︎</button>
                 </form>
-                <button class="btn btn-outline-secondary btn-navbar" type="submit">🛒</button>
-                <button class="btn btn-primary btn-navbar" type="submit">Iniciar Sesión</button>
+                <ul class="mb-2 mb-lg-0" style="list-style: none;">
+                    <li>
+                        <a class="btn btn-outline-secondary btn-navbar" href="#" role="button">🛒</a>
+                    </li>
+                </ul>
+                <ul class="mb-2 mb-lg-0" style="list-style: none;">
+                    <li>
+                        <a class="btn btn-primary btn-navbar" href="#" role="button">Iniciar Sesión</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 </header>
+<footer class="bg-light text-lg-start" th:fragment="footer">
+    <div class="p-3" style="background-color: #e3f2fd;">
+      Contacto: laligapremier@contacto.cl
+    </div>
+</footer>
 </body>
 </html>

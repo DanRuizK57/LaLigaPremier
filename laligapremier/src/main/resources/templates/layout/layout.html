@@ -9,14 +9,12 @@
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
           crossorigin="anonymous">
     <!-- Conexión CSS -->   
-    <link rel="stylesheet" href="../../static/css/styles.css">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../images/logo2.png">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
 <header th:fragment="header">
     <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
-        <img src="../../images/logo.png" alt="Logo" class="logo">
+        <img th:src="@{/image/logo.png}" alt="Logo" class="logo">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/index}">LaLiga Premier</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

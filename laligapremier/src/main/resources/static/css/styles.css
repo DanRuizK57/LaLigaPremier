@@ -8,3 +8,12 @@
     margin-left: 30px;
     margin-right: 10px;
 }
+
+.cuerpo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tarjeta {
+    background-color: #c8d6e0;
+}

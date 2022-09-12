@@ -4,6 +4,33 @@
   <body>
     <header th:replace="layout/layout :: header"></header>
     <h1>Camisetas Disponibles</h1>
+    <!--Cuerpo de la página-->
+    <div class="cuerpo">
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a href="#">Nombre Camiseta</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a href="#">Nombre Camiseta</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a href="#">Nombre Camiseta</a>
+        </div>
+      </article>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
   </body>
 </html>

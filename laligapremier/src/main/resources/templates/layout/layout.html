@@ -10,6 +10,7 @@
           crossorigin="anonymous">
     <!-- Conexión CSS -->   
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/logo2.png}">
 </head>
 <body>
 <!--Barra de navegación-->
@@ -38,16 +39,16 @@
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="submit">🔍︎</button>
+                    <button class="btn btn-navbar" type="submit" style="background-color: white;">🔍︎</button>
                 </form>
                 <ul class="mb-2 mb-lg-0" style="list-style: none;">
                     <li>
-                        <a class="btn btn-outline-secondary btn-navbar" href="#" role="button">🛒</a>
+                        <a class="btn btn-navbar btn-carrito" href="#" role="button">🛒</a>
                     </li>
                 </ul>
                 <ul class="mb-2 mb-lg-0" style="list-style: none;">
                     <li>
-                        <a class="btn btn-primary btn-navbar" href="#" role="button">Iniciar Sesión</a>
+                        <a class="btn btn-navbar btn-inicio-sesion" href="#" role="button">Iniciar Sesión</a>
                     </li>
                 </ul>
             </div>
@@ -56,8 +57,13 @@
 </header>
 <!--Pié de página-->
 <footer class="bg-light text-lg-start" th:fragment="footer">
-    <div class="p-3" style="background-color: #e3f2fd;">
-      Contacto: laligapremier@contacto.cl
+    <div class="contenedor-footer">
+        <div class="info-contacto">
+            Contacto: laligapremier@contacto.cl
+        </div>
+        <div class="img-footer">
+            <img th:src="@{/image/logo.png}" alt="Logo" class="logo">
+        </div>
     </div>
 </footer>
 </body>

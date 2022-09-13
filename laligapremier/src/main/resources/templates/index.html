@@ -3,58 +3,8 @@
   <head th:replace="layout/layout :: head"></head>
   <body>
     <header th:replace="layout/layout :: header"></header>
-    <h1 id="h1">Camisetas Disponibles</h1>
-    <!--Cuerpo de la página-->
-    <div class="cuerpo">
-      <article class="tarjeta">
-        <div class="imagen-camiseta">
-          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta" height="300px" width="300px">
-        </div>
-        <div class="tarjeta-info">
-          <a href="#">Nombre Camiseta</a>
-        </div>
-      </article>
-      <article class="tarjeta">
-        <div class="imagen-camiseta">
-          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta" height="300px" width="300px">
-        </div>
-        <div class="tarjeta-info">
-          <a href="#">Nombre Camiseta</a>
-        </div>
-      </article>
-      <article class="tarjeta">
-        <div class="imagen-camiseta">
-          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta" height="300px" width="300px">
-        </div>
-        <div class="tarjeta-info">
-          <a href="#">Nombre Camiseta</a>
-        </div>
-      </article>
-      <article class="tarjeta">
-        <div class="imagen-camiseta">
-          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta" height="300px" width="300px">
-        </div>
-        <div class="tarjeta-info">
-          <a href="#">Nombre Camiseta</a>
-        </div>
-      </article>
-      <article class="tarjeta">
-        <div class="imagen-camiseta">
-          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta" height="300px" width="300px">
-        </div>
-        <div class="tarjeta-info">
-          <a href="#">Nombre Camiseta</a>
-        </div>
-      </article>
-      <article class="tarjeta">
-        <div class="imagen-camiseta">
-          <img th:src="@{/image/logo2.png}" alt="Imagen Camiseta" height="300px" width="300px">
-        </div>
-        <div class="tarjeta-info">
-          <a href="#">Nombre Camiseta</a>
-        </div>
-      </article>
-    </div>
+    <h4 class="titulo">Camisetas Disponibles</h4>
+    <div th:replace="layout/layout :: mostrar-camisetas"></div>
     <footer th:replace="layout/layout :: footer"></footer>
   </body>
 </html>

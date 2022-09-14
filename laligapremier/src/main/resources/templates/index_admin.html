@@ -3,7 +3,10 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
     <header th:replace="layout/layout :: header"></header>
-    <h4 class="titulo">Camisetas Disponibles</h4>
+    <div class="inicio-sesion">
+        <h4 class="titulo">Camisetas Disponibles</h4>
+        <button type="button" class="btn btn-primary" style="text-align: right;">AGREGAR CAMISETA</button>
+    </div>
     <div th:replace="layout/layout :: mostrar-camisetas"></div>
     <footer th:replace="layout/layout :: footer"></footer>
 </body>

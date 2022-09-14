@@ -85,3 +85,26 @@
     margin: 10px;
     margin-right: 40px;
 }
+
+.casilla {
+    background-color: #c8d6e0;
+    width: 500px;
+}
+
+.formato-datos-cuenta {
+    margin: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.formato-datos-cuenta a{
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+
+.formato-datos-cuenta a:hover {
+    color: blue;
+}
+
+

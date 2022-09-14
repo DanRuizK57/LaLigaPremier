@@ -4,6 +4,29 @@
 <body>
     <header th:replace="layout/layout :: header"></header>
     <h4 class="titulo">Iniciar Sesión</h4>
+    <!--Cuerpo de la página-->
+    <div class="formato-datos-cuenta">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Correo Electrónico</label>
+                <input type="email" class="form-control casilla" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Ingresa email">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <input type="password" class="form-control casilla" id="exampleInputPassword1" placeholder="********" >
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <a th:href="@{/registro}">¿No tienes una cuenta? ¡Crea una ahora!</a>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn" style="background-color: #c8d6e0;">INICIAR SESIÓN</button>
+            </div>  
+        </form>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

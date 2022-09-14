@@ -1,0 +1,15 @@
+package com.proyecto.laligapremier.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class CarritoController {
+
+    @GetMapping(value="/carrito-de-compras")
+    public String carrito(Model model) {
+        model.addAttribute("titulo", "Carrito de Compras");
+        return "carrito";
+    }
+}

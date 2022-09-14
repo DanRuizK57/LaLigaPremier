@@ -21,8 +21,14 @@ public class CamisetaController {
 
     @GetMapping(value = "/equipos")
     public String equipos(Model model){
-        model.addAttribute("titulo" , "Listaod de camisetas de equipos");
+        model.addAttribute("titulo" , "Listado de camisetas de equipos");
         model.addAttribute("camisetasEquipos" , camisetaService.findAll());
         return "equipos";
     }
+
+    @GetMapping(value = "/ver-camiseta")
+    public String verCamiseta(Model model){
+        return "ver_camiseta";
+    }
+
 }

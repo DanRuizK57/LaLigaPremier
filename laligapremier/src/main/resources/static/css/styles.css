@@ -107,4 +107,8 @@
     color: blue;
 }
 
-
+.cuerpo-ver-camiseta {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}

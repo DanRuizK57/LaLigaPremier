@@ -3,6 +3,18 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
     <header th:replace="layout/layout :: header"></header>
+    <div class="cuerpo-ver-camiseta">
+        <div class="camiseta">
+            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <h4>Camiseta FC Barcelona Messi</h4>
+        </div>
+        <div class="descripcion-camiseta">
+            <p></p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn" style="background-color: #c8d6e0;">Añadir al Carrito</button>
+        </div>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

@@ -112,3 +112,30 @@
     flex-flow: row wrap;
     justify-content: space-between;
 }
+
+.descripcion-camiseta {
+    background-color: #575d61;
+    height: 500px;
+    margin: 50px;
+    margin-right: 80px;
+    border-radius: 15px;
+}
+
+.tarjeta2 {
+    margin-top: 60px;
+    margin-bottom: 80px;
+    margin-left: 80px;
+    height: 600px;
+    width: 600px;
+}
+
+.info-camiseta {
+    height: 500px;
+    width: 50%;
+    margin: 50px;
+    margin-right: 80px;
+}
+
+.btn-al-carrito {
+    width: 100px;
+}

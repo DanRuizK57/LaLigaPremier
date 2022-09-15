@@ -4,15 +4,21 @@
 <body>
     <header th:replace="layout/layout :: header"></header>
     <div class="cuerpo-ver-camiseta">
-        <div class="camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
-            <h4>Camiseta FC Barcelona Messi</h4>
-        </div>
-        <div class="descripcion-camiseta">
-            <p></p>
-        </div>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn" style="background-color: #c8d6e0;">Añadir al Carrito</button>
+        <article class="tarjeta2">
+            <div class="imagen-camiseta">
+                <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="500px" width="500px">
+            </div>
+            <div class="tarjeta-info">
+                <h2>FC Barcelona Messi</h2>
+            </div>
+        </article>
+        <div class="info-camiseta">
+            <article class="descripcion-camiseta">
+                <p>sdfsdfsdf</p>
+            </article>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn" style="background-color: #c8d6e0;">Añadir al Carrito</button>
+            </div>
         </div>
     </div>
     <footer th:replace="layout/layout :: footer"></footer>

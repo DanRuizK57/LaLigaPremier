@@ -139,3 +139,10 @@
 .btn-al-carrito {
     width: 100px;
 }
+
+.texto-camiseta {
+    color: white;
+    text-align: center;
+    font-size: large;
+    padding-top: 50px;
+}

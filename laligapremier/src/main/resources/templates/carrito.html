@@ -4,6 +4,27 @@
 <body>
     <header th:replace="layout/layout :: header"></header>
     <h4 class="titulo">Carrito de Compras</h4>
+    <!--Cuerpo de la página-->
+    <div class="cuerpo-carrito">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Precio Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <th>FC Barcelona Messi</th>
+                    <th>$500.000</th>
+                    <th>$500.000</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

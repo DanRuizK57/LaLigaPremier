@@ -146,3 +146,35 @@
     font-size: large;
     padding-top: 50px;
 }
+/* Vista Carrito */
+.tabla-carrito {
+    width: 70%;
+}
+
+.cuerpo-carrito {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.encabezado-carrito {
+    background-color: #c8d6e0;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.texto-ec {
+    padding: 10px;
+    text-align: center;
+}
+
+.texto-cc {
+    padding: 10px;
+    text-align: center;
+    border-bottom: #c8d6e0;
+}
+
+.fila {
+    border-bottom: #c8d6e0;
+}

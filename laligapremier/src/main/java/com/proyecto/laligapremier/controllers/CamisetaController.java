@@ -31,4 +31,9 @@ public class CamisetaController {
         return "ver_camiseta";
     }
 
+    @GetMapping(value = "/formulario")
+    public String formulario(Model model){
+        return "formulario";
+    }
+
 }

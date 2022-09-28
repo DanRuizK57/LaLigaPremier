@@ -1,3 +1,5 @@
+
+/*---- Navbar ----*/
 .logo {
     width: 140px;
     height: 50px;
@@ -30,7 +32,7 @@
     margin: 30px;
 }
 
-/* Se utiliza en primera instancia flexbox, revisión a futuro */
+/*---- Vista Index ----*/
 .cuerpo {
     display: flex;
     justify-content: space-between;
@@ -67,6 +69,8 @@
     color: blue;
 }
 
+/*---- Footer ----*/
+
 .contenedor-footer {
     background-color: #e3f2fd;
     display: flex;
@@ -85,6 +89,8 @@
     margin: 10px;
     margin-right: 40px;
 }
+
+/*---- Formulario Cuenta ----*/
 
 .casilla {
     background-color: #c8d6e0;
@@ -106,6 +112,8 @@
 .formato-datos-cuenta a:hover {
     color: blue;
 }
+
+/*---- Vista Ver Camiseta  ----*/
 
 .cuerpo-ver-camiseta {
     display: flex;
@@ -146,11 +154,14 @@
     font-size: large;
     padding-top: 50px;
 }
-/* Vista Carrito */
+/* ---- Vista Carrito ----*/
 .tabla-carrito {
     width: 70%;
 }
 
+.tabla-carrito thead {
+    border-radius: 15px;
+}
 .cuerpo-carrito {
     display: flex;
     justify-content: center;
@@ -160,8 +171,8 @@
 
 .encabezado-carrito {
     background-color: #c8d6e0;
-    border-radius: 15px;
     text-align: center;
+    border-radius: 15px;
 }
 
 .texto-ec {
@@ -172,9 +183,16 @@
 .texto-cc {
     padding: 10px;
     text-align: center;
-    border-bottom: #c8d6e0;
+    border-bottom: 10px;
+    border-color: #575d61;
 }
 
 .fila {
     border-bottom: #c8d6e0;
+}
+
+/* ----------  Formulario ---------------*/
+.btn-añadir {
+    width: 12%;
+    margin-right: 100px;
 }

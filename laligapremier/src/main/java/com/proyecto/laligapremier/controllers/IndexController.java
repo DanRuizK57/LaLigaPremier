@@ -11,10 +11,17 @@ public class IndexController {
     @Autowired
     private ICamisetaService camisetaService;
 
-    @GetMapping(value = "/index")
+    @GetMapping(value = {"/index", "/"})
     public String index(Model model){
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetaService.findAll());
         return "index";
+    }
+
+    @GetMapping(value = "/index-admin")
+    public String indexAdmin(Model model){
+        model.addAttribute("titulo" , "Camisetas disponibles");
+        model.addAttribute("camisetas" , camisetaService.findAll());
+        return "index_admin";
     }
 }

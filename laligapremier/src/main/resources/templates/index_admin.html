@@ -5,7 +5,9 @@
     <header th:replace="layout/layout :: header"></header>
     <div class="inicio-sesion">
         <h4 class="titulo">Camisetas Disponibles</h4>
-        <button type="button" class="btn btn-primary" style="text-align: right;">AGREGAR CAMISETA</button>
+        <div class="d-flex justify-content-end">
+            <a type="button" class="btn btn-primary btn-añadir" th:href="@{/formulario}">AGREGAR CAMISETA</a>
+        </div>
     </div>
     <div th:replace="layout/layout :: mostrar-camisetas"></div>
     <footer th:replace="layout/layout :: footer"></footer>

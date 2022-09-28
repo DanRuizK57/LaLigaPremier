@@ -199,7 +199,7 @@
     border-radius: 15px;
 }
 
-/* ----------  Formulario ---------------*/
+/* ----------  Vista Admin ---------------*/
 .btn-añadir {
     width: 12%;
     margin-right: 100px;
@@ -207,4 +207,18 @@
 
 .btn-actualizar {
     margin-top: 50px;
+}
+
+/* ----------  Formulario ---------------*/
+.casilla-camiseta {
+    width: 500px;
+}
+
+.formato-datos-camiseta {
+    margin: 60px;
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    background-color: #c8d6e0;
+    border-radius: 15px;
 }

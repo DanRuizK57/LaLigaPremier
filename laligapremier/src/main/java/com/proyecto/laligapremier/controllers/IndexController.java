@@ -24,4 +24,11 @@ public class IndexController {
         model.addAttribute("camisetas" , camisetaService.findAll());
         return "index_admin";
     }
+
+    @GetMapping(value = "/index-usuario")
+    public String indexUsuario(Model model){
+        model.addAttribute("titulo" , "Camisetas disponibles");
+        model.addAttribute("camisetas" , camisetaService.findAll());
+        return "index_usuario";
+    }
 }

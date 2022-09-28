@@ -4,6 +4,35 @@
 <body>
     <header th:replace="layout/layout :: header"></header>
     <h4 class="titulo">Formulario</h4>
+    <div class="formato-datos-cuenta">
+        <form>
+            <div class="form-group">
+                <label for="nombreUsuario">Nombre de Usuario</label>
+                <input type="email" class="form-control casilla" id="nombreUsuario" aria-describedby="emailHelp"
+                       placeholder="Ingresa nombre de usuario">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" class="form-control casilla" id="correo" aria-describedby="emailHelp"
+                       placeholder="Ingresa email">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control casilla" id="contraseña" placeholder="********">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="confirmarContraseña">Confirmar Contraseña</label>
+                <input type="password" class="form-control casilla" id="confirmarContraseña" placeholder="********">
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn" style="background-color: #c8d6e0;">Crear Cuenta</button>
+            </div>
+        </form>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

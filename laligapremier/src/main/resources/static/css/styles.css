@@ -191,6 +191,14 @@
     border-bottom: #c8d6e0;
 }
 
+.precio-total {
+    background-color: #c8d6e0;
+    padding: 20px;
+    margin-right: 15%;
+    margin-bottom: 10%;
+    border-radius: 15px;
+}
+
 /* ----------  Formulario ---------------*/
 .btn-añadir {
     width: 12%;

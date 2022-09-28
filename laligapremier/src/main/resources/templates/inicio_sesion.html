@@ -8,14 +8,14 @@
     <div class="formato-datos-cuenta">
         <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">Correo Electrónico</label>
-                <input type="email" class="form-control casilla" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" class="form-control casilla" id="correo" aria-describedby="emailHelp"
                     placeholder="Ingresa email">
             </div>
             <br>
             <div class="form-group">
-                <label for="exampleInputPassword1">Contraseña</label>
-                <input type="password" class="form-control casilla" id="exampleInputPassword1" placeholder="********" >
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control casilla" id="contraseña" placeholder="********" >
             </div>
             <br>
             <div class="d-flex justify-content-center">
@@ -23,7 +23,7 @@
             </div>
             <br>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn" style="background-color: #c8d6e0;">INICIAR SESIÓN</button>
+                <a type="button" class="btn" style="background-color: #c8d6e0;" th:href="@{/index-usuario}">INICIAR SESIÓN</a>
             </div>  
         </form>
     </div>

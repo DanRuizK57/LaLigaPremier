@@ -222,3 +222,25 @@
     background-color: #c8d6e0;
     border-radius: 15px;
 }
+
+.subir-imagen{
+    background-color: white;
+    border-radius: 15px;
+    padding: 30%;
+    height: 90%;
+    margin-bottom: 10%;
+}
+
+.subir-imagen img {
+    width: 150px;
+    height: 150px;
+}
+
+.imagen-camiseta {
+    margin-right: 50px;
+    width: 50%;
+}
+
+.formulario-camiseta {
+    margin-left: 50px;
+}

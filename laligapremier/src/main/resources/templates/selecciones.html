@@ -4,7 +4,56 @@
   <body>
     <header th:replace="layout/layout :: header"></header>
     <h4 class="titulo">Camisetas de Selecciones</h4>
-    <div th:replace="layout/layout :: mostrar-camisetas"></div>
+    <div class="cuerpo">
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/camiseta-chile.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Chile 2015</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/cr7-portugal.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Portugal CR7</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/ronaldo-brasil.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Brasil Ronaldo</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/españa.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta España 2021-2022</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/mbappe.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Francia Mbappé</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/mexico-2018.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta México 2018</a>
+        </div>
+      </article>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
   </body>
 </html>

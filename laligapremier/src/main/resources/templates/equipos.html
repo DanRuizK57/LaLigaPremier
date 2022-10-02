@@ -4,7 +4,56 @@
   <body>
     <header th:replace="layout/layout :: header"></header>
     <h4 class="titulo">Camisetas de Equipos</h4>
-    <div th:replace="layout/layout :: mostrar-camisetas"></div>
+    <div class="cuerpo">
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/camiseta-alexis.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Inter Alexis</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/camiseta-temuco.png}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Deportes Temuco 2015</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/haaland.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Borussia Dormunt Haaland</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/juventus.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta Juventus 2019-2020</a>
+        </div>
+      </article>
+      <article class="tarjeta">
+        <div class="imagen-camiseta">
+          <img th:src="@{/image/camisetas/riverplate.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+        </div>
+        <div class="tarjeta-info">
+          <a th:href="@{/ver-camiseta}">Camiseta River Plate 2021-2022</a>
+        </div>
+      </article>
+    </div>
     <footer th:replace="layout/layout :: footer"></footer>
   </body>
 </html>

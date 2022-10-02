@@ -41,8 +41,8 @@
                                 <strong>Modo Administrador</strong>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
-                                <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+                                <li><a class="dropdown-item" th:href="@{/editar-perfil}">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" th:href="@{/cambiar-contraseña}">Cambiar Contraseña</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" th:href="@{/}">Cerrar Sesión</a></li>
                             </ul>
@@ -62,7 +62,7 @@
 <div class="cuerpo" th:fragment="mostrar-camisetas">
     <article class="tarjeta">
         <div class="imagen-camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <img th:src="@{/image/camisetas/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" class="img-camiseta">
         </div>
         <div class="tarjeta-info">
             <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
@@ -73,10 +73,10 @@
     </article>
     <article class="tarjeta">
         <div class="imagen-camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <img th:src="@{/image/camisetas/camiseta-alexis.jpg}" alt="Imagen Camiseta" class="img-camiseta">
         </div>
         <div class="tarjeta-info">
-            <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
+            <a th:href="@{/ver-camiseta}">Camiseta Inter Alexis</a>
         </div>
         <div class="d-flex justify-content-center">
             <a type="button" class="btn btn-warning btn-actualizar" th:href="@{/formulario}">ACTUALIZAR</a>
@@ -84,10 +84,10 @@
     </article>
     <article class="tarjeta">
         <div class="imagen-camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <img th:src="@{/image/camisetas/camiseta-temuco.png}" alt="Imagen Camiseta" class="img-camiseta">
         </div>
         <div class="tarjeta-info">
-            <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
+            <a th:href="@{/ver-camiseta}">Camiseta Dep. Temuco 2015</a>
         </div>
         <div class="d-flex justify-content-center">
             <a type="button" class="btn btn-warning btn-actualizar" th:href="@{/formulario}">ACTUALIZAR</a>
@@ -95,10 +95,10 @@
     </article>
     <article class="tarjeta">
         <div class="imagen-camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <img th:src="@{/image/camisetas/camiseta-chile.jpg}" alt="Imagen Camiseta" class="img-camiseta">
         </div>
         <div class="tarjeta-info">
-            <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
+            <a th:href="@{/ver-camiseta}">Camiseta Chile 2015</a>
         </div>
         <div class="d-flex justify-content-center">
             <a type="button" class="btn btn-warning btn-actualizar" th:href="@{/formulario}">ACTUALIZAR</a>
@@ -106,10 +106,10 @@
     </article>
     <article class="tarjeta">
         <div class="imagen-camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <img th:src="@{/image/camisetas/cr7-portugal.jpg}" alt="Imagen Camiseta" class="img-camiseta">
         </div>
         <div class="tarjeta-info">
-            <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
+            <a th:href="@{/ver-camiseta}">Camiseta Portugal CR7</a>
         </div>
         <div class="d-flex justify-content-center">
             <a type="button" class="btn btn-warning btn-actualizar" th:href="@{/formulario}">ACTUALIZAR</a>
@@ -117,10 +117,10 @@
     </article>
     <article class="tarjeta">
         <div class="imagen-camiseta">
-            <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="300px" width="300px">
+            <img th:src="@{/image/camisetas/ronaldo-brasil.jpg}" alt="Imagen Camiseta" class="img-camiseta">
         </div>
         <div class="tarjeta-info">
-            <a th:href="@{/ver-camiseta}">Camiseta FC Barcelona Messi</a>
+            <a th:href="@{/ver-camiseta}">Camiseta Brasil Ronaldo</a>
         </div>
         <div class="d-flex justify-content-center">
             <a type="button" class="btn btn-warning btn-actualizar" th:href="@{/formulario}">ACTUALIZAR</a>

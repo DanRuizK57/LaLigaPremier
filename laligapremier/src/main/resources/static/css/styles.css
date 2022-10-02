@@ -160,11 +160,18 @@
     margin: auto;
 }
 
-.texto-camiseta {
+.texto-desc-camiseta {
     color: white;
     text-align: center;
     font-size: large;
-    padding-top: 50px;
+    padding-top: 5%;
+}
+
+.texto-camiseta {
+    color: white;
+    font-size: large;
+    margin-top: 3%;
+    margin-left: 5%;
 }
 
 .btn-al-carrito {
@@ -260,4 +267,11 @@
 
 .formulario-camiseta {
     margin-left: 50px;
+}
+
+/*---- Vista Nosotros ----*/
+.nosotros-info {
+    margin-top: 5%;
+    margin-left: 8%;
+    font-size: large;
 }

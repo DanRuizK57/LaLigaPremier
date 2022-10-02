@@ -25,4 +25,10 @@ public class UsuarioController {
         return "editar_perfil";
     }
 
+    @GetMapping(value="/cambiar-contraseña")
+    public String cambiarContraseña(Model model) {
+        model.addAttribute("titulo" , "Cambiar Contraseña");
+        return "cambiar_contraseña";
+    }
+
 }

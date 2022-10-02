@@ -4,21 +4,19 @@
 <body>
     <header th:replace="layout/layout :: header"></header>
     <div class="cuerpo-ver-camiseta">
-        <article class="tarjeta2">
-            <div class="imagen-camiseta">
-                <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" height="500px" width="500px">
-            </div>
-            <div class="tarjeta-info">
-                <h2>FC Barcelona Messi</h2>
-            </div>
-        </article>
+        <div class="camiseta">
+            <article class="tarjeta2 d-flex justify-content-center flex-column">
+                    <img th:src="@{/image/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" class="img-ver-camiseta">
+                    <h2 class="tarjeta-info">FC Barcelona Messi</h2>
+            </article>
+        </div>
         <div class="info-camiseta">
             <article class="descripcion-camiseta">
                 <p class="texto-camiseta">Camiseta del FC Barcelona año 2019-2020</p>
                 <p class="texto-camiseta">Firmada por Leonel Messi</p>
                 <p class="texto-camiseta">Precio: $500.000</p>
             </article>
-            <div class="d-flex justify-content-center">
+            <div class="al-carrito d-flex justify-content-center">
                 <button class="btn" th:href="@{/carrito-de-compras}" style="background-color: #c8d6e0;">Añadir al Carrito</button>
             </div>
         </div>

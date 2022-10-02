@@ -19,4 +19,10 @@ public class UsuarioController {
         return "registro";
     }
 
+    @GetMapping(value="/editar-perfil")
+    public String editarPerfil(Model model) {
+        model.addAttribute("titulo" , "Editar Perfil");
+        return "editar_perfil";
+    }
+
 }

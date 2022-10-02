@@ -37,13 +37,13 @@
     display: flex;
     justify-content: space-between;
     flex-flow: row wrap;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 8%;
+    margin-right: 8%;
 }
 
 .tarjeta {
-    margin-top: 60px;
-    margin-bottom: 80px;
+    margin-top: 3%;
+    margin-bottom: 3%;
     height: 450px;
     width: 450px;
     background-color: #c8d6e0;
@@ -52,12 +52,18 @@
 
 .imagen-camiseta {
     text-align: center;
-    margin: 50px;
+    margin: 10%;
+    margin-left: 16%;
+}
+
+.img-camiseta{
+    height: 300px;
+    width: 300px;
 }
 
 .tarjeta-info{
     text-align: center;
-    margin-top: 25px;
+    margin-top: 2%;
 }
 
 .tarjeta-info a{
@@ -76,6 +82,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    margin-top: 20%;
 }
 
 .info-contacto {
@@ -117,35 +124,40 @@
 
 .cuerpo-ver-camiseta {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.camiseta {
+    width: 40%;
+}
+
+.info-camiseta {
+    height: 500px;
+    width: 60%;
+    margin: 50px;
+    margin-right: 80px;
+}
+
+.tarjeta2 {
+    margin-top: 13%;
+    margin-bottom: 20%;
+    margin-left: 80px;
+    height: 600px;
+    width: 90%;
 }
 
 .descripcion-camiseta {
     background-color: #575d61;
     height: 500px;
     margin: 50px;
-    margin-right: 80px;
+    margin-right: 10%;
     border-radius: 15px;
 }
 
-.tarjeta2 {
-    margin-top: 60px;
-    margin-bottom: 80px;
-    margin-left: 80px;
-    height: 600px;
-    width: 600px;
-}
-
-.info-camiseta {
-    height: 500px;
-    width: 50%;
-    margin: 50px;
-    margin-right: 80px;
-}
-
-.btn-al-carrito {
-    width: 100px;
+.img-ver-camiseta {
+    height: 550px;
+    width: 550px;
+    margin: auto;
 }
 
 .texto-camiseta {
@@ -154,6 +166,11 @@
     font-size: large;
     padding-top: 50px;
 }
+
+.btn-al-carrito {
+    width: 100px;
+}
+
 /* ---- Vista Carrito ----*/
 .tabla-carrito {
     width: 70%;

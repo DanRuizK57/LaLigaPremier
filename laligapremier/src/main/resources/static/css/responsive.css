@@ -1,0 +1,85 @@
+@media (max-width: 1620px) {
+    .tarjeta {
+        width: 30%;
+    }
+
+    .img-camiseta {
+        margin: 0px auto;
+    }
+
+}
+
+@media (max-width: 1500px) {
+
+    .imagen-camiseta {
+        margin: 10%;
+    }
+
+    .img-camiseta{
+        height: 280px;
+        width: 280px;
+    }
+
+
+    .img-ver-camiseta {
+        height: 450px;
+        width: 450px;
+    }
+
+    .descripcion-camiseta {
+        height: 450px;
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 1400px) {
+
+    .tarjeta {
+        height: 400px;
+    }
+
+    .img-camiseta{
+        height: 280px;
+        width: 280px;
+    }
+}
+
+@media (max-width: 1300px) {
+
+    .cuerpo {
+        justify-content: center;
+    }
+
+    .tarjeta {
+        height: 400px;
+        width: 350px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .img-camiseta{
+        height: 250px;
+        width: 250px;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .cuerpo-ver-camiseta {
+        flex-direction: column;
+    }
+
+    .tarjeta2 {
+        width: 205%;
+    }
+
+    .descripcion-camiseta {
+        width: 125%;
+    }
+
+    .al-carrito {
+        width: 145%;
+    }
+
+}

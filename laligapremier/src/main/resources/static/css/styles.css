@@ -275,3 +275,37 @@
     margin-left: 8%;
     font-size: large;
 }
+
+/*---- Vista Inicio de Sesión ----*/
+
+.contenedor-is {
+    background-color: #c8d6e0;
+    padding: 3%;
+    border-radius: 30px;
+}
+
+.img-google {
+    height: 50px;
+    width: 50px;
+}
+
+.btn-is {
+    background-color: #44115C;
+    color: #fff;
+}
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}

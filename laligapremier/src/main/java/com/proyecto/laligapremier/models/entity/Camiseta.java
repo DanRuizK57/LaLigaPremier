@@ -3,7 +3,8 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import com.proyecto.laligapremier.models.enums.Marca;
-import com.proyecto.laligapremier.models.enums.Tallas;
+import com.proyecto.laligapremier.models.enums.Talla;
+
 
 @Entity
 @Table(name = "camisetas")
@@ -39,7 +40,7 @@ public class Camiseta {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tallas")
-    private Tallas tallas;
+    private Talla talla;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "marca")

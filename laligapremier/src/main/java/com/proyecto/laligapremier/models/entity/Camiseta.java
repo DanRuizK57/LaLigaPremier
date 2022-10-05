@@ -44,6 +44,9 @@ public class Camiseta {
     @Enumerated(EnumType.STRING)
     @Column(name = "marca")
     private Marca marca; 
+
+
+    private String prueba = "probando cosas para el merge ";
     
 
     private static final long serialVersionUID = 1L;

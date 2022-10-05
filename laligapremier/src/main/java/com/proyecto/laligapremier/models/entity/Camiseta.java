@@ -2,6 +2,8 @@ package com.proyecto.laligapremier.models.entity;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import com.proyecto.laligapremier.models.enums.Marca;
+import com.proyecto.laligapremier.models.enums.Tallas;
 
 @Entity
 @Table(name = "camisetas")
@@ -34,6 +36,15 @@ public class Camiseta {
 
     @Column(name = "imagen")
     private String imagen;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tallas")
+    private Tallas tallas;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "marca")
+    private Marca marca; 
+    
 
     private static final long serialVersionUID = 1L;
 }

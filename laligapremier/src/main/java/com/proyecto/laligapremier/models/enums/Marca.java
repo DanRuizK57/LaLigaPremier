@@ -1,7 +1,13 @@
 package com.proyecto.laligapremier.models.enums;
 
 public enum Marca {
-    ADIDAS,
-    NIKE, 
-    PUMA 
+    ADIDAS ("Adidas"),
+    NIKE ("Nike"), 
+    PUMA ("Puma");
+
+    private final String nombre; 
+    
+    Marca(String nombre){
+        this.nombre = nombre; 
+    }
 }

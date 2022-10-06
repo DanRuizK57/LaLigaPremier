@@ -9,6 +9,6 @@ public class NosostrosController {
     @GetMapping(value = "/nosotros")
     public String nosotros(Model model){
         model.addAttribute("titulo" , "Informacion sobre los creadores");
-        return "nosotros";
+        return "mostrar/nosotros";
     }
 }

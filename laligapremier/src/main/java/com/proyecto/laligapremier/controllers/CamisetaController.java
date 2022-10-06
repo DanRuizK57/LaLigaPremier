@@ -16,24 +16,24 @@ public class CamisetaController {
     public String selecciones(Model model){
         model.addAttribute("titulo" , "Listado de camisetas de selecciones");
         model.addAttribute("camisetasSelecciones" , camisetaService.findAll());
-        return "selecciones";
+        return "mostrar/selecciones";
     }
 
     @GetMapping(value = "/equipos")
     public String equipos(Model model){
         model.addAttribute("titulo" , "Listado de camisetas de equipos");
         model.addAttribute("camisetasEquipos" , camisetaService.findAll());
-        return "equipos";
+        return "mostrar/equipos";
     }
 
     @GetMapping(value = "/ver-camiseta")
     public String verCamiseta(Model model){
-        return "ver_camiseta";
+        return "camiseta/ver_camiseta";
     }
 
     @GetMapping(value = "/formulario")
     public String formulario(Model model){
-        return "formulario";
+        return "camiseta/form_camiseta";
     }
 
 }

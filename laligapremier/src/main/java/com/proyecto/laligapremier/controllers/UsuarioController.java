@@ -10,25 +10,25 @@ public class UsuarioController {
     @GetMapping(value="/iniciar-sesion")
     public String iniciarSesion(Model model) {
         model.addAttribute("titulo" , "Iniciar Sesión");
-        return "inicio_sesion";
+        return "cuenta/inicio_sesion";
     }
 
     @GetMapping(value="/registro")
     public String registro(Model model) {
         model.addAttribute("titulo" , "Registrar Cuenta");
-        return "registro";
+        return "cuenta/registro";
     }
 
     @GetMapping(value="/editar-perfil")
     public String editarPerfil(Model model) {
         model.addAttribute("titulo" , "Editar Perfil");
-        return "editar_perfil";
+        return "cuenta/editar_perfil";
     }
 
     @GetMapping(value="/cambiar-contraseña")
     public String cambiarContraseña(Model model) {
         model.addAttribute("titulo" , "Cambiar Contraseña");
-        return "cambiar_contraseña";
+        return "cuenta/cambiar_contraseña";
     }
 
 }

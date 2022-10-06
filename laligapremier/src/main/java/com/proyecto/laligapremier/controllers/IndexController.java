@@ -15,20 +15,20 @@ public class IndexController {
     public String index(Model model){
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetaService.findAll());
-        return "index";
+        return "mostrar/index";
     }
 
     @GetMapping(value = "/index-admin")
     public String indexAdmin(Model model){
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetaService.findAll());
-        return "index_admin";
+        return "mostrar/index_admin";
     }
 
     @GetMapping(value = "/index-usuario")
     public String indexUsuario(Model model){
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetaService.findAll());
-        return "index_usuario";
+        return "mostrar/index_usuario";
     }
 }

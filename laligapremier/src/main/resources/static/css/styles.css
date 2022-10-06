@@ -304,8 +304,14 @@
 .h-custom {
     height: calc(100% - 73px);
 }
-@media (max-width: 450px) {
-    .h-custom {
-        height: 100%;
-    }
+
+.img-fluid2 {
+    max-width: 100%;
+    height: auto;
+    margin-left: 16%;
+}
+
+.btn-r {
+    background-color: #01B201;
+    color: #fff;
 }

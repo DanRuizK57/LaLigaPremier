@@ -1,10 +1,7 @@
 package com.proyecto.laligapremier.controllers;
+
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
-
-import java.lang.ProcessBuilder.Redirect;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Controller
 @SessionAttributes("camiseta")
@@ -54,6 +53,9 @@ public class CamisetaController {
     
     }
 
-  
+    @GetMapping(value = "/filtros")
+    public String filtros(Model model){
+        return "filtros";
+    }
 
 }

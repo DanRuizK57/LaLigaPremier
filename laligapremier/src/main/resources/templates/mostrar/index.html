@@ -3,8 +3,158 @@
   <head th:replace="layout/layout :: head"></head>
   <body>
     <header th:replace="layout/layout :: header"></header>
-    <h4 class="titulo">Camisetas Disponibles</h4>
-    <div th:replace="layout/layout :: mostrar-camisetas"></div>
+
+    <!--Cuerpo de la página-->
+    <div class="wrapper">
+
+      <div class="d-md-flex align-items-md-center">
+        <div class="h3" th:text="${titulo}"></div>
+      </div>
+
+      <div class="d-sm-flex align-items-sm-center pt-2 clear">
+        <div class="text-muted filter-label">Filtros Aplicados:</div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2">Filtro 1 <span class=" px-1 close">&times;</span> </div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0">Filtro 2 <span class=" px-1 close">&times;</span> </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="content py-md-0 py-3">
+        <section id="sidebar">
+          <div class="filters">
+            <div class="btn btn-filtros">Eliminar Filtros</div>
+          </div>
+          <div class="py-3">
+            <h5 class="font-weight-bold">Marca</h5>
+            <form class="brand">
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Adidas <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Nike <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Puma <input type="checkbox"> <span class="check"></span> </label> </div>
+            </form>
+          </div>
+          <div class="py-3">
+            <h5 class="font-weight-bold">Talla</h5>
+            <form class="brand">
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">XS <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">S <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">M <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">L <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">XL <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">XXL <input type="checkbox"> <span class="check"></span> </label> </div>
+            </form>
+          </div>
+          <div class="py-3">
+            <h5 class="font-weight-bold">Rango de precios</h5>
+            <form class="brand">
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $30.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $50.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $80.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $100.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+              <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Más de $100.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Camisetas -->
+        <section id="products">
+          <div class="container py-3">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+                <div class="card">
+                  <img th:src="@{/image/camisetas/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+                  <div class="card-body">
+                    <h6 class="font-weight-bold pt-1">FC Barcelona Messi</h6>
+                    <div class="text-muted description">Camiseta firmada por Lionel Messi.</div>
+                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                      <div class="d-flex flex-column">
+                        <div class="h6 font-weight-bold">$500.000 CLP</div>
+                      </div>
+                      <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-md-0 pt-4">
+                <div class="card"> <img th:src="@{/image/camisetas/camiseta-alexis.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+                  <div class="card-body">
+                    <h6 class="font-weight-bold pt-1">Inter de Milán Alexis</h6>
+                    <div class="text-muted description">Camiseta de Alexis Sánchez en Inter de Milán.</div>
+                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                      <div class="d-flex flex-column">
+                        <div class="h6 font-weight-bold">$50.000 CLP</div>
+                      </div>
+                      <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-0 pt-4">
+                <div class="card"> <img th:src="@{/image/camisetas/camiseta-temuco.png}" alt="Imagen Camiseta" class="img-camiseta">
+                  <div class="card-body">
+                    <h6 class="font-weight-bold pt-1">Deportes Temuco 2015</h6>
+                    <div class="text-muted description">Camiseta de Deportes Temuco 2015.</div>
+                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                      <div class="d-flex flex-column">
+                        <div class="h6 font-weight-bold">$40.000 CLP</div>
+                      </div>
+                      <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                <div class="card"> <img th:src="@{/image/camisetas/camiseta-chile.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+                  <div class="card-body">
+                    <h6 class="font-weight-bold pt-1">Selección Chilena 2015</h6>
+                    <div class="text-muted description">Camiseta de la selección Chilena año 2015.</div>
+                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                      <div class="d-flex flex-column">
+                        <div class="h6 font-weight-bold">$55.000 CLP</div>
+                      </div>
+                      <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                <div class="card"> <img th:src="@{/image/camisetas/cr7-portugal.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+                  <div class="card-body">
+                    <h6 class="font-weight-bold pt-1">Selección de Portugal CR7</h6>
+                    <div class="text-muted description">Camiseta de Portugal de Cristiano Ronaldo.</div>
+                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                      <div class="d-flex flex-column">
+                        <div class="h6 font-weight-bold">$50.000 CLP</div>
+                      </div>
+                      <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                <div class="card"> <img th:src="@{/image/camisetas/ronaldo-brasil.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+                  <div class="card-body">
+                    <h6 class="font-weight-bold pt-1">Selección Brasileña Ronaldo</h6>
+                    <div class="text-muted description">Camiseta de la selección de Brasil de Ronaldo.</div>
+                    <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3">
+                      <div class="d-flex flex-column">
+                        <div class="h6 font-weight-bold">$65.000 CLP</div>
+                      </div>
+                      <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
     <footer th:replace="layout/layout :: footer"></footer>
   </body>
 </html>

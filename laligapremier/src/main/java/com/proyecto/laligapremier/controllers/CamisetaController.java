@@ -53,9 +53,4 @@ public class CamisetaController {
     
     }
 
-    @GetMapping(value = "/filtros")
-    public String filtros(Model model){
-        return "filtros";
-    }
-
 }

@@ -58,7 +58,8 @@
 
 .img-camiseta{
     height: 300px;
-    width: 300px;
+    width: 100%;
+    padding: 2%;
 }
 
 .tarjeta-info{
@@ -82,7 +83,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    margin-top: 20%;
+    margin-top: 6%;
 }
 
 .info-contacto {

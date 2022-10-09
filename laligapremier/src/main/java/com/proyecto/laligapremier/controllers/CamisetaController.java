@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 import javax.validation.Valid;
 
+import com.proyecto.laligapremier.service.IUploadFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class CamisetaController {
     @Autowired
     private ICamisetaService camisetaService;
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private IUploadFileService uploadFileService;
 
-    private final static String UPLOAD_FOLDER = "uploads";
 
     @GetMapping(value = "/selecciones")
     public String ListarSelecciones(Model model){
@@ -96,35 +97,18 @@ public class CamisetaController {
             if (camiseta.getId() != null
                     && camiseta.getId()>0
                     && camiseta.getImagen()!= null
-                    && camiseta.getImagen().length() > 0 ){
-
-                Path rootPath = Paths.get(UPLOAD_FOLDER).resolve(camiseta.getImagen()).toAbsolutePath();
-                File archivo = rootPath.toFile();
-
-                if(archivo.exists() && archivo.canRead()){
-                    if(archivo.delete())
-                        flash.addFlashAttribute(
-                                "info" ,"Imagen " + camiseta.getImagen() +
-                                        " eliminad con existo" );
-                }
+                    && camiseta.getImagen().length() > 0 ) uploadFileService.delete(camiseta.getImagen());
 
 
-
-            }
-            String nombreUnico = UUID.randomUUID().toString() + "_" + imagen.getOriginalFilename();
-            Path rootPath = Paths.get(UPLOAD_FOLDER).resolve(nombreUnico);
-            Path rootAbsolutePath = rootPath.toAbsolutePath();
-            log.info("rootPath: " + rootPath);
-            log.info("rootAbsolutePath: " + rootAbsolutePath);
-
+            String nombreUnico = null;
             try {
-                Files.copy(imagen.getInputStream() , rootAbsolutePath);
-                flash.addAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
-
-                camiseta.setImagen(nombreUnico);
+                nombreUnico = uploadFileService.copy(imagen);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
+
+            flash.addAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
+            camiseta.setImagen(nombreUnico);
 
 
         }
@@ -134,19 +118,17 @@ public class CamisetaController {
 
     @GetMapping(value="/uploads/{filename:.+}")
     public ResponseEntity<Resource> verImagen(@PathVariable String filename){
-        Path pathImagen = Paths.get(UPLOAD_FOLDER).resolve(filename).toAbsolutePath();
-        log.info("pathImagen " + pathImagen);
         Resource recurso = null;
-
         try {
-             recurso = new UrlResource(pathImagen.toUri());
-             if(!recurso.exists() && !recurso.isReadable())
-                 throw new RuntimeException("Error : No se puede cargar la imagen " + pathImagen.toString());
+            recurso = uploadFileService.load(filename);
         } catch (MalformedURLException e) {
-
+            throw new RuntimeException(e);
         }
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION
-                , "attachment; filename=\"" + recurso.getFilename() + "\"")
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders
+                        .CONTENT_DISPOSITION, "attachment; filename=\""
+                        + recurso.getFilename() + "\"")
                 .body(recurso);
     }
 
@@ -156,17 +138,14 @@ public class CamisetaController {
             Camiseta camiseta = camisetaService.findOne(id);
             camisetaService.delete(id);
             flash.addFlashAttribute("success" , "Camiseta eliminada con exito");
-
-            Path rootPath = Paths.get(UPLOAD_FOLDER).resolve(camiseta.getImagen()).toAbsolutePath();
-            File archivo = rootPath.toFile();
-
-            if(archivo.exists() && archivo.canRead()){
-                if(archivo.delete())
-                    flash.addFlashAttribute(
-                            "info" ,"Imagen " + camiseta.getImagen() +
-                            " eliminad con existo" );
+            if(uploadFileService.delete(camiseta.getImagen()))
+                flash.addFlashAttribute(
+                        "info"
+                        ,"Imagen "
+                                + camiseta.getImagen() +
+                                " eliminad con existo" );
             }
-        }
+
         return "redirect:/index_admin";
     }
 

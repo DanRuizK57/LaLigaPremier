@@ -9,6 +9,7 @@
             <div class="subir-imagen">
                 <img th:src="@{/image/simbolo-imagen.png}" alt="Imagen">
                 <p>Subir imagen</p>
+                <input type="file" name ="file" class="form-control "/>
             </div>
             <br>
             <div class="d-flex justify-content-start">
@@ -16,7 +17,7 @@
             </div>
         </div>
         <div class="formulario-camiseta">
-            <form>
+            <form enctype="multipart/form-data">
                 <div>
                     <label>Tipo</label>
                     <br>

@@ -2,6 +2,7 @@ package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -33,6 +35,8 @@ public class CamisetaController {
     private ICamisetaService camisetaService;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
+
+    private final static String UPLOAD_FOLDER = "uploads";
 
     @GetMapping(value = "/selecciones")
     public String ListarSelecciones(Model model){
@@ -89,8 +93,26 @@ public class CamisetaController {
             model.addAttribute("titulo" , "Agregar camiseta"); 
         }
         if(!imagen.isEmpty()){
+            if (camiseta.getId() != null
+                    && camiseta.getId()>0
+                    && camiseta.getImagen()!= null
+                    && camiseta.getImagen().length() > 0 ){
+
+                Path rootPath = Paths.get(UPLOAD_FOLDER).resolve(camiseta.getImagen()).toAbsolutePath();
+                File archivo = rootPath.toFile();
+
+                if(archivo.exists() && archivo.canRead()){
+                    if(archivo.delete())
+                        flash.addFlashAttribute(
+                                "info" ,"Imagen " + camiseta.getImagen() +
+                                        " eliminad con existo" );
+                }
+
+
+
+            }
             String nombreUnico = UUID.randomUUID().toString() + "_" + imagen.getOriginalFilename();
-            Path rootPath = Paths.get("uploads").resolve(nombreUnico);
+            Path rootPath = Paths.get(UPLOAD_FOLDER).resolve(nombreUnico);
             Path rootAbsolutePath = rootPath.toAbsolutePath();
             log.info("rootPath: " + rootPath);
             log.info("rootAbsolutePath: " + rootAbsolutePath);
@@ -112,7 +134,7 @@ public class CamisetaController {
 
     @GetMapping(value="/uploads/{filename:.+}")
     public ResponseEntity<Resource> verImagen(@PathVariable String filename){
-        Path pathImagen = Paths.get("uploads").resolve(filename).toAbsolutePath();
+        Path pathImagen = Paths.get(UPLOAD_FOLDER).resolve(filename).toAbsolutePath();
         log.info("pathImagen " + pathImagen);
         Resource recurso = null;
 
@@ -126,6 +148,26 @@ public class CamisetaController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION
                 , "attachment; filename=\"" + recurso.getFilename() + "\"")
                 .body(recurso);
+    }
+
+    @RequestMapping(value = "/eliminar/{id}")
+    public String eliminar(@PathVariable(value = "id") Long id , RedirectAttributes flash){
+        if(id > 0 ){
+            Camiseta camiseta = camisetaService.findOne(id);
+            camisetaService.delete(id);
+            flash.addFlashAttribute("success" , "Camiseta eliminada con exito");
+
+            Path rootPath = Paths.get(UPLOAD_FOLDER).resolve(camiseta.getImagen()).toAbsolutePath();
+            File archivo = rootPath.toFile();
+
+            if(archivo.exists() && archivo.canRead()){
+                if(archivo.delete())
+                    flash.addFlashAttribute(
+                            "info" ,"Imagen " + camiseta.getImagen() +
+                            " eliminad con existo" );
+            }
+        }
+        return "redirect:/index_admin";
     }
 
     

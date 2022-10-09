@@ -10,6 +10,7 @@ public class CarritoController {
     @GetMapping(value="/carrito-de-compras")
     public String carrito(Model model) {
         model.addAttribute("titulo", "Carrito de Compras");
-        return "carrito";
+        return "mostrar/carrito";
     }
+
 }

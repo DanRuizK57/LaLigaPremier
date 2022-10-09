@@ -1,4 +1,5 @@
 package com.proyecto.laligapremier.models.entity;
+import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -23,10 +24,10 @@ public class Camiseta {
     @Column(name = "liga", nullable = false)
     private String liga;
 
-    @Column(name = "dorsal" , nullable = false)
-    private Integer dorsar;
+    @Column(name = "dorsal" )
+    private Integer dorsal;
 
-    @Column(name = "jugador" , nullable = false)
+    @Column(name = "jugador" )
     private String jugador ;
 
     @Column(name = "temporada" , nullable = false)
@@ -44,7 +45,11 @@ public class Camiseta {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "marca")
-    private Marca marca; 
+    private Marca marca;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_camista")
+    private TipoCamiseta tipoCamiseta;
 
 
     private String prueba = "probando cosas para el merge ";

@@ -97,13 +97,11 @@ public class CamisetaController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            flash.addAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
+            String mensajeFlash = (camiseta.getId() != null) ? "Camiseta editada con exito" : "¡Camiseta agregada con exito!";
+            flash.addFlashAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
+            flash.addFlashAttribute("info" , mensajeFlash);
             camiseta.setImagen(nombreUnico);
-
-
         }
-
         return "redirect:/mostrar/index_admin"; 
     }
 
@@ -136,12 +134,6 @@ public class CamisetaController {
                                 + camiseta.getImagen() +
                                 " eliminad con existo" );
             }
-
         return "redirect:/index_admin";
     }
-
-    
-
-  
-
 }

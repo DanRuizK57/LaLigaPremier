@@ -1,17 +1,21 @@
 package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Map;
 import javax.validation.Valid;
+
+import com.proyecto.laligapremier.service.IUploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CamisetaController {
     @Autowired
     private ICamisetaService camisetaService;
+
+    @Autowired
+    private IUploadFileService uploadFileService;
+
 
     @GetMapping(value = "/selecciones")
     public String ListarSelecciones(Model model){
@@ -52,7 +60,7 @@ public class CamisetaController {
             return "redirect:/mostrar/equipos";
         }
         model.put("camiseta", camiseta);
-        model.put("titulo", "detalle de la camiseta ");
+        model.put("titulo", "detalle de la camiseta " + camiseta.getEquipo() + "del jugador " + camiseta.getJugador());
         return "camiseta/ver_camiseta";
     }
 
@@ -64,6 +72,7 @@ public class CamisetaController {
         return "camiseta/form_camiseta"; 
     
     }
+    @RequestMapping(value = "/camiseta/ form_camiseta", method = RequestMethod.POST)
     public String guardar(
         @Valid Camiseta camiseta,
         BindingResult result,
@@ -76,10 +85,59 @@ public class CamisetaController {
             model.addAttribute("titulo" , "Agregar camiseta"); 
         }
         if(!imagen.isEmpty()){
-            //falta estudio para implementar la subida de imagen correctamente
+            if (camiseta.getId() != null
+                    && camiseta.getId()>0
+                    && camiseta.getImagen()!= null
+                    && camiseta.getImagen().length() > 0 ) uploadFileService.delete(camiseta.getImagen());
+
+
+            String nombreUnico = null;
+            try {
+                nombreUnico = uploadFileService.copy(imagen);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            flash.addAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
+            camiseta.setImagen(nombreUnico);
+
+
         }
 
         return "redirect:/mostrar/index_admin"; 
+    }
+
+    @GetMapping(value="/uploads/{filename:.+}")
+    public ResponseEntity<Resource> verImagen(@PathVariable String filename){
+        Resource recurso = null;
+        try {
+            recurso = uploadFileService.load(filename);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders
+                        .CONTENT_DISPOSITION, "attachment; filename=\""
+                        + recurso.getFilename() + "\"")
+                .body(recurso);
+    }
+
+    @RequestMapping(value = "/eliminar/{id}")
+    public String eliminar(@PathVariable(value = "id") Long id , RedirectAttributes flash){
+        if(id > 0 ){
+            Camiseta camiseta = camisetaService.findOne(id);
+            camisetaService.delete(id);
+            flash.addFlashAttribute("success" , "Camiseta eliminada con exito");
+            if(uploadFileService.delete(camiseta.getImagen()))
+                flash.addFlashAttribute(
+                        "info"
+                        ,"Imagen "
+                                + camiseta.getImagen() +
+                                " eliminad con existo" );
+            }
+
+        return "redirect:/index_admin";
     }
 
     

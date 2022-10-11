@@ -82,17 +82,33 @@ public class CamisetaController {
         @Valid Camiseta camiseta,
         BindingResult result,
         Model model,
+        @RequestParam("file") MultipartFile imagen,
         RedirectAttributes flash,
         SessionStatus status
     ){
         if(result.hasErrors()){
             model.addAttribute("titulo" , "Agregar camiseta");
-            camisetaService.save(camiseta);
-            return "/camiseta/form_camiseta";
         }
-        camisetaService.save(camiseta);
-        status.setComplete();
-        flash.addFlashAttribute("success" ,"Camiseta agregada con exito");
+        if(!imagen.isEmpty()) {
+            if (camiseta.getId() != null
+                    && camiseta.getId() > 0
+                    && camiseta.getImagen() != null
+                    && camiseta.getImagen().length() > 0) uploadFileService.delete(camiseta.getImagen());
+
+
+            String nombreUnico = null;
+            try {
+                nombreUnico = uploadFileService.copy(imagen);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String mensajeFlash = (camiseta.getId() != null) ? "Camiseta editada con exito" : "¡Camiseta agregada con exito!";
+            camiseta.setImagen(nombreUnico);
+            camisetaService.save(camiseta);
+            status.setComplete();
+            flash.addFlashAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
+            flash.addFlashAttribute("info" , mensajeFlash);
+        }
 
         return "redirect:/index-admin";
     }

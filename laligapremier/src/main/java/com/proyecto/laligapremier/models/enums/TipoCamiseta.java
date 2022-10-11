@@ -1,5 +1,9 @@
 package com.proyecto.laligapremier.models.enums;
 
+import lombok.Getter;
+
+
+@Getter
 public enum TipoCamiseta {
     SELECCION("Seleccion"),
     EQUIPO("Equipo");

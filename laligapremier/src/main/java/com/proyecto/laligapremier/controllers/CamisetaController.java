@@ -1,5 +1,8 @@
 package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.enums.Marca;
+import com.proyecto.laligapremier.models.enums.Talla;
+import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
 
 import java.io.IOException;
@@ -64,45 +67,34 @@ public class CamisetaController {
         return "camiseta/ver_camiseta";
     }
 
-    @RequestMapping(value = "/camiseta/form_camiseta")
+    @RequestMapping(value = "/form")
     public String crearCamiseta(Map<String , Object>model){    
         Camiseta camiseta = new Camiseta(); 
         model.put("camiseta" , camiseta); 
         model.put("titulo", "Agregar Camiseta");
-        return "camiseta/form_camiseta"; 
-    
+        model.put("tipoCamisetas", TipoCamiseta.values());
+        model.put("tallas", Talla.values());
+        model.put("marcas", Marca.values());
+        return "camiseta/form_camiseta";
     }
-    @RequestMapping(value = "/camiseta/ form_camiseta", method = RequestMethod.POST)
+    @PostMapping(value = "/form")
     public String guardar(
         @Valid Camiseta camiseta,
         BindingResult result,
         Model model,
-        @RequestParam("file") MultipartFile imagen,
         RedirectAttributes flash,
         SessionStatus status
     ){
         if(result.hasErrors()){
-            model.addAttribute("titulo" , "Agregar camiseta"); 
+            model.addAttribute("titulo" , "Agregar camiseta");
+            camisetaService.save(camiseta);
+            return "/camiseta/form_camiseta";
         }
-        if(!imagen.isEmpty()){
-            if (camiseta.getId() != null
-                    && camiseta.getId()>0
-                    && camiseta.getImagen()!= null
-                    && camiseta.getImagen().length() > 0 ) uploadFileService.delete(camiseta.getImagen());
+        camisetaService.save(camiseta);
+        status.setComplete();
+        flash.addFlashAttribute("success" ,"Camiseta agregada con exito");
 
-
-            String nombreUnico = null;
-            try {
-                nombreUnico = uploadFileService.copy(imagen);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String mensajeFlash = (camiseta.getId() != null) ? "Camiseta editada con exito" : "¡Camiseta agregada con exito!";
-            flash.addFlashAttribute("info" , "Has subido correctamente '" + nombreUnico + "'");
-            flash.addFlashAttribute("info" , mensajeFlash);
-            camiseta.setImagen(nombreUnico);
-        }
-        return "redirect:/mostrar/index_admin"; 
+        return "redirect:/index-admin";
     }
 
     @GetMapping(value="/uploads/{filename:.+}")

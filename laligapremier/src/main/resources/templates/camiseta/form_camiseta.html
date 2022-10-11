@@ -3,84 +3,113 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
     <header th:replace="layout/layout :: header"></header>
-    <h4 class="titulo">Formulario</h4>
-    <div class="formato-datos-camiseta d-flex justify-content-center">
-        <div class="imagen-camiseta">
-            <div class="subir-imagen">
-                <img th:src="@{/image/simbolo-imagen.png}" alt="Imagen">
-                <p>Subir imagen</p>
-                <input type="file" name ="file" class="form-control "/>
-            </div>
-            <br>
-            <div class="d-flex justify-content-start">
-                <button type="submit" class="btn btn-danger">Eliminar Camiseta</button>
-            </div>
-        </div>
-        <div class="formulario-camiseta">
-            <form enctype="multipart/form-data">
-                <div>
-                    <label>Tipo</label>
-                    <br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label class="form-check-label" for="exampleRadios1">
-                            Equipo
-                        </label>
+    <div class="container py-4">
+        <div class="card bg-dark text-white">
+            <div class="card-header" th:text="${titulo}"></div>
+            <div class="card-body">
+                <div th:object="${camiseta}" th:remove="tag">
+                    <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                        <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+                <form th:action="@{/form}" th:object="${camiseta}" method="post" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">equipo</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{equipo}" class="form-control"
+                                   th:errorclass="'form-control alert-danger'" /> <small
+                                class="form-text text-danger"
+                                th:if="${#fields.hasErrors('equipo')}" th:errors="*{equipo}"></small>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label class="form-check-label" for="exampleRadios2">
-                            Selección
-                        </label>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">liga</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{liga}" class="form-control"
+                                   th:errorclass="'form-control alert-danger'" /> <small
+                                class="form-text text-danger"
+                                th:if="${#fields.hasErrors('liga')}" th:errors="*{liga}"></small>
+                        </div>
                     </div>
-                </div>
-                <br>
-                <div class="form-group col-md-4">
-                    <label for="liga">Liga</label>
-                    <select id="liga" class="form-control casilla-camiseta">
-                        <option selected>--- Seleccionar Liga ---</option>
-                        <option value="1">La Liga</option>
-                        <option value="2">Premiere League</option>
-                        <option value="3">Serie A</option>
-                        <option value="4">Bundesliga</option>
-                    </select>
-                </div>
-                <br>
-                <div class="form-group col-md-4">
-                    <label for="equipo">Equipo</label>
-                    <select id="equipo" class="form-control casilla-camiseta">
-                        <option selected>--- Seleccionar Equipo ---</option>
-                        <option value="1">FC Barcelona</option>
-                        <option value="2">Liverpool</option>
-                        <option value="3">Juventus</option>
-                        <option value="4">Deportes Temuco</option>
-                    </select>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="dorsal">Dorsal</label>
-                    <input type="number" class="form-control casilla-camiseta" id="dorsal">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="jugador">Jugador</label>
-                    <input type="text" class="form-control casilla-camiseta" id="jugador">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="temporada">Temporada</label>
-                    <input type="text" class="form-control casilla-camiseta" id="temporada">
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input type="number" class="form-control casilla-camiseta" id="precio">
-                </div>
-                <br>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success">Publicar Camiseta</button>
-                </div>
-            </form>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">dorsal</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{dorsal}" class="form-control"
+                                   th:errorclass="'form-control alert-danger'" /> <small
+                                class="form-text text-danger"
+                                th:if="${#fields.hasErrors('dorsal')}" th:errors="*{dorsal}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">jugador</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{jugador}" class="form-control"
+                                   th:errorclass="'form-control alert-danger'" /> <small
+                                class="form-text text-danger"
+                                th:if="${#fields.hasErrors('jugador')}" th:errors="*{jugador}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">temporada</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{temporada}" class="form-control"
+                                   th:errorclass="'form-control alert-danger'" /> <small
+                                class="form-text text-danger"
+                                th:if="${#fields.hasErrors('temporada')}" th:errors="*{temporada}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">precio</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{precio}" class="form-control"
+                                   th:errorclass="'form-control alert-danger'" /> <small
+                                class="form-text text-danger"
+                                th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Talla</label>
+                        <div class="col-sm-6">
+                            <select th:field="*{talla}">
+                                <option th:each="talla : ${tallas}"
+                                        th:text="${talla.talla}"
+                                        th:value="${talla}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">marca</label>
+                            <div class="col-sm-6">
+                                <select th:field="*{marca}">
+                                    <option th:each="marca : ${marcas}"
+                                            th:text="${marca.nombre}"
+                                            th:value="${marca}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">tipo</label>
+                        <div class="col-sm-6">
+                           <select th:field="*{tipoCamiseta}">
+                               <option th:each="tipoCamiseta : ${tipoCamisetas}"
+                                       th:text="${tipoCamiseta.tipo}"
+                                       th:value="${tipoCamiseta}">
+                               </option>
+                           </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <input type="submit" value="Crear Camiseta" class="btn btn-secondary" />
+                            <tr></tr>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <footer th:replace="layout/layout :: footer"></footer>

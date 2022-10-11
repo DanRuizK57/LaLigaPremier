@@ -1,5 +1,8 @@
 package com.proyecto.laligapremier.models.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Talla {
     XS ("XS"),
     S ("S"),

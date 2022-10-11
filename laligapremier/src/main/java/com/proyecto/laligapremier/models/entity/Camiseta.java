@@ -18,10 +18,10 @@ public class Camiseta {
     @Column(name = "id" , nullable = false)
     private Long id;
 
-    @Column(name = "equipo" , nullable = false)
+    @Column(name = "equipo" )
     private String equipo;
 
-    @Column(name = "liga", nullable = false)
+    @Column(name = "liga" )
     private String liga;
 
     @Column(name = "dorsal" )
@@ -51,8 +51,6 @@ public class Camiseta {
     @Column(name = "tipo_camista")
     private TipoCamiseta tipoCamiseta;
 
-
-    private String prueba = "probando cosas para el merge ";
     
 
     private static final long serialVersionUID = 1L;

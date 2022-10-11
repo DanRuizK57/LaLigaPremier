@@ -11,4 +11,6 @@ public interface ICamisetaService {
     void delete(Long id);
     Camiseta findOne(Long id);
     void save(Camiseta camiseta);
+
+
 }

@@ -56,18 +56,8 @@
 
 /*---- Footer ----*/
 
-.contenedor-footer {
-    background-color: #e3f2fd;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+#footer {
     margin-top: 6%;
-}
-
-.info-contacto {
-    margin: 10px;
-    margin-left: 40px;
-    margin-top: 20px;
 }
 
 .img-footer {
@@ -76,8 +66,8 @@
     margin-right: 40px;
 }
 
-.copyright {
-    background-color: #e3f2fd;
+.footer {
+    margin-top: 6%;
 }
 
 /*---- Formulario Cuenta ----*/

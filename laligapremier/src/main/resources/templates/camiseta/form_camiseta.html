@@ -13,8 +13,19 @@
                     </ul>
                 </div>
                 <form th:action="@{/form}" th:object="${camiseta}" method="post" enctype="multipart/form-data">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">equipo</label>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Tipo</label>
+                        <div class="col-sm-6">
+                            <select th:field="*{tipoCamiseta}">
+                                <option th:each="tipoCamiseta : ${tipoCamisetas}"
+                                        th:text="${tipoCamiseta.tipo}"
+                                        th:value="${tipoCamiseta}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Equipo</label>
                         <div class="col-sm-6">
                             <input type="text" th:field="*{equipo}" class="form-control"
                                    th:errorclass="'form-control alert-danger'" /> <small
@@ -22,8 +33,8 @@
                                 th:if="${#fields.hasErrors('equipo')}" th:errors="*{equipo}"></small>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">liga</label>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Liga</label>
                         <div class="col-sm-6">
                             <input type="text" th:field="*{liga}" class="form-control"
                                    th:errorclass="'form-control alert-danger'" /> <small
@@ -31,8 +42,8 @@
                                 th:if="${#fields.hasErrors('liga')}" th:errors="*{liga}"></small>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">dorsal</label>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Dorsal</label>
                         <div class="col-sm-6">
                             <input type="text" th:field="*{dorsal}" class="form-control"
                                    th:errorclass="'form-control alert-danger'" /> <small
@@ -40,8 +51,8 @@
                                 th:if="${#fields.hasErrors('dorsal')}" th:errors="*{dorsal}"></small>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">jugador</label>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Jugador</label>
                         <div class="col-sm-6">
                             <input type="text" th:field="*{jugador}" class="form-control"
                                    th:errorclass="'form-control alert-danger'" /> <small
@@ -49,8 +60,8 @@
                                 th:if="${#fields.hasErrors('jugador')}" th:errors="*{jugador}"></small>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">temporada</label>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Temporada</label>
                         <div class="col-sm-6">
                             <input type="text" th:field="*{temporada}" class="form-control"
                                    th:errorclass="'form-control alert-danger'" /> <small
@@ -58,8 +69,8 @@
                                 th:if="${#fields.hasErrors('temporada')}" th:errors="*{temporada}"></small>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">precio</label>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Precio</label>
                         <div class="col-sm-6">
                             <input type="text" th:field="*{precio}" class="form-control"
                                    th:errorclass="'form-control alert-danger'" /> <small
@@ -67,7 +78,7 @@
                                 th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Talla</label>
                         <div class="col-sm-6">
                             <select th:field="*{talla}">
@@ -78,9 +89,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row py-2">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">marca</label>
+                            <label class="col-sm-2 col-form-label">Marca</label>
                             <div class="col-sm-6">
                                 <select th:field="*{marca}">
                                     <option th:each="marca : ${marcas}"
@@ -90,18 +101,7 @@
                                 </select>
                             </div>
                         </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">tipo</label>
-                        <div class="col-sm-6">
-                           <select th:field="*{tipoCamiseta}">
-                               <option th:each="tipoCamiseta : ${tipoCamisetas}"
-                                       th:text="${tipoCamiseta.tipo}"
-                                       th:value="${tipoCamiseta}">
-                               </option>
-                           </select>
-                        </div>
-                    </div>
-                        <div class="form-group row">
+                        <div class="form-group row py-2">
                             <label for="file" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-6">
                                 <input type="file" name="file" class="form-control"/>

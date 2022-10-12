@@ -21,8 +21,8 @@
 
                     <!-- Descripción Camiseta-->
                     <div class="details col-md-6">
-                        <h3 class="titulo-ver-camiseta txt-destacado" th:text="${camiseta.equipo + camiseta.jugador}"></h3>
-                        <p class="desc-ver-camiseta">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
+                        <h3 class="titulo-ver-camiseta txt-destacado" th:text="${camiseta.nombre}"></h3>
+                        <p class="desc-ver-camiseta" th:text="${camiseta.descripcion}"></p>
                         <h4 class="precio txt-destacado">Precio: <span th:text="'$' + ${camiseta.precio}"></span></h4>
                         <div class="mt-4">
                             <label>

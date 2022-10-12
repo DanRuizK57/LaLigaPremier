@@ -39,6 +39,12 @@ public class Camiseta {
     @Column(name = "imagen")
     private String imagen;
 
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "tallas")
     private Talla talla;

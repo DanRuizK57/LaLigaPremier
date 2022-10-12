@@ -110,7 +110,7 @@ public class CamisetaController {
             flash.addFlashAttribute("info" , mensajeFlash);
         }
 
-        return "redirect:/index-admin";
+        return "redirect:/index";
     }
 
     @GetMapping(value="/uploads/{filename:.+}")

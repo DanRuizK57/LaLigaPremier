@@ -66,6 +66,28 @@ public class CamisetaController {
         model.put("titulo", "detalle de la camiseta " + camiseta.getEquipo() + "del jugador " + camiseta.getJugador());
         return "camiseta/ver_camiseta";
     }
+    @GetMapping(value = "/form/{id}")
+    public String editarCamiseta(@PathVariable(value = "id") Long id,Map<String , Object> model , RedirectAttributes flash){
+        Camiseta camiseta = null;
+        if(id>0){
+            camiseta = camisetaService.findOne(id);
+            if(camiseta==null){
+                flash.addFlashAttribute("error" , "La camiseta no existe en la base de datos");
+                return "redirect:/index";
+            }
+        }
+        else {
+            flash.addAttribute("error" , "el id de la camiseta no puede ser 0");
+            return "redirect:/index";
+        }
+        model.put("camiseta" , camiseta);
+        model.put("tipoCamisetas", TipoCamiseta.values());
+        model.put("tallas", Talla.values());
+        model.put("marcas", Marca.values());
+        model.put("titulo" , "Editar camiseta");
+
+        return "camiseta/form_camiseta";
+    }
 
     @RequestMapping(value = "/form")
     public String crearCamiseta(Map<String , Object>model){    

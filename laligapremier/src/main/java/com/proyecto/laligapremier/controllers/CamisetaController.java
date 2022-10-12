@@ -164,6 +164,6 @@ public class CamisetaController {
                                 + camiseta.getImagen() +
                                 " eliminad con existo" );
             }
-        return "redirect:/index_admin";
+        return "redirect:/index";
     }
 }

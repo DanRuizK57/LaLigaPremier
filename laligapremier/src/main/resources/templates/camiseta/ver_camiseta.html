@@ -6,20 +6,21 @@
     <div class="cuerpo-ver-camiseta">
         <div class="camiseta">
             <article class="tarjeta2 d-flex justify-content-center flex-column">
-                    <img th:src="@{/image/camisetas/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" class="img-ver-camiseta">
-                    <h2 class="tarjeta-info">FC Barcelona Messi</h2>
+                    <img th:if="${#strings.length(camiseta.imagen) > 0}" alt="Imagen Camiseta" class="img-ver-camiseta"
+                         th:src="@{'/uploads/' + ${camiseta.imagen}}" />
+                    <h2 th:text="${camiseta.equipo + camiseta.jugador}"  class="tarjeta-info">FC Barcelona Messi</h2>
             </article>
         </div>
         <div class="info-camiseta">
             <article class="descripcion-camiseta">
                 <p class="texto-desc-camiseta">Camiseta firmada por Leo Messi.</p>
                 <ul>
-                    <li class="texto-camiseta">Tipo: Equipo</li>
-                    <li class="texto-camiseta">Liga: LaLiga (España)</li>
-                    <li class="texto-camiseta">Dorsal: 10</li>
-                    <li class="texto-camiseta">Jugador: Lionel Messi</li>
-                    <li class="texto-camiseta">Temporada: 2019-2020</li>
-                    <li class="texto-camiseta">Precio: $500.000</li>
+                    <li th:text="${camiseta.tipoCamiseta}" class="texto-camiseta"></li>
+                    <li class="texto-camiseta" th:text="${camiseta.liga}"></li>
+                    <li class="texto-camiseta" th:text="${camiseta.dorsal}"></li>
+                    <li class="texto-camiseta" th:text="${camiseta.jugador}"></li>
+                    <li class="texto-camiseta" th:text="${camiseta.temporada}">Temporada: 2019-2020</li>
+                    <li class="texto-camiseta" th:text="${camiseta.precio}"></li>
                 </ul>
             </article>
             <div class="al-carrito d-flex justify-content-center">

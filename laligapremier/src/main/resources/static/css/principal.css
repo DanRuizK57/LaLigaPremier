@@ -238,8 +238,19 @@ div.h6,h6{
 }
 
 
-.btn-filtros{
+.btn-aplicar-filtros{
     background-color: #01B201;
+    color: black;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-weight: 800;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    width: 150px;
+}
+
+.btn-eliminar-filtros{
+    background-color: red;
     color: black;
     border: 1px solid #fff;
     border-radius: 10px;

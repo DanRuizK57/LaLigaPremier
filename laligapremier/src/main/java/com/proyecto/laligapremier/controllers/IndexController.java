@@ -1,5 +1,7 @@
 package com.proyecto.laligapremier.controllers;
 
+import com.proyecto.laligapremier.models.enums.Marca;
+import com.proyecto.laligapremier.models.enums.Talla;
 import com.proyecto.laligapremier.service.ICamisetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ public class IndexController {
     public String index(Model model){
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetaService.findAll());
+        model.addAttribute("marcas" , Marca.values());
+        model.addAttribute("tallas" , Talla.values());
         return "mostrar/index";
     }
 

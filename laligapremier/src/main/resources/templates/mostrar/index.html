@@ -25,21 +25,25 @@
       </div>
       <div class="py-3">
         <h5 class="font-weight-bold">Marca</h5>
-        <form class="brand">
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick" >Adidas <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Nike <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Puma <input type="checkbox"> <span class="check"></span> </label> </div>
+        <form class="brand" th:each="marca : ${marcas}">
+          <div class="form-inline d-flex align-items-center py-1">
+            <label class="tick">
+              <input th:text="${marca.nombre}" th:value="${marca}" type="checkbox" />
+              <span class="check"></span>
+            </label>
+          </div>
         </form>
       </div>
       <div class="py-3">
         <h5 class="font-weight-bold">Talla</h5>
-        <form class="brand">
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">XS <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">S <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">M <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">L <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">XL <input type="checkbox"> <span class="check"></span> </label> </div>
-          <div class="form-inline d-flex align-items-center py-1"> <label class="tick">XXL <input type="checkbox"> <span class="check"></span> </label> </div>
+        <form class="brand" th:each="talla : ${tallas}">
+          <div class="form-inline d-flex align-items-center py-1">
+            <label class="tick">
+              <input th:text="${talla.talla}" th:value="${talla}" type="checkbox">
+              <span class="check"></span>
+            </label>
+          </div>
+
         </form>
       </div>
       <div class="py-3">

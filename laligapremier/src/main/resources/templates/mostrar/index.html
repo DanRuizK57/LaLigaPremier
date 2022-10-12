@@ -79,6 +79,7 @@
                     <div th:text="'$' + ${camiseta.precio}" class="h6 font-weight-bold"></div>
                   </div>
                   <a class="btn btn-primary" th:href="@{/ver-camiseta/} + ${camiseta.id}">Ver Detalles</a>
+                  <a class="btn btn-primary" th:href="@{/form/} + ${camiseta.id}">Editar</a>
                 </div>
               </div>
             </div>

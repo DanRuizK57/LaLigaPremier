@@ -55,7 +55,7 @@ public class CamisetaController {
      * @param flash
      * @return vista que muestra las camisetas
      */
-    @GetMapping(value = "/ver-camiseta")
+    @GetMapping(value = "/ver-camiseta/{id}")
     public String verCamiseta(@PathVariable(value = "id")Long id, Map <String, Object> model , RedirectAttributes flash){
         Camiseta camiseta = camisetaService.findOne(id);
         if(camiseta == null){

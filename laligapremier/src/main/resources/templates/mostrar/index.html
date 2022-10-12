@@ -56,95 +56,22 @@
 
     <!-- Camisetas -->
     <section id="products">
-      <div class="container py-3">
+
+      <div class="container py-3" th:each="camiseta : ${camisetas}">
         <div class="row">
           <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
             <div class="card tarjeta">
-              <img th:src="@{/image/camisetas/Camiseta-messi-firmada.jpg}" alt="Imagen Camiseta" class="img-camiseta">
+              <img th:if="${#strings.length(camiseta.imagen) > 0}" class="img-camiseta"
+                   th:src="@{'/uploads/' + ${camiseta.imagen}}"/>
               <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">FC Barcelona Messi</h6>
+                <h6 th:text="${camiseta.jugador}" class="font-weight-bold pt-1"></h6>
                 <div class="text-muted description">Camiseta firmada por Lionel Messi.</div>
                 <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
                 <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                   <div class="d-flex flex-column">
-                    <div class="h6 font-weight-bold">$500.000 CLP</div>
+                    <div th:text="${camiseta.precio}" class="h6 font-weight-bold"></div>
                   </div>
-                  <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-md-0 pt-4">
-            <div class="card tarjeta"> <img th:src="@{/image/camisetas/camiseta-alexis.jpg}" alt="Imagen Camiseta" class="img-camiseta">
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Inter de Milán Alexis</h6>
-                <div class="text-muted description">Camiseta de Alexis Sánchez en Inter de Milán.</div>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                  <div class="d-flex flex-column">
-                    <div class="h6 font-weight-bold">$50.000 CLP</div>
-                  </div>
-                  <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-0 pt-4">
-            <div class="card tarjeta"> <img th:src="@{/image/camisetas/camiseta-temuco.png}" alt="Imagen Camiseta" class="img-camiseta">
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Deportes Temuco 2015</h6>
-                <div class="text-muted description">Camiseta de Deportes Temuco 2015.</div>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between">
-                  <div class="d-flex flex-column">
-                    <div class="h6 font-weight-bold">$40.000 CLP</div>
-                  </div>
-                  <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
-            <div class="card tarjeta"> <img th:src="@{/image/camisetas/camiseta-chile.jpg}" alt="Imagen Camiseta" class="img-camiseta">
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Selección Chilena 2015</h6>
-                <div class="text-muted description">Camiseta de la selección Chilena año 2015.</div>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3">
-                  <div class="d-flex flex-column">
-                    <div class="h6 font-weight-bold">$55.000 CLP</div>
-                  </div>
-                  <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
-            <div class="card tarjeta"> <img th:src="@{/image/camisetas/cr7-portugal.jpg}" alt="Imagen Camiseta" class="img-camiseta">
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Selección de Portugal CR7</h6>
-                <div class="text-muted description">Camiseta de Portugal de Cristiano Ronaldo.</div>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3">
-                  <div class="d-flex flex-column">
-                    <div class="h6 font-weight-bold">$50.000 CLP</div>
-                  </div>
-                  <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
-            <div class="card tarjeta"> <img th:src="@{/image/camisetas/ronaldo-brasil.jpg}" alt="Imagen Camiseta" class="img-camiseta">
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Selección Brasileña Ronaldo</h6>
-                <div class="text-muted description">Camiseta de la selección de Brasil de Ronaldo.</div>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3">
-                  <div class="d-flex flex-column">
-                    <div class="h6 font-weight-bold">$65.000 CLP</div>
-                  </div>
-                  <a class="btn btn-primary" th:href="@{/ver-camiseta}">Ver Detalles</a>
+                  <a class="btn btn-primary" th:href="@{/ver-camiseta/} + ${camiseta.id}">Ver Detalles</a>
                 </div>
               </div>
             </div>

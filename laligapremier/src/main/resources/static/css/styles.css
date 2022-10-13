@@ -163,8 +163,9 @@
 
 /* ----------  Vista Admin ---------------*/
 .btn-añadir {
-    width: 12%;
-    margin-right: 100px;
+    margin-right: 5%;
+    background-color: #0076ad;
+    font-weight: 800;
 }
 
 .btn-actualizar {

@@ -7,8 +7,11 @@
 <!--Cuerpo de la página-->
 <div class="wrapper">
 
-  <div class="d-md-flex align-items-md-center">
+  <div class="d-md-flex justify-content-between">
     <div class="h3" th:text="${titulo}"></div>
+    <div class="d-flex justify-content-end">
+      <a type="button" class="btn btn-añadir" th:href="@{/form}">AGREGAR CAMISETA</a>
+    </div>
   </div>
 
   <div class="d-sm-flex align-items-sm-center pt-2 clear">

@@ -14,7 +14,12 @@ public interface ICamisetaService {
 
     List<Camiseta> listarEquipos();
 
+    Page<Camiseta> listarEquipos(Pageable pageable);
+
     List<Camiseta> listarSelecciones();
+
+    Page<Camiseta> listarSelecciones(Pageable pageable);
+
 
 
 

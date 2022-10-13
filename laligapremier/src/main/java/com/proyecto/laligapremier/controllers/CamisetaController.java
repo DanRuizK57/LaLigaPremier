@@ -11,8 +11,12 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.proyecto.laligapremier.service.IUploadFileService;
+import com.proyecto.laligapremier.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,16 +38,30 @@ public class CamisetaController {
 
 
     @GetMapping(value = "/selecciones")
-    public String ListarSelecciones(Model model){
+    public String ListarSelecciones(@RequestParam(name = "page", defaultValue = "0") int page, Model model){
+        Pageable pageRequest = PageRequest.of(page, 6);
+
+        Page<Camiseta> camisetas = camisetaService.listarSelecciones(pageRequest);
+
+        PageRender<Camiseta> pageRender = new PageRender<>("/selecciones", camisetas);
+
         model.addAttribute("titulo" , "Listado de camisetas de selecciones");
-        model.addAttribute("camisetas" , camisetaService.listarSelecciones());
+        model.addAttribute("camisetas" , camisetas);
+        model.addAttribute("page", pageRender);
         return "mostrar/selecciones";
     }
 
     @GetMapping(value = "/equipos")
-    public String ListarEquipos(Model model){
+    public String ListarEquipos(@RequestParam(name = "page", defaultValue = "0") int page, Model model){
+        Pageable pageRequest = PageRequest.of(page, 6);
+
+        Page<Camiseta> camisetas = camisetaService.listarEquipos(pageRequest);
+
+        PageRender<Camiseta> pageRender = new PageRender<>("/equipos", camisetas);
+
         model.addAttribute("titulo" , "Listado de camisetas de equipos");
-        model.addAttribute("camisetas" , camisetaService.listarEquipos());
+        model.addAttribute("camisetas" , camisetas);
+        model.addAttribute("page", pageRender);
         return "mostrar/equipos";
     }
 

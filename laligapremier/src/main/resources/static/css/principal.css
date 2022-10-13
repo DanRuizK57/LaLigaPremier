@@ -193,14 +193,13 @@ div.text-muted{
     background-color: #01B201;
 }
 #products{
-    width: 75%;
     margin-left: 2%;
     display: flex;
-    justify-content: center;
+    flex-flow: row wrap;
 }
 
-.tarjeta {
-    width: 80%;
+.contenedor-camisetas {
+    width: 33%;
 }
 
 .tarjeta:hover{

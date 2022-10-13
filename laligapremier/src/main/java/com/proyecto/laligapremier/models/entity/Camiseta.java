@@ -54,7 +54,7 @@ public class Camiseta {
     private Marca marca;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_camista")
+    @Column(name = "tipo_camiseta")
     private TipoCamiseta tipoCamiseta;
 
     

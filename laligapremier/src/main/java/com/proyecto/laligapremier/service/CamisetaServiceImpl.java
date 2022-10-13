@@ -43,4 +43,22 @@ public class CamisetaServiceImpl implements ICamisetaService {
     public void save(Camiseta camiseta) {
         camisetaDao.save(camiseta);
     }
+
+    @Override
+    public List<Camiseta> listarEquipos() {
+        return findAll().stream()
+                .filter(p -> p.getTipoCamiseta()
+                        .getTipo()
+                        .equalsIgnoreCase("equipo"))
+                .toList();
+    }
+
+    @Override
+    public List<Camiseta> listarSelecciones() {
+        return findAll().stream()
+                .filter(p -> p.getTipoCamiseta()
+                        .getTipo()
+                        .equalsIgnoreCase("seleccion"))
+                .toList();
+    }
 }

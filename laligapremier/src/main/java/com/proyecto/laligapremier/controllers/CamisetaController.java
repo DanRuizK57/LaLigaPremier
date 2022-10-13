@@ -36,14 +36,14 @@ public class CamisetaController {
     @GetMapping(value = "/selecciones")
     public String ListarSelecciones(Model model){
         model.addAttribute("titulo" , "Listado de camisetas de selecciones");
-        model.addAttribute("camisetasSelecciones" , camisetaService.findAll());
+        model.addAttribute("camisetas" , camisetaService.listarSelecciones());
         return "mostrar/selecciones";
     }
 
     @GetMapping(value = "/equipos")
     public String ListarEquipos(Model model){
         model.addAttribute("titulo" , "Listado de camisetas de equipos");
-        model.addAttribute("camisetasEquipos" , camisetaService.findAll());
+        model.addAttribute("camisetas" , camisetaService.listarEquipos());
         return "mostrar/equipos";
     }
 

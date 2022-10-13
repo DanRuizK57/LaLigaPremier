@@ -12,5 +12,10 @@ public interface ICamisetaService {
     Camiseta findOne(Long id);
     void save(Camiseta camiseta);
 
+    List<Camiseta> listarEquipos();
+
+    List<Camiseta> listarSelecciones();
+
+
 
 }

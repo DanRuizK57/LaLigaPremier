@@ -66,8 +66,9 @@
 
       <div class="container py-3" th:each="camiseta : ${camisetas}">
         <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
+          <div class="offset-md-0 offset-sm-1">
             <div class="card tarjeta">
+
               <img th:if="${#strings.length(camiseta.imagen) > 0}" class="img-camiseta"
                    th:src="@{'/uploads/' + ${camiseta.imagen}}"/>
               <div class="card-body tarjeta-cuerpo">
@@ -82,6 +83,7 @@
                   <a class="btn btn-primary" th:href="@{/form/} + ${camiseta.id}">Editar</a>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

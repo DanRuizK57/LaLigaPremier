@@ -31,4 +31,9 @@ public class UsuarioController {
         return "cuenta/cambiar_contraseña";
     }
 
+    @GetMapping(value="/popup")
+    public String popup(Model model) {
+        model.addAttribute("titulo" , "Popup");
+        return "popup";
+    }
 }

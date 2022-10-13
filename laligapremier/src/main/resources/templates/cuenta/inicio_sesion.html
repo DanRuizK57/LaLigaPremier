@@ -42,7 +42,33 @@
                                 Recordarme
                             </label>
                         </div>
-                        <a th:href="@{/cambiar-contraseña}" class="text-body">¿Olvidaste tu contraseña?</a>
+                        <a th:href="@{/cambiar-contraseña}" class="text-body" data-bs-toggle="modal"
+                           data-bs-target="#recuperarContraseña">¿Olvidaste tu contraseña?</a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="recuperarContraseña" tabindex="-1" aria-labelledby="recuperarContraseñaLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content bg-recuperar-contraseña">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="recuperarContraseñaLabel"><strong>Recuperar Contraseña</strong></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="">
+                                            <div class="form-group">
+                                                <label for="correo">Correo Electrónico</label>
+                                                <input type="email" class="form-control mt-2" id="correo" aria-describedby="emailHelp"
+                                                       placeholder="Ingresa email">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 

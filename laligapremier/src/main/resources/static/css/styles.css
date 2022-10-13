@@ -32,6 +32,10 @@
     margin: 30px;
 }
 
+.bg-recuperar-contraseña {
+    background-color: #c8d6e0;
+}
+
 /*---- Vista Index ----*/
 .cuerpo {
     display: flex;

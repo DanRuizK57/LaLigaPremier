@@ -73,12 +73,12 @@ public class CamisetaController {
             camiseta = camisetaService.findOne(id);
             if(camiseta==null){
                 flash.addFlashAttribute("error" , "La camiseta no existe en la base de datos");
-                return "redirect:/index";
+                return "redirect:/";
             }
         }
         else {
             flash.addAttribute("error" , "el id de la camiseta no puede ser 0");
-            return "redirect:/index";
+            return "redirect:/";
         }
         model.put("camiseta" , camiseta);
         model.put("tipoCamisetas", TipoCamiseta.values());
@@ -164,6 +164,6 @@ public class CamisetaController {
                                 + camiseta.getImagen() +
                                 " eliminad con existo" );
             }
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

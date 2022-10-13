@@ -31,18 +31,34 @@ class CamisetaServiceImplTest {
     @Test
     @DisplayName("La lista equipos contiene SOLO camisetas tipo equipos")
     void listarEquipos_T3 () {
-        List<Camiseta> equipos = service.listarEquipos();
-
-        List<Camiseta> selecciones = service.listarEquipos()
+        List<Camiseta> seleccionesEnEquipos = service.listarEquipos()
                 .stream()
                 .filter(p -> p.getTipoCamiseta().getTipo().equalsIgnoreCase("seleccion"))
                 .toList();
-        assertTrue(selecciones.isEmpty());
+        assertTrue(seleccionesEnEquipos.isEmpty());
 
     }
-
-
     @Test
-    void listarSelecciones() {
+    @DisplayName("Lista de selecciones no es nula")
+    void listarSelecciones_T1 () {
+        List<Camiseta> selecciones = service.listarSelecciones();
+        assertNotNull(selecciones);
+    }
+    @Test
+    @DisplayName("Lista de selecciones no esta vacia")
+    void listarSelecciones_T2 () {
+        List<Camiseta> selecciones = service.listarSelecciones();
+        assertFalse(selecciones.isEmpty());
+    }
+    @Test
+    @DisplayName("La lista selecciones contiene SOLO camisetas tipo selecciones")
+    void listarSelecciones_T3 () {
+
+        List<Camiseta> equipoEnSelecciones = service.listarSelecciones()
+                .stream()
+                .filter(p -> p.getTipoCamiseta().getTipo().equalsIgnoreCase("equipo"))
+                .toList();
+        assertTrue(equipoEnSelecciones.isEmpty());
+
     }
 }

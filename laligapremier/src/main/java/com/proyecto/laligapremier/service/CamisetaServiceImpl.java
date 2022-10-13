@@ -58,7 +58,7 @@ public class CamisetaServiceImpl implements ICamisetaService {
         return findAll().stream()
                 .filter(p -> p.getTipoCamiseta()
                         .getTipo()
-                        .equalsIgnoreCase("equipo"))
+                        .equalsIgnoreCase("seleccion"))
                 .toList();
     }
 }

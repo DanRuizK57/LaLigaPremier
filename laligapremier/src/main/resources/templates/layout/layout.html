@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
@@ -21,7 +22,7 @@
 <!--Barra de navegación-->
 <header th:fragment="header">
     <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
-        <img th:src="@{/image/logo.png}" alt="Logo" class="logo">
+        <img src="/image/logo.png" alt="Logo" class="logo">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,8 +52,25 @@
                     </li>
                 </ul>
                 <ul class="mb-2 mb-lg-0" style="list-style: none;">
-                    <li>
+                    <li sec:authorize="!isAuthenticated()">
                         <a class="btn btn-navbar btn-inicio-sesion" th:href="@{/iniciar-sesion}" role="button">Iniciar Sesión</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <strong sec:authorize="hasRole('ROLE_USER')" sec:authentication="name"></strong>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/editar-perfil}">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" th:href="@{/cambiar-contraseña}">Cambiar Contraseña</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post">
+                                        <input class="dropdown-item" type="submit" value="Cerrar Sesión"/>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -106,7 +124,7 @@
     <div class="text-center p-4 border-top" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2022 Copyright: LaLiga Premier
         <div class="img-footer">
-            <img th:src="@{/image/logo.png}" alt="Logo" class="logo">
+            <img src="/image/logo.png" alt="Logo" class="logo">
         </div>
     </div>
 

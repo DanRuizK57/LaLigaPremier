@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+<h4 class="titulo">Cambiar Contraseña</h4>
+<!--Cuerpo de la página-->
+<div class="formato-datos-cuenta">
+  <form>
+    <div class="form-group">
+      <label for="claveActual">Contraseña Actual</label>
+      <input type="password" class="form-control casilla" id="claveActual" placeholder="************">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="claveNueva">Contraseña Nueva</label>
+      <input type="password" class="form-control casilla" id="claveNueva" placeholder="************">
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="claveNueva2">Confirmar Contraseña Nueva</label>
+      <input type="password" class="form-control casilla" id="claveNueva2" placeholder="************">
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+      <a type="submit" class="btn" th:href="@{/}" style="background-color: #c8d6e0;">Enviar</a>
+    </div>
+  </form>
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

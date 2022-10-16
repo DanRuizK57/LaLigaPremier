@@ -17,6 +17,9 @@ public class Usuario {
     private String correo;
     private String clave;
     private String roles;
+    private String telefono;
+    private String direccion;
+
 
     public Usuario() {
     }
@@ -42,6 +45,8 @@ public class Usuario {
                 ", correo='" + correo + '\'' +
                 ", clave='" + clave + '\'' +
                 ", roles='" + roles + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", direccion='" + direccion + '\'' +
                 '}';
     }
 }

@@ -13,20 +13,25 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
-    private IUsuarioDao data;
+    private IUsuarioDao usuarioDao;
     @Override
     public List<Usuario> listar() {
-        return (List<Usuario>) data.findAll();
+        return (List<Usuario>) usuarioDao.findAll();
     }
 
     @Override
     public Optional<Usuario> listarId(Long id) {
-        return data.findById(id);
+        return usuarioDao.findById(id);
+    }
+
+    @Override
+    public Usuario findOne(Long id) {
+        return usuarioDao.findById(id).orElse(null);
     }
 
     @Override
     public void guardar(Usuario u) {
-        data.save(u);
+        usuarioDao.save(u);
     }
 
     @Override

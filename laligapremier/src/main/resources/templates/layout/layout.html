@@ -59,9 +59,9 @@
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <strong sec:authorize="hasRole('ROLE_USER')" sec:authentication="name"></strong>
-                            </button>
+                            </button >
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/editar-perfil}">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" th:href="@{/editar-perfil/}">Editar Perfil</a></li>
                                 <li><a class="dropdown-item" th:href="@{/cambiar-contraseña}">Cambiar Contraseña</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

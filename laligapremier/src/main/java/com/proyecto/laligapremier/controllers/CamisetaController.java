@@ -154,7 +154,7 @@ public class CamisetaController {
             flash.addFlashAttribute("info" , mensajeFlash);
         }
 
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping(value="/uploads/{filename:.+}")

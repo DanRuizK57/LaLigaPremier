@@ -3,6 +3,7 @@ package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Usuario;
 import com.proyecto.laligapremier.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,18 +46,21 @@ public class UsuarioController {
         return "redirect:/iniciar-sesion";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/editar-perfil")
     public String editarPerfil(Model model) {
         model.addAttribute("titulo" , "Editar Perfil");
         return "cuenta/editar-perfil";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/cambiar-contraseña")
     public String cambiarContraseña(Model model) {
         model.addAttribute("titulo" , "Cambiar Contraseña");
         return "cuenta/cambiar-contraseña";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/recuperar-contraseña")
     public String recuperarContraseña(Model model) {
         model.addAttribute("titulo" , "Recuperar Contraseña");

@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -84,6 +85,8 @@ public class CamisetaController {
         model.put("titulo", "detalle de la camiseta " + camiseta.getEquipo() + "del jugador " + camiseta.getJugador());
         return "camiseta/ver_camiseta";
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/form/{id}")
     public String editarCamiseta(@PathVariable(value = "id") Long id,Map<String , Object> model , RedirectAttributes flash){
         Camiseta camiseta = null;
@@ -107,6 +110,7 @@ public class CamisetaController {
         return "camiseta/form_camiseta";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/form")
     public String crearCamiseta(Map<String , Object>model){    
         Camiseta camiseta = new Camiseta(); 
@@ -169,6 +173,7 @@ public class CamisetaController {
                 .body(recurso);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/eliminar/{id}")
     public String eliminar(@PathVariable(value = "id") Long id , RedirectAttributes flash){
         if(id > 0 ){

@@ -6,25 +6,25 @@
 <h4 class="titulo">Editar Perfil</h4>
 <!--Cuerpo de la página-->
 <div class="formato-datos-cuenta">
-    <form>
+    <form th:action="@{/perfil}" th:object="${usuario}" method="post">
         <div class="form-group">
             <label for="nombreUsuario">Nombre de Usuario</label>
-            <input type="email" class="form-control casilla" id="nombreUsuario" aria-describedby="emailHelp">
+            <input th:field="*{nombre}" type="text" class="form-control casilla" id="nombreUsuario" aria-describedby="emailHelp">
         </div>
         <br>
         <div class="form-group">
             <label for="correo">Correo Electrónico</label>
-            <input type="email" class="form-control casilla" id="correo" aria-describedby="emailHelp">
+            <input th:field="*{correo}" type="email" class="form-control casilla" id="correo" aria-describedby="emailHelp">
         </div>
         <br>
         <div class="form-group">
             <label for="telefono">Teléfono</label>
-            <input type="text" class="form-control casilla" id="telefono">
+            <input th:field="*{telefono}" type="text" class="form-control casilla" id="telefono">
         </div>
         <br>
         <div class="form-group">
             <label for="direccion">Dirección</label>
-            <input type="text" class="form-control casilla" id="direccion">
+            <input th:field="*{direccion}" type="text" class="form-control casilla" id="direccion">
         </div>
         <br>
         <div class="d-flex justify-content-center">

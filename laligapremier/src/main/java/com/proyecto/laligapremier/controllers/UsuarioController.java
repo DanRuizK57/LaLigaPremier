@@ -48,13 +48,13 @@ public class UsuarioController {
     @GetMapping(value="/editar-perfil")
     public String editarPerfil(Model model) {
         model.addAttribute("titulo" , "Editar Perfil");
-        return "editar-perfil";
+        return "cuenta/editar-perfil";
     }
 
     @GetMapping(value="/cambiar-contraseña")
     public String cambiarContraseña(Model model) {
         model.addAttribute("titulo" , "Cambiar Contraseña");
-        return "cambiar-contraseña";
+        return "cuenta/cambiar-contraseña";
     }
 
     @GetMapping(value="/recuperar-contraseña")

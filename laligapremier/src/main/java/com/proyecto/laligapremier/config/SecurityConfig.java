@@ -46,6 +46,8 @@ public class SecurityConfig {
                 .formLogin((formulario) -> formulario
                         // permite acceso a todos
                         .loginPage("/iniciar-sesion")
+                        // Utilizar otro atributo para iniciar sesión
+                        .usernameParameter("correo")
                         .permitAll()
                 )
                 .logout((cerrarSesion) -> cerrarSesion.permitAll())

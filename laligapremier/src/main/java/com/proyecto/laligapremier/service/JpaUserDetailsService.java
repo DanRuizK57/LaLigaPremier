@@ -16,11 +16,11 @@ public class JpaUserDetailsService implements UserDetailsService {
 
     // Busca si el usuario está registrado
     @Override
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
        return usuarioDao
-               .findByNombre(nombre)
+               .findByCorreo(correo)
                .map(UsuarioSecurity::new)
-               .orElseThrow(() -> new UsernameNotFoundException("Correo no encontrado: " + nombre));
+               .orElseThrow(() -> new UsernameNotFoundException("Correo no encontrado: " + correo));
     }
 
 }

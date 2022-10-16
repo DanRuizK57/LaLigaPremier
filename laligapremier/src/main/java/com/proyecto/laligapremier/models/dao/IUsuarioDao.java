@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface IUsuarioDao extends PagingAndSortingRepository<Usuario, Long> {
     Optional<Usuario> findByNombre(String nombre);
+    Optional<Usuario> findByCorreo(String nombre);
 }

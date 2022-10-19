@@ -40,4 +40,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         return bCryptPasswordEncoder.encode(clave);
     }
 
+    @Override
+    public Usuario findByNombre(String nombre) {
+        return usuarioDao.findByNombre(nombre);
+    }
+
 }

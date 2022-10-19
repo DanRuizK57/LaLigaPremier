@@ -15,4 +15,6 @@ public interface UsuarioService {
 
     public String cifrarClave(String clave);
 
+    public Usuario findByNombre(String nombre);
+
 }

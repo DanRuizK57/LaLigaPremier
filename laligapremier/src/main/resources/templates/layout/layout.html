@@ -55,13 +55,14 @@
                     <li sec:authorize="!isAuthenticated()">
                         <a class="btn btn-navbar btn-inicio-sesion" th:href="@{/iniciar-sesion}" role="button">Iniciar Sesión</a>
                     </li>
-                    <li sec:authorize="isAuthenticated()">
+                    <!--sec:authorize="isAuthenticated()-->
+                    <li th:if="(${#httpServletRequest.remoteUser})">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <strong sec:authorize="hasRole('ROLE_USER')" sec:authentication="name"></strong>
                             </button >
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/editar-perfil/}">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" th:href="@{/editar-perfil/} + ${userId}">Editar Perfil</a></li>
                                 <li><a class="dropdown-item" th:href="@{/cambiar-contraseña}">Cambiar Contraseña</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

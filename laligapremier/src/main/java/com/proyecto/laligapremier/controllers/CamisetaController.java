@@ -185,7 +185,7 @@ public class CamisetaController {
                         "info"
                         ,"Imagen "
                                 + camiseta.getImagen() +
-                                " eliminad con existo" );
+                                " eliminada con exito");
             }
         return "redirect:/";
     }

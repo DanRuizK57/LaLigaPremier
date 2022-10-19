@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="es">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="es">
   <head th:replace="layout/layout :: head"> </head>
   <body>
     <header th:replace="layout/layout :: header"></header>
 
     <!--Cuerpo de la página-->
     <div class="wrapper">
+      <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-md-flex justify-content-between">
+        <div class="h3" th:text="${titulo}"></div>
+        <div class="d-flex justify-content-end">
+          <a type="button" class="btn btn-añadir" th:href="@{/form}">AGREGAR CAMISETA</a>
+        </div>
+      </div>
 
       <div class="d-md-flex align-items-md-center">
         <div class="h3" th:text="${titulo}"></div>

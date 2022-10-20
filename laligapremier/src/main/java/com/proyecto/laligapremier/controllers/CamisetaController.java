@@ -7,6 +7,7 @@ import com.proyecto.laligapremier.service.ICamisetaService;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
@@ -189,4 +190,14 @@ public class CamisetaController {
             }
         return "redirect:/";
     }
+
+    @GetMapping("/busqueda")
+    public String buscarCamisetas(Model model, @RequestParam(value = "query", required = false) String q) {
+        List<Camiseta> camisetas = camisetaService.findByNombre(q);
+        model.addAttribute("camisetas", camisetas);
+        model.addAttribute("titulo", "Resultados de búsqueda:");
+        return "mostrar/busqueda";
+    }
+
+
 }

@@ -88,4 +88,11 @@ public class CamisetaServiceImpl implements ICamisetaService {
 
         return seleccionesPage;
     }
+
+    @Override
+    @Transactional()
+    public List<Camiseta> findByNombre(String q) {
+        List<Camiseta> camisetas = camisetaDao.findByNombre(q);
+        return camisetas;
+    }
 }

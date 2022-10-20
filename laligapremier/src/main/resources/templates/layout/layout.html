@@ -42,8 +42,9 @@
                         <a class="nav-link" th:href="@{/nosotros}">Nosotros</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                <form class="d-flex" role="search" th:action="@{/busqueda}">
+                    <input class="form-control me-2" type="search" placeholder="Buscar"
+                           name="query">
                     <button class="btn btn-navbar" type="submit" style="background-color: white;">🔍︎</button>
                 </form>
                 <ul class="mb-2 mb-lg-0" style="list-style: none;">
@@ -129,6 +130,7 @@
         </div>
     </div>
 
+    <script th:src="@{/js/funciones.js}"></script>
 </footer>
 </body>
 </html>

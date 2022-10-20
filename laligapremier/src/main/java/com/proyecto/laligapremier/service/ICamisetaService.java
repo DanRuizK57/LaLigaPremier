@@ -20,6 +20,8 @@ public interface ICamisetaService {
 
     Page<Camiseta> listarSelecciones(Pageable pageable);
 
+    public List<Camiseta> findByNombre(String term);
+
 
 
 

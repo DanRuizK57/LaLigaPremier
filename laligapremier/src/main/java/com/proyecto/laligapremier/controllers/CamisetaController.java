@@ -213,5 +213,9 @@ public class CamisetaController {
         return "mostrar/busqueda";
     }
 
+    @GetMapping(value = "/cargar-camisetas/{term}", produces = {"application/json"})
+    public @ResponseBody List<Camiseta> cargarCamisetas(@PathVariable String term){
+        return camisetaService.findByNombre(term);
+    }
 
 }

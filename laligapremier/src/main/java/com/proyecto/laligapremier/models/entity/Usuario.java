@@ -3,6 +3,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Getter
@@ -13,9 +15,16 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String nombre;
+    @NotBlank
+    @Email
     private String correo;
+    @NotBlank
     private String clave;
+
+    private String repetirClave;
     private String roles;
     private String telefono;
     private String direccion;
@@ -34,6 +43,14 @@ public class Usuario {
     public Usuario(String correo, String clave, String roles) {
         this.correo = correo;
         this.clave = clave;
+        this.roles = roles;
+    }
+
+    public Usuario(String nombre, String correo, String clave, String repetirClave, String roles) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.clave = clave;
+        this.repetirClave = repetirClave;
         this.roles = roles;
     }
 

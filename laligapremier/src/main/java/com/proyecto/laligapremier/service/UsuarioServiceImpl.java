@@ -45,4 +45,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDao.findByNombre(nombre);
     }
 
+    @Override
+    public boolean compararClaves(String clave, String repetirClave) {
+        return clave.equals(repetirClave);
+    }
+
 }

@@ -17,4 +17,6 @@ public interface UsuarioService {
 
     public Usuario findByNombre(String nombre);
 
+    public boolean compararClaves(String clave, String repetirClave);
+
 }

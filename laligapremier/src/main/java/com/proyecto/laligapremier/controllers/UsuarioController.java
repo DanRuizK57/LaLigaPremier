@@ -28,22 +28,33 @@ public class UsuarioController {
 
     @GetMapping(value="/registro")
     public String registro(Model model) {
+        Usuario usuario = new Usuario();
         model.addAttribute("titulo" , "Registrar Cuenta");
-        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("usuario", usuario);
         return "cuenta/registro";
     }
 
     @PostMapping("/registro")
-    public String guardarUsuario(@Valid Usuario usuario, SessionStatus status) {
+    public String guardarUsuario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status, RedirectAttributes flash) {
 
-        //Pasar nueva contraseña cifrada
-        usuario.setClave(usuarioService.cifrarClave(usuario.getClave()));
+        if (result.hasErrors()) {
+            model.addAttribute("titulo", "Registrar Cuenta");
+            return "cuenta/registro";
+        }
 
-        usuario.setRoles("ROLE_USER");
+        if(usuarioService.compararClaves(usuario.getClave() , usuario.getRepetirClave())){
+            //Pasar nueva contraseña cifrada
+            usuario.setClave((usuarioService.cifrarClave(usuario.getClave())));
 
-        usuarioService.guardar(usuario);
-        status.setComplete();
-        return "redirect:/iniciar-sesion";
+            usuario.setRoles("ROLE_USER");
+
+            usuarioService.guardar(usuario);
+            status.setComplete();
+            return "redirect:/iniciar-sesion";
+        }
+        model.addAttribute("titulo", "Registrar Cuenta");
+        flash.addFlashAttribute("error" , "¡Las contraseñas deben coincidir!");
+        return "cuenta/registro";
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")

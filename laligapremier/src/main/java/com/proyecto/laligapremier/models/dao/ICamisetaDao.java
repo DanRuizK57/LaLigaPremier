@@ -14,4 +14,7 @@ public interface ICamisetaDao extends PagingAndSortingRepository<Camiseta, Long>
     @Query(value = "SELECT * FROM camisetas WHERE camisetas.nombre LIKE %:q%", nativeQuery = true)
     public List<Camiseta> findByNombre(@Param("q") String q);
 
+    @Query(value = "SELECT * FROM camisetas WHERE camisetas.nombre LIKE %:q%", nativeQuery = true)
+    public Page<Camiseta> findByNombre(@Param("q")String q, Pageable pageable);
+
 }

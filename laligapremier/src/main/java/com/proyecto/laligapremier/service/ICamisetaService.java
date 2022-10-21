@@ -22,6 +22,8 @@ public interface ICamisetaService {
 
     public List<Camiseta> findByNombre(String term);
 
+    Page<Camiseta> findByNombre(String term, Pageable pageable);
+
 
 
 

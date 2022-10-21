@@ -50,6 +50,8 @@ public class CamisetaController {
         model.addAttribute("titulo" , "Listado de camisetas de selecciones");
         model.addAttribute("camisetas" , camisetas);
         model.addAttribute("page", pageRender);
+        model.addAttribute("marcas" , Marca.values());
+        model.addAttribute("tallas" , Talla.values());
         return "mostrar/selecciones";
     }
 
@@ -64,6 +66,8 @@ public class CamisetaController {
         model.addAttribute("titulo" , "Listado de camisetas de equipos");
         model.addAttribute("camisetas" , camisetas);
         model.addAttribute("page", pageRender);
+        model.addAttribute("marcas" , Marca.values());
+        model.addAttribute("tallas" , Talla.values());
         return "mostrar/equipos";
     }
 
@@ -192,10 +196,20 @@ public class CamisetaController {
     }
 
     @GetMapping("/busqueda")
-    public String buscarCamisetas(Model model, @RequestParam(value = "query", required = false) String q) {
-        List<Camiseta> camisetas = camisetaService.findByNombre(q);
+    public String buscarCamisetas(@RequestParam(name = "page", defaultValue = "0") int page,
+                                  Model model, @RequestParam(value = "query", required = false) String q) {
+        Pageable pageRequest = PageRequest.of(page, 6);
+
+        Page<Camiseta> camisetas = camisetaService.findByNombre(q, pageRequest);
+
+        PageRender<Camiseta> pageRender = new PageRender<>("/busqueda", camisetas);
+
+
         model.addAttribute("camisetas", camisetas);
         model.addAttribute("titulo", "Resultados de búsqueda:");
+        model.addAttribute("page", pageRender);
+        model.addAttribute("marcas" , Marca.values());
+        model.addAttribute("tallas" , Talla.values());
         return "mostrar/busqueda";
     }
 

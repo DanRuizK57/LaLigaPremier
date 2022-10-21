@@ -89,17 +89,22 @@
                                 <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-flex justify-content-center border-top">
                                     <a class="btn btn-warning mt-3" th:href="@{/form/} + ${camiseta.id}">Editar</a>
                                 </div>
-                                <div th:unless="${camisetas.size}">
-                                    <h2>No hay resultados</h2>
-                                </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div th:if="${camisetas.size} != null">
+                <h2>No hay resultados</h2>
+            </div>
+
         </section>
-        <nav th:replace="mostrar/paginador :: paginador"></nav>
+        <div th:if="${camisetas.size} != null">
+            <nav th:replace="mostrar/paginador :: paginador"></nav>
+        </div>
+
     </div>
 </div>
 

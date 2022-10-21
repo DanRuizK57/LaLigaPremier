@@ -95,4 +95,9 @@ public class CamisetaServiceImpl implements ICamisetaService {
         List<Camiseta> camisetas = camisetaDao.findByNombre(q);
         return camisetas;
     }
+
+    @Override
+    public Page<Camiseta> findByNombre(String q, Pageable pageable) {
+        return camisetaDao.findByNombre(q, pageable);
+    }
 }

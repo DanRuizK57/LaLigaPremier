@@ -62,6 +62,9 @@
 
 #footer {
     margin-top: 6%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .img-footer {

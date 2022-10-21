@@ -184,13 +184,13 @@ public class CamisetaController {
         if(id > 0 ){
             Camiseta camiseta = camisetaService.findOne(id);
             camisetaService.delete(id);
-            flash.addFlashAttribute("success" , "Camiseta eliminada con exito");
+            flash.addFlashAttribute("success" , "Camiseta eliminada con éxito");
             if(uploadFileService.delete(camiseta.getImagen()))
                 flash.addFlashAttribute(
                         "info"
                         ,"Imagen "
                                 + camiseta.getImagen() +
-                                " eliminad con existo" );
+                                " eliminada con éxito" );
             }
         return "redirect:/";
     }

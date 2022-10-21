@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="layout/layout :: head"></head>
 <body>
     <header th:replace="layout/layout :: header"></header>
@@ -7,11 +7,7 @@
         <div class="card bg-dark text-white">
             <div class="card-header" th:text="${titulo}"></div>
             <div class="card-body">
-                <div th:object="${camiseta}" th:remove="tag">
-                    <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-                        <li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
-                    </ul>
-                </div>
+
                 <form th:action="@{/form}" th:object="${camiseta}" method="post" enctype="multipart/form-data">
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Tipo</label>
@@ -113,8 +109,8 @@
                         <div class="form-group row py-2">
                             <label class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-6">
-                                <input type="text" th:field="*{descripcion}" class="form-control"
-                                       th:errorclass="'form-control alert-danger'" /> <small
+                                <textarea type="text" rows="3" th:field="*{descripcion}" class="form-control"
+                                       th:errorclass="'form-control alert-danger'"></textarea> <small
                                     class="form-text text-danger"
                                     th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
                             </div>

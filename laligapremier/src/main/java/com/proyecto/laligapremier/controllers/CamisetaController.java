@@ -137,6 +137,10 @@ public class CamisetaController {
     ){
         if(result.hasErrors()){
             model.addAttribute("titulo" , "Agregar camiseta");
+            model.addAttribute("tipoCamisetas", TipoCamiseta.values());
+            model.addAttribute("tallas", Talla.values());
+            model.addAttribute("marcas", Marca.values());
+            return "camiseta/form_camiseta";
         }
         if(!imagen.isEmpty()) {
             if (camiseta.getId() != null

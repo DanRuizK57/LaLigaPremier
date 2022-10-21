@@ -34,6 +34,8 @@
                     <div class="offset-md-0 offset-sm-1">
                         <div class="card tarjeta">
 
+                            <img th:if="${#strings.length(camiseta.imagen) < 1}" class="img-camiseta"
+                                 th:src="@{/image/logo2.png}"/>
                             <img th:if="${#strings.length(camiseta.imagen) > 0}" class="img-camiseta"
                                  th:src="@{'/uploads/' + ${camiseta.imagen}}"/>
                             <div class="card-body tarjeta-cuerpo">
@@ -58,7 +60,7 @@
                 </div>
             </div>
 
-            <div th:if="${camisetas.size} != null">
+            <div th:if="${camisetas.size} == null">
                 <h2>No hay resultados</h2>
             </div>
 

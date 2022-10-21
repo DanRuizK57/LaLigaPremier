@@ -3,6 +3,9 @@ import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 
@@ -18,9 +21,11 @@ public class Camiseta {
     @Column(name = "id" , nullable = false)
     private Long id;
 
+    @NotBlank
     @Column(name = "equipo" )
     private String equipo;
 
+    @NotBlank
     @Column(name = "liga" )
     private String liga;
 
@@ -30,29 +35,36 @@ public class Camiseta {
     @Column(name = "jugador" )
     private String jugador ;
 
+    @NotBlank
     @Column(name = "temporada" , nullable = false)
     private String temporada ;
 
+    @NotNull
     @Column(name = "precio" , nullable = false)
     private Integer precio;
 
     @Column(name = "imagen")
     private String imagen;
 
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
 
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tallas")
     private Talla talla;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "marca")
     private Marca marca;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_camiseta")
     private TipoCamiseta tipoCamiseta;

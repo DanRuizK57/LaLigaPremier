@@ -35,7 +35,8 @@ public class SecurityConfig {
                         // Se añaden excepciones, donde se podrá ingresar sin autenticación
                         .mvcMatchers("/", "/index", "/registro",
                                 "/nosotros", "/carrito-de-compras", "/selecciones",
-                                "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}", "/busqueda",
+                                "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}",
+                                "/busqueda", "/recuperar-contraseña",
                                 // Cargar archivos ccs e imágenes
                                 "/css/**", "/image/**", "/js/**").permitAll()
                         .anyRequest().authenticated())

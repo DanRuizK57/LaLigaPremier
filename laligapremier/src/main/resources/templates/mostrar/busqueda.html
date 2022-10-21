@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<div class="wrapper">
+
+    <div class="d-md-flex justify-content-between">
+        <div class="h3" th:text="${titulo}"></div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-flex justify-content-end">
+            <a type="button" class="btn btn-añadir" th:href="@{/form}">AGREGAR CAMISETA</a>
+        </div>
+    </div>
+
+    <div class="d-sm-flex align-items-sm-center pt-2 clear">
+        <div class="text-muted filter-label">Filtros Aplicados:</div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2">Filtro 1 <span class=" px-1 close">&times;</span> </div>
+        <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0">Filtro 2 <span class=" px-1 close">&times;</span> </div>
+    </div>
+
+
+    <div class="content py-md-0 py-3">
+
+        <!-- Filtros -->
+        <section th:replace="layout/layout :: filtros"></section>
+
+        <!-- Camisetas -->
+        <section id="products">
+
+            <div class="container contenedor-camisetas py-3" th:each="camiseta : ${camisetas}">
+                <div class="row">
+                    <div class="offset-md-0 offset-sm-1">
+                        <div class="card tarjeta">
+
+                            <img th:if="${#strings.length(camiseta.imagen) > 0}" class="img-camiseta"
+                                 th:src="@{'/uploads/' + ${camiseta.imagen}}"/>
+                            <div class="card-body tarjeta-cuerpo">
+                                <h6 th:text="${camiseta.nombre}" class="font-weight-bold pt-1"></h6>
+                                <div class="text-muted description" th:text="${camiseta.descripcion}"></div>
+                                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star"></span> </div>
+                                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            <strong class="fs-4" th:text="'$' + ${camiseta.precio}"></strong>
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-primary px-2" th:href="@{/ver-camiseta/} + ${camiseta.id}">Ver Detalles</a>
+                                </div>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')" class="d-flex justify-content-center border-top">
+                                    <a class="btn btn-warning mt-3" th:href="@{/form/} + ${camiseta.id}">Editar</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${camisetas.size} != null">
+                <h2>No hay resultados</h2>
+            </div>
+
+        </section>
+        <div th:if="${camisetas.size} != null">
+            <nav th:replace="mostrar/paginador :: paginador"></nav>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

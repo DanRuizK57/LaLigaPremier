@@ -42,8 +42,9 @@
                         <a class="nav-link" th:href="@{/nosotros}">Nosotros</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                <form class="d-flex" role="search" th:action="@{/busqueda}">
+                    <input class="form-control me-2" type="search" placeholder="Buscar"
+                           name="query">
                     <button class="btn btn-navbar" type="submit" style="background-color: white;">🔍︎</button>
                 </form>
                 <ul class="mb-2 mb-lg-0" style="list-style: none;">
@@ -82,6 +83,49 @@
     <div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
     <div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
 </header>
+
+<!-- Filtros -->
+<section id="sidebar" th:fragment="filtros">
+    <div class="py-3">
+        <h5 class="font-weight-bold">Marca</h5>
+        <form class="brand" th:each="marca : ${marcas}">
+            <div class="form-inline d-flex align-items-center py-1">
+                <label class="tick">
+                    <input th:text="${marca.nombre}" th:value="${marca}" type="checkbox" />
+                    <span class="check"></span>
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="py-3">
+        <h5 class="font-weight-bold">Talla</h5>
+        <form class="brand" th:each="talla : ${tallas}">
+            <div class="form-inline d-flex align-items-center py-1">
+                <label class="tick">
+                    <input th:text="${talla.talla}" th:value="${talla}" type="checkbox">
+                    <span class="check"></span>
+                </label>
+            </div>
+
+        </form>
+    </div>
+    <div class="py-3">
+        <h5 class="font-weight-bold">Rango de precios</h5>
+        <form class="brand">
+            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $30.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $50.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $80.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $100.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Más de $100.000 <input type="checkbox"> <span class="check"></span> </label> </div>
+        </form>
+    </div>
+    <div class="filters">
+        <div class="btn btn-aplicar-filtros">Aplicar Filtros</div>
+    </div>
+    <div class="filters">
+        <div class="btn btn-eliminar-filtros">Eliminar Filtros</div>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted border-top footer" th:fragment="footer">
@@ -129,6 +173,7 @@
         </div>
     </div>
 
+    <script th:src="@{/js/funciones.js}"></script>
 </footer>
 </body>
 </html>

@@ -34,10 +34,10 @@ public class SecurityConfig {
                 .authorizeRequests(consulta -> consulta
                         // Se añaden excepciones, donde se podrá ingresar sin autenticación
                         .mvcMatchers("/", "/index", "/registro",
-                                "nosotros", "/carrito-de-compras", "/selecciones",
-                                "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}",
+                                "/nosotros", "/carrito-de-compras", "/selecciones",
+                                "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}", "/busqueda",
                                 // Cargar archivos ccs e imágenes
-                                "/css/**", "/image/**").permitAll()
+                                "/css/**", "/image/**", "/js/**").permitAll()
                         .anyRequest().authenticated())
                 // Así spring security identifica como obtener los datos de los usuarios
                 .userDetailsService(jpaUserDetailsService)

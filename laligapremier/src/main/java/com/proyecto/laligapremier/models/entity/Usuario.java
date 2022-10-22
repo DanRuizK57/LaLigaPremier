@@ -5,6 +5,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +30,8 @@ public class Usuario {
     private String telefono;
     private String direccion;
 
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Pedido> pedidos;
 
     public Usuario() {
     }

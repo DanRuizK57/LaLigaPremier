@@ -12,6 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes("usuario")
@@ -21,7 +22,24 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping(value="/iniciar-sesion")
-    public String iniciarSesion(Model model) {
+    public String iniciarSesion(@RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model, Principal principal, RedirectAttributes flash) {
+
+        if (principal != null) {
+            flash.addFlashAttribute("info", "¡Ya iniciaste sesión anteriormente!");
+            return "redirect:/";
+        }
+
+        if (error != null) {
+            model.addAttribute("error" , "Correo o contraseña incorrectos, inténtalo nuevamente.");
+        }
+
+        if (logout != null) {
+            flash.addFlashAttribute("success" , "Has cerrado sesión correctamente.");
+            return "redirect:/";
+        }
+
         model.addAttribute("titulo" , "Iniciar Sesión");
         return "cuenta/iniciar-sesion";
     }
@@ -50,10 +68,11 @@ public class UsuarioController {
 
             usuarioService.guardar(usuario);
             status.setComplete();
+            flash.addFlashAttribute("success" , "¡Te has registrado correctamente!");
             return "redirect:/iniciar-sesion";
         }
+        model.addAttribute("error" , "¡Las contraseñas deben coincidir!");
         model.addAttribute("titulo", "Registrar Cuenta");
-        flash.addFlashAttribute("error" , "¡Las contraseñas deben coincidir!");
         return "cuenta/registro";
     }
 

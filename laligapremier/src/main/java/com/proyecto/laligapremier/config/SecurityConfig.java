@@ -38,7 +38,7 @@ public class SecurityConfig {
                                 "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}",
                                 "/busqueda", "/recuperar-contraseña",
                                 // Cargar archivos ccs e imágenes
-                                "/css/**", "/image/**", "/js/**").permitAll()
+                                "/css/**", "/image/**", "/js/**", "/resources/sql/**").permitAll()
                         .anyRequest().authenticated())
                 // Así spring security identifica como obtener los datos de los usuarios
                 .userDetailsService(jpaUserDetailsService)

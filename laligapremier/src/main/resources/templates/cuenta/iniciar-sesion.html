@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="layout/layout :: head"></head>
 <body>
-<div th:if="${param.error}" class="alert alert-danger">
-    Nombre de usuario y/o contraseña incorrectos.
-</div>
-<div th:if="${param.logout}" class="alert alert-success">
-    Has cerrado sesión correctamente.
-</div>
+
 <section class="vh-100">
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -27,6 +22,8 @@
                     <div class="divider d-flex align-items-center my-4">
                         <p class="text-center fw-bold mx-3 mb-0">O</p>
                     </div>
+
+                    <small th:if="${error != null}" th:text="${error}" class="alert alert-danger py-1 d-flex justify-content-start"></small>
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="correo">Correo Electrónico</label>

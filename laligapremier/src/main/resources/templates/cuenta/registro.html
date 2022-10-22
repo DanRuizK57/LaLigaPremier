@@ -2,6 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="es">
 <head th:replace="layout/layout :: head"></head>
 <body>
+
 <section class="vh-100">
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,7 +43,7 @@
                             <label class="form-label" for="contraseña2">Repetir Contraseña</label>
                             <input th:field="*{repetirClave}" type="password" id="contraseña2" class="form-control"
                                    placeholder="************"/>
-                            <small th:if="${#fields.hasErrors('repetirClave')}" th:errors="*{repetirClave}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
+                            <small th:if="${error != null}" th:text="${error}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
                         </div>
                     </div>
 

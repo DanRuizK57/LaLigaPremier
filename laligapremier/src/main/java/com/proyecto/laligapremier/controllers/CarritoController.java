@@ -2,6 +2,7 @@ package com.proyecto.laligapremier.controllers;
 
 import com.proyecto.laligapremier.exceptions.SinStockException;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.service.ICamisetaService;
 import com.proyecto.laligapremier.service.ICarritoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,11 @@ public class CarritoController {
     @GetMapping("/shoppingCart/addProduct/{camisetaId}")
     public String addProductToCart(@PathVariable("camisetaId") Long camisetaId) {
 
+
+
         Camiseta camiseta = camisetaService.findById(camisetaId).orElse(null);
+
+
         if (camiseta != null) {
             carritoService.addProduct(camiseta);
             return "redirect:/shoppingCart";

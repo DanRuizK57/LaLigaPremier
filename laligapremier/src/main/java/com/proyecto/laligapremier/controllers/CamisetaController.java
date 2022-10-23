@@ -1,5 +1,6 @@
 package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 import com.proyecto.laligapremier.models.enums.TipoCamiseta;
@@ -81,12 +82,19 @@ public class CamisetaController {
      */
     @GetMapping(value = "/ver-camiseta/{id}")
     public String verCamiseta(@PathVariable(value = "id")Long id, Map <String, Object> model , RedirectAttributes flash){
+
+        ItemPedido item = new ItemPedido();
+
         Camiseta camiseta = camisetaService.findOne(id);
+
+        item.setCamiseta(camiseta);
+
         if(camiseta == null){
             flash.addAttribute("error" , "Camiseta no encontrada");
             return "redirect:/mostrar/equipos";
         }
-        model.put("camiseta", camiseta);
+        model.put("camiseta", item.getCamiseta());
+        model.put("item", item);
         model.put("titulo", "detalle de la camiseta " + camiseta.getEquipo() + "del jugador " + camiseta.getJugador());
         return "camiseta/ver_camiseta";
     }

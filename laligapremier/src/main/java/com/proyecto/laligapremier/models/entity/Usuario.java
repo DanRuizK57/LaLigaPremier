@@ -30,8 +30,8 @@ public class Usuario {
     private String telefono;
     private String direccion;
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Pedido> pedidos;
+    //@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //private List<Pedido> pedidos;
 
     public Usuario() {
     }

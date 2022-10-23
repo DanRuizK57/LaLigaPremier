@@ -5,7 +5,7 @@ import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 import com.proyecto.laligapremier.service.ICamisetaService;
-import com.proyecto.laligapremier.service.UsuarioService;
+import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,7 +24,7 @@ public class IndexController {
     private ICamisetaService camisetaService;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private IUsuarioService IUsuarioService;
 
     @Autowired
     private IUsuarioDao usuarioDao;
@@ -39,7 +39,7 @@ public class IndexController {
         PageRender<Camiseta> pageRender = new PageRender<>("/", camisetas);
 
         if (principal != null) {
-            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            int userId = Math.toIntExact(IUsuarioService.findByNombre(principal.getName()).getId());
             model.addAttribute("userId", userId);
         }
 

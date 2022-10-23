@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CamisetaServiceImpl implements ICamisetaService {
 
@@ -43,6 +45,11 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Transactional
     public void save(Camiseta camiseta) {
         camisetaDao.save(camiseta);
+    }
+
+    @Override
+    public void flush() {
+        camisetaDao.flush();
     }
 
     @Override
@@ -99,5 +106,10 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Override
     public Page<Camiseta> findByNombre(String q, Pageable pageable) {
         return camisetaDao.findByNombre(q, pageable);
+    }
+
+    @Override
+    public Optional<Camiseta> findById(Long id) {
+        return camisetaDao.findById(id);
     }
 }

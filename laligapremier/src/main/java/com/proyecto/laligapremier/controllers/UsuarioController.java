@@ -1,7 +1,7 @@
 package com.proyecto.laligapremier.controllers;
 
 import com.proyecto.laligapremier.models.entity.Usuario;
-import com.proyecto.laligapremier.service.UsuarioService;
+import com.proyecto.laligapremier.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.security.Principal;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private IUsuarioService IUsuarioService;
 
     @GetMapping(value="/iniciar-sesion")
     public String iniciarSesion(@RequestParam(value = "error", required = false) String error,
@@ -60,13 +60,13 @@ public class UsuarioController {
             return "cuenta/registro";
         }
 
-        if(usuarioService.compararClaves(usuario.getClave() , usuario.getRepetirClave())){
+        if(IUsuarioService.compararClaves(usuario.getClave() , usuario.getRepetirClave())){
             //Pasar nueva contraseña cifrada
-            usuario.setClave((usuarioService.cifrarClave(usuario.getClave())));
+            usuario.setClave((IUsuarioService.cifrarClave(usuario.getClave())));
 
             usuario.setRoles("ROLE_USER");
 
-            usuarioService.guardar(usuario);
+            IUsuarioService.guardar(usuario);
             status.setComplete();
             flash.addFlashAttribute("success" , "¡Te has registrado correctamente!");
             return "redirect:/iniciar-sesion";
@@ -82,7 +82,7 @@ public class UsuarioController {
 
         Usuario usuario = null;
         if(id>0){
-            usuario = usuarioService.findOne(id);
+            usuario = IUsuarioService.findOne(id);
             if(usuario==null){
                 flash.addFlashAttribute("error" , "El usuario no existe en la base de datos");
                 return "redirect:/";
@@ -111,7 +111,7 @@ public class UsuarioController {
         }
 
             String mensajeFlash = (usuario.getId() != null) ? "¡Usuario editado con éxito!" : "¡Usuario agregado con éxito!";
-            usuarioService.guardar(usuario);
+            IUsuarioService.guardar(usuario);
             status.setComplete();
             flash.addFlashAttribute("info" , mensajeFlash);
 

@@ -1,6 +1,7 @@
-package com.proyecto.laligapremier.service;
+package com.proyecto.laligapremier.service.impl;
 import com.proyecto.laligapremier.models.dao.ICamisetaDao;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.service.ICamisetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

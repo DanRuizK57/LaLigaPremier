@@ -8,7 +8,8 @@ public enum Talla {
     S ("S"),
     M ("M"),
     L("L"),
-    XL("XL");
+    XL("XL"),
+    XXL("XXL");
 
     private final String talla;
     

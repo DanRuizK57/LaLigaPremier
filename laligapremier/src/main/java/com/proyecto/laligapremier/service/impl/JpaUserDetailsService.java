@@ -1,4 +1,4 @@
-package com.proyecto.laligapremier.service;
+package com.proyecto.laligapremier.service.impl;
 
 import com.proyecto.laligapremier.models.dao.IUsuarioDao;
 import com.proyecto.laligapremier.models.entity.UsuarioSecurity;

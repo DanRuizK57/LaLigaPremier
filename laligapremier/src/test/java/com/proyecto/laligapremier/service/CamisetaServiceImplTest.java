@@ -1,6 +1,7 @@
 package com.proyecto.laligapremier.service;
 
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.service.impl.CamisetaServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

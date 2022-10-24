@@ -1,7 +1,8 @@
-package com.proyecto.laligapremier.service;
+package com.proyecto.laligapremier.service.impl;
 
 import com.proyecto.laligapremier.models.dao.IUsuarioDao;
 import com.proyecto.laligapremier.models.entity.Usuario;
+import com.proyecto.laligapremier.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

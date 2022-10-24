@@ -1,6 +1,7 @@
-package com.proyecto.laligapremier.service;
+package com.proyecto.laligapremier.service.impl;
 
 
+import com.proyecto.laligapremier.service.IUploadFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;

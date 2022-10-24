@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="layout/layout :: head"></head>
 <body>
     <header th:replace="layout/layout :: header"></header>
@@ -23,48 +23,29 @@
                     <!-- Descripción Camiseta-->
                     <div class="details col-md-6">
 
-
+                        <form th:action="@{/shoppingCart/addProduct/} + ${camiseta.id}" th:object="${item}" method="post">
 
                             <h3 class="titulo-ver-camiseta txt-destacado" th:text="${camiseta.nombre}"></h3>
                             <p class="desc-ver-camiseta" th:text="${camiseta.descripcion}"></p>
                             <h4 class="precio txt-destacado">Precio: <span th:text="'$' + ${camiseta.precio}"></span></h4>
                             <div class="mt-4">
                                 <label>
-                                    <h6 class="cantidad txt-destacado">Cantidad <input type="number" class="casilla-cantidad"></h6>
+                                    <h6 class="cantidad txt-destacado">Cantidad <input th:field="*{cantidad}" type="number" class="casilla-cantidad"></h6>
                                 </label>
                             </div>
                             <div class="tallas mt-4">
                                 <h6 class="txt-destacado tallas">Talla</h6>
-                                <label class="radio talla">
-                                    <input type="radio" name="size" value="XS">
-                                    <span class="txt-destacado">XS</span>
-                                </label>
-                                <label class="radio talla">
-                                    <input type="radio" name="size" value="S">
-                                    <span class="txt-destacado">S</span>
-                                </label>
-                                <label class="radio talla">
-                                    <input type="radio" name="size" value="M">
-                                    <span class="txt-destacado">M</span>
-                                </label>
-                                <label class="radio talla">
-                                    <input type="radio" name="size" value="L">
-                                    <span class="txt-destacado">L</span>
-                                </label>
-                                <label class="radio talla">
-                                    <input type="radio" name="size" value="XL">
-                                    <span class="txt-destacado">XL</span>
-                                </label>
-                                <label class="radio talla">
-                                    <input type="radio" name="size" value="XXL">
-                                    <span class="txt-destacado">XXL</span>
+                                <label class="radio talla" th:each="talla: ${tallas}">
+                                    <input type="radio" name="size" th:field="*{talla}" th:value="${talla}">
+                                    <span class="txt-destacado" th:for="${#ids.prev('talla')}" th:text="${talla.talla}"></span>
                                 </label>
                             </div>
+
                             <div class="action d-flex justify-content-center">
-                                <a th:href="@{/shoppingCart/addProduct/} + ${camiseta.id}" class="add-to-cart btn btn-default" type="button">Añadir al Carrito</a>
+                                <button class="add-to-cart btn btn-default" type="submit">Añadir al Carrito</button>
                             </div>
 
-
+                        </form>
 
                         <div class="mt-5">
                             <!-- Botón desplegable -->

@@ -19,16 +19,18 @@
                                         <h1 class="fw-bold mb-0 text-black" th:text="${titulo}"></h1>
                                     </div>
 
+                                    <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
+
                                     <hr class="my-4">
 
-                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="camiseta: ${camisetas}">
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="item: ${items.entrySet()}">
                                         <div class="col-md-2 col-lg-2 col-xl-2">
-                                            <img th:if="${#strings.length(camiseta.getKey().imagen) > 0}" class="img-fluid rounded-3"
-                                                 th:src="@{'/uploads/' + ${camiseta.getKey().imagen}}"/>
+                                            <img th:if="${#strings.length(item.getKey().camiseta.imagen) > 0}" class="img-fluid rounded-3"
+                                                 th:src="@{'/uploads/' + ${item.getKey().camiseta.imagen}}"/>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                            <h6 class="text-black mb-0" th:text="${camiseta.getKey().nombre}">Selección de Francia Mbappé</h6>
-                                            <h6 class="text-muted" th:text="'Talla ' + ${camiseta.getKey().talla}"></h6>
+                                            <h6 class="text-black mb-0" th:text="${item.getKey().camiseta.nombre}"></h6>
+                                            <h6 class="text-muted" th:text="'Talla ' + ${item.getKey().talla}"></h6>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                             <button class="btn btn-link px-2"
@@ -36,7 +38,7 @@
                                                 <i class="fas fa-minus"></i>
                                             </button>
 
-                                            <input id="form1" min="0" name="quantity" value="1" type="number"
+                                            <input id="form1" min="0" name="quantity" th:value="${item.getKey().cantidad}" type="number"
                                                    class="form-control form-control-sm" />
 
                                             <button class="btn btn-link px-2"
@@ -44,9 +46,14 @@
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <h6 class="mb-0" th:text="${camiseta.getKey().precio}"></h6>
+                                        <div class="col-md-3 col-lg-2 col-xl-2">
+                                            <h6 class="mb-0" th:text="${item.getKey().camiseta.precio}"></h6>
                                         </div>
+                                        <div class="col-md-3 col-lg-2 col-xl-2">
+                                            <h6 class="mb-0" th:text="${item.getKey().camiseta.precio} * ${item.getKey().cantidad}"></h6>
+                                        </div>
+                                        <a th:href="@{/shoppingCart/removeProduct/} + ${item.getKey().id}" data-mdb-toggle="tooltip" title="Eliminar"><i
+                                                class="bi bi-trash-fill text-danger"></i></a>
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                             <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
                                         </div>
@@ -68,7 +75,7 @@
 
                                     <div class="d-flex justify-content-between mb-4">
                                         <h5 class="text-uppercase">Camisetas</h5>
-                                        <h5 th:text="${camisetas.size()}"></h5>
+                                        <h5 th:if="${items.size()} != null" th:text="${items.size()}"></h5>
                                     </div>
 
                                     <hr class="my-4">

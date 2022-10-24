@@ -1,6 +1,7 @@
 package com.proyecto.laligapremier.exceptions;
 
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.ItemPedido;
 
 public class SinStockException extends Exception {
 
@@ -10,8 +11,8 @@ public class SinStockException extends Exception {
         super(DEFAULT_MESSAGE);
     }
 
-    public SinStockException(Camiseta camiseta) {
-        super(String.format("Not enough %s products in stock. Only %d left", camiseta.getNombre(), camiseta.getCantidad()));
+    public SinStockException(ItemPedido item) {
+        super(String.format("Not enough %s products in stock. Only %d left", item.getCamiseta().getNombre(), item.getCamiseta().getCantidad()));
     }
 
 }

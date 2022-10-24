@@ -2,17 +2,18 @@ package com.proyecto.laligapremier.service;
 
 import com.proyecto.laligapremier.exceptions.SinStockException;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.ItemPedido;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 public interface ICarritoService {
 
-    void addProduct(Camiseta camiseta);
+    void addProduct(ItemPedido item);
 
-    void removeProduct(Camiseta camiseta);
+    void removeProduct(ItemPedido item);
 
-    Map<Camiseta, Integer> getProductsInCart();
+    Map<ItemPedido, Integer> getProductsInCart();
 
     void checkout() throws SinStockException;
 

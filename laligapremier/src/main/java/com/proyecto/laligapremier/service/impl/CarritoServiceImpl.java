@@ -1,8 +1,9 @@
-package com.proyecto.laligapremier.service;
+package com.proyecto.laligapremier.service.impl;
 
 import com.proyecto.laligapremier.exceptions.SinStockException;
-import com.proyecto.laligapremier.models.dao.ICamisetaDao;
-import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.ItemPedido;
+import com.proyecto.laligapremier.service.ICarritoService;
+import com.proyecto.laligapremier.service.IItemPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -21,22 +22,22 @@ import java.util.Map;
 public class CarritoServiceImpl implements ICarritoService {
 
     @Autowired
-    private ICamisetaService camisetaService;
+    private IItemPedidoService itemPedidoService;
 
-    private Map<Camiseta, Integer> camisetas = new HashMap<>();
+    private Map<ItemPedido, Integer> items = new HashMap<>();
 
     /**
      * If product is in the map just increment quantity by 1.
      * If product is not in the map with, add it with quantity 1
      *
-     * @param camiseta
+     * @param item
      */
     @Override
-    public void addProduct(Camiseta camiseta) {
-        if (camisetas.containsKey(camiseta)) {
-            camisetas.replace(camiseta, camisetas.get(camiseta) + 1);
+    public void addProduct(ItemPedido item) {
+        if (items.containsKey(item)) {
+            items.replace(item, items.get(item) + 1);
         } else {
-            camisetas.put(camiseta, 1);
+            items.put(item, 1);
         }
     }
 
@@ -44,15 +45,15 @@ public class CarritoServiceImpl implements ICarritoService {
      * If product is in the map with quantity > 1, just decrement quantity by 1.
      * If product is in the map with quantity 1, remove it from map
      *
-     * @param camiseta
+     * @param item
      */
     @Override
-    public void removeProduct(Camiseta camiseta) {
-        if (camisetas.containsKey(camiseta)) {
-            if (camisetas.get(camiseta) > 1)
-                camisetas.replace(camiseta, camisetas.get(camiseta) - 1);
-            else if (camisetas.get(camiseta) == 1) {
-                camisetas.remove(camiseta);
+    public void removeProduct(ItemPedido item) {
+        if (items.containsKey(item)) {
+            if (items.get(item) > 1)
+                items.replace(item, items.get(item) - 1);
+            else if (items.get(item) == 1) {
+                items.remove(item);
             }
         }
     }
@@ -61,8 +62,8 @@ public class CarritoServiceImpl implements ICarritoService {
      * @return unmodifiable copy of the map
      */
     @Override
-    public Map<Camiseta, Integer> getProductsInCart() {
-        return Collections.unmodifiableMap(camisetas);
+    public Map<ItemPedido, Integer> getProductsInCart() {
+        return Collections.unmodifiableMap(items);
     }
 
     /**
@@ -72,23 +73,23 @@ public class CarritoServiceImpl implements ICarritoService {
      */
     @Override
     public void checkout() throws SinStockException {
-        Camiseta camiseta;
-        for (Map.Entry<Camiseta, Integer> entry : camisetas.entrySet()) {
+        ItemPedido item;
+        for (Map.Entry<ItemPedido, Integer> entry : items.entrySet()) {
             // Refresh quantity for every product before checking
-            camiseta = camisetaService.findOne(entry.getKey().getId());
-            if (camiseta.getCantidad() < entry.getValue())
-                throw new SinStockException(camiseta);
-            entry.getKey().setCantidad(camiseta.getCantidad() - entry.getValue());
+            item = itemPedidoService.findOne(entry.getKey().getId());
+            if (item.getCantidad() < entry.getValue())
+                throw new SinStockException(item);
+            entry.getKey().setCantidad(item.getCantidad() - entry.getValue());
         }
-        camisetaService.save((Camiseta) camisetas.keySet());
-        camisetaService.flush();
-        camisetas.clear();
+        itemPedidoService.save((ItemPedido) items.keySet());
+        itemPedidoService.flush();
+        items.clear();
     }
 
     @Override
     public BigDecimal getTotal() {
-        return camisetas.entrySet().stream()
-                .map(entry -> entry.getKey().getPrecio().multiply(BigDecimal.valueOf(entry.getValue())))
+        return items.entrySet().stream()
+                .map(entry -> entry.getKey().getCamiseta().getPrecio().multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
     }

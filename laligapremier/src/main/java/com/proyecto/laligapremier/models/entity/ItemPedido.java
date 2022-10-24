@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -20,8 +21,10 @@ public class ItemPedido {
     @ManyToOne
     private Camiseta camiseta;
 
+    @NotNull
     private Talla talla;
 
+    @NotNull
     private Integer cantidad;
 
     public ItemPedido() {

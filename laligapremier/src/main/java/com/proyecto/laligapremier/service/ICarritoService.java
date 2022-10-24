@@ -11,11 +11,11 @@ import java.util.Map;
 
 public interface ICarritoService {
 
-    void addProduct(ItemPedido item);
+    void añadirItem(ItemPedido item);
 
-    void removeProduct(Long itemId);
+    void eliminarItem(Long itemId);
 
-    List<ItemPedido> getProductsInCart();
+    List<ItemPedido> obtenerItemsDelCarrito();
 
     void sumarCantidad(Long itemId);
 

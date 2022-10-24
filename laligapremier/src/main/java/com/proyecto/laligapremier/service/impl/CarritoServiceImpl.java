@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -32,7 +30,7 @@ public class CarritoServiceImpl implements ICarritoService {
      * @param item
      */
     @Override
-    public void addProduct(ItemPedido item) {
+    public void añadirItem(ItemPedido item) {
         items.add(item);
     }
 
@@ -43,7 +41,7 @@ public class CarritoServiceImpl implements ICarritoService {
      * @param itemId
      */
     @Override
-    public void removeProduct(Long itemId) {
+    public void eliminarItem(Long itemId) {
         ItemPedido item = new ItemPedido();
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getId().equals(itemId)) {
@@ -57,7 +55,7 @@ public class CarritoServiceImpl implements ICarritoService {
      * @return unmodifiable copy of the map
      */
     @Override
-    public List<ItemPedido> getProductsInCart() {
+    public List<ItemPedido> obtenerItemsDelCarrito() {
         return items;
     }
 

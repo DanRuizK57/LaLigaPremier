@@ -33,19 +33,19 @@ public class CarritoController {
     @Autowired
     private IItemPedidoService itemPedidoService;
 
-    @GetMapping("/shoppingCart")
+    @GetMapping("/carrito")
     public String shoppingCart(Model model) {
 
-        model.addAttribute("items", carritoService.getProductsInCart());
+        model.addAttribute("items", carritoService.obtenerItemsDelCarrito());
         model.addAttribute("totalItems", carritoService.contadorItems().toString());
         model.addAttribute("totalPrecio", carritoService.calcularPrecioTotal().toString());
         return "mostrar/carrito";
     }
 
-    @PostMapping("/shoppingCart/addProduct/{camisetaId}")
+    @PostMapping("/ver-camiseta/{camisetaId}")
     public String addProductToCart(@Valid ItemPedido item,
-                                   @PathVariable("camisetaId") Long camisetaId,
                                    BindingResult result,
+                                   @PathVariable("camisetaId") Long camisetaId,
                                    Model model,
                                    SessionStatus status) {
 
@@ -54,29 +54,30 @@ public class CarritoController {
         item.setCamiseta(camiseta);
 
         if(result.hasErrors()){
-            model.addAttribute("tipoCamisetas", TipoCamiseta.values());
             model.addAttribute("tallas", Talla.values());
-            return "camiseta/form_camiseta";
+            model.addAttribute("camiseta", camiseta);
+            model.addAttribute("item", item);
+            return "camiseta/ver_camiseta";
         }
 
         if (camiseta != null) {
-            carritoService.addProduct(item);
+            carritoService.añadirItem(item);
             itemPedidoService.save(item);
             status.setComplete();
-            return "redirect:/shoppingCart";
+            return "redirect:/carrito";
         }
         return "redirect:/";
     }
 
-    @GetMapping("/shoppingCart/removeProduct/{itemId}")
+    @GetMapping("/eliminarCamiseta/{itemId}")
     public String removeProductFromCart(@PathVariable("itemId") Long itemId, Model model) {
 
         ItemPedido item = itemPedidoService.findOne(itemId);
 
         if (item != null) {
-            carritoService.removeProduct(itemId);
+            carritoService.eliminarItem(itemId);
             itemPedidoService.delete(itemId);
-            return "redirect:/shoppingCart";
+            return "redirect:/carrito";
         }
         return "redirect:/";
     }
@@ -84,13 +85,13 @@ public class CarritoController {
     @GetMapping("/sumar/{itemId}")
     public String sumar(@PathVariable("itemId") Long itemId, HttpSession session) {
         carritoService.sumarCantidad(itemId);
-        return "redirect:/shoppingCart";
+        return "redirect:/carrito";
     }
 
     @GetMapping("/restar/{itemId}")
     public String restar(@PathVariable("itemId") Long itemId, HttpSession session) {
         carritoService.restarCantidad(itemId);
-        return "redirect:/shoppingCart";
+        return "redirect:/carrito";
     }
 
     // Cantidad de camisetas en revisión de implementación

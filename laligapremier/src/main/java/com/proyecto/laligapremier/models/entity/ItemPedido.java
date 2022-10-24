@@ -26,4 +26,8 @@ public class ItemPedido {
 
     public ItemPedido() {
     }
+
+    public Integer calcularPrecioItem(){
+        return camiseta.getPrecio() * cantidad;
+    }
 }

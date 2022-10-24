@@ -5,18 +5,24 @@ import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 public interface ICarritoService {
 
     void addProduct(ItemPedido item);
 
-    void removeProduct(ItemPedido item);
+    void removeProduct(Long itemId);
 
-    Map<ItemPedido, Integer> getProductsInCart();
+    List<ItemPedido> getProductsInCart();
 
-    void checkout() throws SinStockException;
+    void sumarCantidad(Long itemId);
 
-    BigDecimal getTotal();
+    void restarCantidad(Long itemId);
+
+    Integer contadorItems();
+
+    Integer calcularPrecioTotal();
 
 }

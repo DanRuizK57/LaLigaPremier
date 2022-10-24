@@ -12,6 +12,7 @@ import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 
 @Entity
@@ -45,8 +46,8 @@ public class Camiseta {
 
     @NotNull
     @Column(name = "precio", nullable = false)
-    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
-    private BigDecimal precio;
+    @DecimalMin(value = "0", message = "*Price has to be non negative number")
+    private Integer precio;
 
     @Column(name = "imagen")
     private String imagen;

@@ -13,47 +13,46 @@
                     <div class="card-body p-0">
                         <div class="row g-0">
 
-                            <div class="col-lg-8">
+                            <div class="col-lg-9">
                                 <div class="p-5">
                                     <div class="d-flex justify-content-between align-items-center mb-5">
                                         <h1 class="fw-bold mb-0 text-black" th:text="${titulo}"></h1>
                                     </div>
 
-                                    <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
-
                                     <hr class="my-4">
 
-                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="item: ${items.entrySet()}">
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="item: ${items}">
                                         <div class="col-md-2 col-lg-2 col-xl-2">
-                                            <img th:if="${#strings.length(item.getKey().camiseta.imagen) > 0}" class="img-fluid rounded-3"
-                                                 th:src="@{'/uploads/' + ${item.getKey().camiseta.imagen}}"/>
+                                            <img th:if="${#strings.length(item.camiseta.imagen) > 0}" class="img-fluid rounded-3"
+                                                 th:src="@{'/uploads/' + ${item.camiseta.imagen}}"/>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
-                                            <h6 class="text-black mb-0" th:text="${item.getKey().camiseta.nombre}"></h6>
-                                            <h6 class="text-muted" th:text="'Talla ' + ${item.getKey().talla}"></h6>
+                                            <h6 class="text-black mb-0" th:text="${item.camiseta.nombre}"></h6>
+                                            <h6 class="text-muted" th:text="'Talla ' + ${item.talla}"></h6>
                                         </div>
-                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                            <button class="btn btn-link px-2"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
+                                        <div class="col-md-3 col-lg-4 col-xl-2 d-flex">
 
-                                            <input id="form1" min="0" name="quantity" th:value="${item.getKey().cantidad}" type="number"
+                                            <input id="form1" min="0" name="quantity" th:value="${item.cantidad}" type="number"
                                                    class="form-control form-control-sm" />
-
-                                            <button class="btn btn-link px-2"
+                                            <a class="btn btn-link px-2" th:href="@{/sumar/} + ${item.id}"
                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
+                                                <i class="bi bi-plus-circle-fill"></i>
+                                            </a>
+                                            <a class="btn btn-link px-2" th:href="@{/restar/} + ${item.id}"
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="bi bi-dash-circle-fill"></i>
+                                            </a>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2">
-                                            <h6 class="mb-0" th:text="${item.getKey().camiseta.precio}"></h6>
+                                            <h6 class="mb-0" th:text="'$' + ${item.camiseta.precio}"></h6>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2">
-                                            <h6 class="mb-0" th:text="${item.getKey().camiseta.precio} * ${item.getKey().cantidad}"></h6>
+                                            <h6 class="mb-0" th:text="'$' + ${item.calcularPrecioItem()}"></h6>
                                         </div>
-                                        <a th:href="@{/shoppingCart/removeProduct/} + ${item.getKey().id}" data-mdb-toggle="tooltip" title="Eliminar"><i
-                                                class="bi bi-trash-fill text-danger"></i></a>
+                                        <div class="col-lg-1">
+                                            <a th:href="@{/shoppingCart/removeProduct/} + ${item.id}" data-mdb-toggle="tooltip" title="Eliminar"><i
+                                                    class="bi bi-trash-fill text-danger"></i></a>
+                                        </div>
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                             <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
                                         </div>
@@ -68,21 +67,21 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 resumen">
+                            <div class="col-lg-3 resumen">
                                 <div class="p-4">
                                     <h3 class="fw-bold mb-5 mt-2 pt-1">Resumen</h3>
                                     <hr class="my-4">
 
                                     <div class="d-flex justify-content-between mb-4">
                                         <h5 class="text-uppercase">Camisetas</h5>
-                                        <h5 th:if="${items.size()} != null" th:text="${items.size()}"></h5>
+                                        <h5 th:text="${totalItems}"></h5>
                                     </div>
 
                                     <hr class="my-4">
 
                                     <div class="d-flex justify-content-between mb-5">
                                         <h5 class="text-uppercase">Precio Total</h5>
-                                        <h5 th:text="${total}"></h5>
+                                        <h5 th:text="'$' + ${totalPrecio}"></h5>
                                     </div>
 
                                     <button type="button" class="btn btn-dark btn-block btn-lg"

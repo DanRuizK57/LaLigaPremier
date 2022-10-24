@@ -16,7 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("item")
@@ -35,7 +37,8 @@ public class CarritoController {
     public String shoppingCart(Model model) {
 
         model.addAttribute("items", carritoService.getProductsInCart());
-        model.addAttribute("total", carritoService.getTotal().toString());
+        model.addAttribute("totalItems", carritoService.contadorItems().toString());
+        model.addAttribute("totalPrecio", carritoService.calcularPrecioTotal().toString());
         return "mostrar/carrito";
     }
 
@@ -71,15 +74,27 @@ public class CarritoController {
         ItemPedido item = itemPedidoService.findOne(itemId);
 
         if (item != null) {
-            carritoService.removeProduct(item);
+            carritoService.removeProduct(itemId);
             itemPedidoService.delete(itemId);
             return "redirect:/shoppingCart";
         }
         return "redirect:/";
     }
 
+    @GetMapping("/sumar/{itemId}")
+    public String sumar(@PathVariable("itemId") Long itemId, HttpSession session) {
+        carritoService.sumarCantidad(itemId);
+        return "redirect:/shoppingCart";
+    }
+
+    @GetMapping("/restar/{itemId}")
+    public String restar(@PathVariable("itemId") Long itemId, HttpSession session) {
+        carritoService.restarCantidad(itemId);
+        return "redirect:/shoppingCart";
+    }
+
     // Cantidad de camisetas en revisión de implementación
-    @GetMapping("/shoppingCart/checkout")
+    /*@GetMapping("/shoppingCart/checkout")
     public String checkout(Model model) {
         try {
             carritoService.checkout();
@@ -88,7 +103,7 @@ public class CarritoController {
             return "mostrar/carrito";
         }
         return "redirect:/";
-    }
+    }*/
 
 
 

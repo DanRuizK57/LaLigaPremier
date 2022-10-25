@@ -19,7 +19,7 @@ import java.security.Principal;
 public class UsuarioController {
 
     @Autowired
-    private IUsuarioService IUsuarioService;
+    private IUsuarioService usuarioService;
 
     @GetMapping(value="/iniciar-sesion")
     public String iniciarSesion(@RequestParam(value = "error", required = false) String error,
@@ -60,13 +60,13 @@ public class UsuarioController {
             return "cuenta/registro";
         }
 
-        if(IUsuarioService.compararClaves(usuario.getClave() , usuario.getRepetirClave())){
+        if(usuarioService.compararClaves(usuario.getClave() , usuario.getRepetirClave())){
             //Pasar nueva contraseña cifrada
-            usuario.setClave((IUsuarioService.cifrarClave(usuario.getClave())));
+            usuario.setClave((usuarioService.cifrarClave(usuario.getClave())));
 
             usuario.setRoles("ROLE_USER");
 
-            IUsuarioService.guardar(usuario);
+            usuarioService.guardar(usuario);
             status.setComplete();
             flash.addFlashAttribute("success" , "¡Te has registrado correctamente!");
             return "redirect:/iniciar-sesion";
@@ -82,7 +82,7 @@ public class UsuarioController {
 
         Usuario usuario = null;
         if(id>0){
-            usuario = IUsuarioService.findOne(id);
+            usuario = usuarioService.findOne(id);
             if(usuario==null){
                 flash.addFlashAttribute("error" , "El usuario no existe en la base de datos");
                 return "redirect:/";
@@ -111,7 +111,7 @@ public class UsuarioController {
         }
 
             String mensajeFlash = (usuario.getId() != null) ? "¡Usuario editado con éxito!" : "¡Usuario agregado con éxito!";
-            IUsuarioService.guardar(usuario);
+            usuarioService.guardar(usuario);
             status.setComplete();
             flash.addFlashAttribute("info" , mensajeFlash);
 
@@ -119,11 +119,77 @@ public class UsuarioController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping(value="/cambiar-contraseña")
-    public String cambiarContraseña(Model model) {
+    @GetMapping(value="/cambiar-contraseña/{id}")
+    public String cambiarContraseña(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash) {
+
+        Usuario usuario = null;
+        if(id>0){
+            usuario = usuarioService.findOne(id);
+            if(usuario==null){
+                flash.addFlashAttribute("error" , "El usuario no existe en la base de datos");
+                return "redirect:/";
+            }
+        }
+        else {
+            flash.addAttribute("error" , "El id del usuario no puede ser 0");
+            return "redirect:/";
+        }
+
+        model.addAttribute("usuario", usuario);
         model.addAttribute("titulo" , "Cambiar Contraseña");
         return "cuenta/cambiar-contraseña";
     }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping(value="/cambiar-contraseña")
+    public String guardarNuevaContraseña(@Valid Usuario usuario,
+                                         BindingResult result,
+                                         Model model,
+                                         RedirectAttributes flash,
+                                         SessionStatus status) {
+
+        if(result.hasErrors()){
+            model.addAttribute("titulo" , "Cambiar Contraseña");
+        }
+
+        Usuario usuarioBD = usuarioService.findByNombre(usuario.getNombre());
+
+        String nuevaClave = usuario.getNuevaClave();
+        String repetirClave = usuario.getRepetirClave();
+
+        // IF para ver si la contraseña actual coincide con la puesta en el formulario
+        if (usuarioService.compararClavesActuales(usuario.getClave(), usuarioBD.getClave())) {
+            if (nuevaClave != null && repetirClave != null && !repetirClave.isBlank() && !nuevaClave.isBlank()) {
+                if(usuarioService.compararClaves(nuevaClave , repetirClave)){
+                    //Pasar nueva contraseña cifrada
+                    usuario.setClave((usuarioService.cifrarClave(usuario.getNuevaClave())));
+
+                    usuario.setRoles("ROLE_USER");
+                    usuario.setNuevaClave(null);
+                    usuario.setRepetirClave(null);
+
+                    usuarioService.guardar(usuario);
+                    status.setComplete();
+                    flash.addFlashAttribute("success" , "Contraseña cambiada correctamente.");
+                    return "redirect:/";
+                }else {
+                    model.addAttribute("error" , "¡Las contraseñas deben coincidir!");
+                    model.addAttribute("titulo" , "Cambiar Contraseña");
+                    return "cuenta/cambiar-contraseña";
+                }
+            }else {
+                model.addAttribute("error" , "¡Las contraseñas no pueden estar vacías o nulas!");
+                model.addAttribute("titulo" , "Cambiar Contraseña");
+                return "cuenta/cambiar-contraseña";
+            }
+
+        }
+
+        model.addAttribute("error" , "¡La contraseña actual es incorrecta!");
+        model.addAttribute("titulo" , "Cambiar Contraseña");
+        return "cuenta/cambiar-contraseña";
+    }
+
     @GetMapping(value="/recuperar-contraseña")
     public String recuperarContraseña(Model model) {
         model.addAttribute("titulo" , "Recuperar Contraseña");

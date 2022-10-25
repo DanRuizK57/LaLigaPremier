@@ -64,7 +64,7 @@
                             </button >
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" th:href="@{/editar-perfil/} + ${userId}">Editar Perfil</a></li>
-                                <li><a class="dropdown-item" th:href="@{/cambiar-contraseña}">Cambiar Contraseña</a></li>
+                                <li><a class="dropdown-item" th:href="@{/cambiar-contraseña/} + ${userId}">Cambiar Contraseña</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form th:action="@{/logout}" method="post">

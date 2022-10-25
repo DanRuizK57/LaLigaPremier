@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="layout/layout :: head"></head>
 <body>
 <header th:replace="layout/layout :: header"></header>
 <h4 class="titulo">Cambiar Contraseña</h4>
 <!--Cuerpo de la página-->
 <div class="formato-datos-cuenta">
-  <form>
+  <form th:action="@{/cambiar-contraseña}" th:object="${usuario}" method="post">
     <div class="form-group">
       <label for="claveActual">Contraseña Actual</label>
-      <input type="password" class="form-control casilla" id="claveActual" placeholder="************">
+      <input type="password" th:field="*{clave}" class="form-control casilla" id="claveActual" placeholder="************">
+      <small th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
     </div>
     <br>
     <div class="form-group">
       <label for="claveNueva">Contraseña Nueva</label>
-      <input type="password" class="form-control casilla" id="claveNueva" placeholder="************">
+      <input type="password" th:field="*{nuevaClave}" class="form-control casilla" id="claveNueva" placeholder="************">
+      <small th:if="${#fields.hasErrors('nuevaClave')}" th:errors="*{nuevaClave}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
     </div>
     <br>
     <div class="form-group">
       <label for="claveNueva2">Confirmar Contraseña Nueva</label>
-      <input type="password" class="form-control casilla" id="claveNueva2" placeholder="************">
+      <input type="password" th:field="*{repetirClave}" class="form-control casilla" id="claveNueva2" placeholder="************">
+      <small th:if="${#fields.hasErrors('repetirClave')}" th:errors="*{repetirClave}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
     </div>
     <br>
     <div class="d-flex justify-content-center">
-      <a type="submit" class="btn" th:href="@{/}" style="background-color: #c8d6e0;">Enviar</a>
+      <button type="submit" class="btn" style="background-color: #c8d6e0;">Enviar</button>
     </div>
   </form>
 </div>

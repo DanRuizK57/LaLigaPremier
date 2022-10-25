@@ -47,6 +47,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
+    public boolean compararClavesActuales(String claveActual, String claveEncriptada) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.matches(claveActual, claveEncriptada);
+    }
+
+    @Override
     public boolean compararClaves(String clave, String repetirClave) {
         return clave.equals(repetirClave);
     }

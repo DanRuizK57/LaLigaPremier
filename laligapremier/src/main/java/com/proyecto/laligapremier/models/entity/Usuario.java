@@ -24,11 +24,12 @@ public class Usuario {
     private String correo;
     @NotBlank
     private String clave;
-
-    private String repetirClave;
     private String roles;
     private String telefono;
     private String direccion;
+    private String repetirClave;
+
+    private String nuevaClave;
 
     //@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //private List<Pedido> pedidos;

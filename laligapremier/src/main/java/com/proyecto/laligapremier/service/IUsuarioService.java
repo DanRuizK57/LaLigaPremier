@@ -17,6 +17,8 @@ public interface IUsuarioService {
 
     public Usuario findByNombre(String nombre);
 
+    public boolean compararClavesActuales(String claveActual, String claveEncriptada);
+
     public boolean compararClaves(String clave, String repetirClave);
 
 }

@@ -2,6 +2,7 @@ package com.proyecto.laligapremier.service.impl;
 
 import com.proyecto.laligapremier.models.dao.IUsuarioDao;
 import com.proyecto.laligapremier.models.entity.Usuario;
+import com.proyecto.laligapremier.models.enums.TipoCuenta;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,6 +56,19 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public boolean compararClaves(String clave, String repetirClave) {
         return clave.equals(repetirClave);
+    }
+
+    public void processOAuthPostLogin(String username) {
+        Usuario existUser = usuarioDao.findByNombre(username);
+
+        if (existUser == null) {
+            Usuario newUser = new Usuario();
+            newUser.setNombre(username);
+            newUser.setTipoCuenta(TipoCuenta.GOOGLE);
+
+            usuarioDao.save(newUser);
+        }
+
     }
 
 }

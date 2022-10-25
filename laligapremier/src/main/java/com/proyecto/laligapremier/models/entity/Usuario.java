@@ -1,4 +1,5 @@
 package com.proyecto.laligapremier.models.entity;
+import com.proyecto.laligapremier.models.enums.TipoCuenta;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,9 @@ public class Usuario {
     private String repetirClave;
 
     private String nuevaClave;
+
+    @Enumerated(EnumType.STRING)
+    private TipoCuenta tipoCuenta;
 
     //@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //private List<Pedido> pedidos;

@@ -14,9 +14,9 @@
                 <form th:action="@{/iniciar-sesion}" method="post">
                     <div class="d-flex flex-row align-items-center justify-content-center">
                         <p class="lead fw-normal mb-0 me-3">Iniciar sesión con</p>
-                        <button type="button" class="btn btn-light btn-floating mx-1">
+                        <a th:href="@{/oauth2/authorization/google}" type="button" class="btn btn-light btn-floating mx-1">
                             <img th:src="@{/image/google_logo.png}" alt="Logo" class="img-google">
-                        </button>
+                        </a>
                     </div>
 
                     <div class="divider d-flex align-items-center my-4">

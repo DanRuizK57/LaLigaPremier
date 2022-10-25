@@ -44,6 +44,11 @@ public class UsuarioController {
         return "cuenta/iniciar-sesion";
     }
 
+    @RequestMapping(value = "/iniciar-sesion-google")
+    public Principal user(Principal principal) {
+        return principal;
+    }
+
     @GetMapping(value="/registro")
     public String registro(Model model) {
         Usuario usuario = new Usuario();

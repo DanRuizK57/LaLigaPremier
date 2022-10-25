@@ -21,4 +21,6 @@ public interface IUsuarioService {
 
     public boolean compararClaves(String clave, String repetirClave);
 
+    public void processOAuthPostLogin(String username);
+
 }

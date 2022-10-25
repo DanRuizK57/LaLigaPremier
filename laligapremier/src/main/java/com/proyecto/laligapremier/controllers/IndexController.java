@@ -24,7 +24,7 @@ public class IndexController {
     private ICamisetaService camisetaService;
 
     @Autowired
-    private IUsuarioService IUsuarioService;
+    private IUsuarioService usuarioService;
 
     @Autowired
     private IUsuarioDao usuarioDao;
@@ -39,7 +39,7 @@ public class IndexController {
         PageRender<Camiseta> pageRender = new PageRender<>("/", camisetas);
 
         if (principal != null) {
-            int userId = Math.toIntExact(IUsuarioService.findByNombre(principal.getName()).getId());
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
             model.addAttribute("userId", userId);
         }
 

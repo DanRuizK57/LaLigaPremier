@@ -8,11 +8,13 @@ import com.proyecto.laligapremier.service.ICamisetaService;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
 import com.proyecto.laligapremier.service.IUploadFileService;
+import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -35,18 +37,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CamisetaController {
     @Autowired
     private ICamisetaService camisetaService;
-
     @Autowired
     private IUploadFileService uploadFileService;
+    @Autowired
+    private IUsuarioService usuarioService;
 
 
     @GetMapping(value = "/selecciones")
-    public String ListarSelecciones(@RequestParam(name = "page", defaultValue = "0") int page, Model model){
+    public String ListarSelecciones(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
         Pageable pageRequest = PageRequest.of(page, 6);
 
         Page<Camiseta> camisetas = camisetaService.listarSelecciones(pageRequest);
 
         PageRender<Camiseta> pageRender = new PageRender<>("/selecciones", camisetas);
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
 
         model.addAttribute("titulo" , "Listado de camisetas de selecciones");
         model.addAttribute("camisetas" , camisetas);
@@ -57,12 +65,17 @@ public class CamisetaController {
     }
 
     @GetMapping(value = "/equipos")
-    public String ListarEquipos(@RequestParam(name = "page", defaultValue = "0") int page, Model model){
+    public String ListarEquipos(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
         Pageable pageRequest = PageRequest.of(page, 6);
 
         Page<Camiseta> camisetas = camisetaService.listarEquipos(pageRequest);
 
         PageRender<Camiseta> pageRender = new PageRender<>("/equipos", camisetas);
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
 
         model.addAttribute("titulo" , "Listado de camisetas de equipos");
         model.addAttribute("camisetas" , camisetas);
@@ -81,7 +94,12 @@ public class CamisetaController {
      * @return vista que muestra las camisetas
      */
     @GetMapping(value = "/ver-camiseta/{id}")
-    public String verCamiseta(@PathVariable(value = "id")Long id, Map <String, Object> model , RedirectAttributes flash){
+    public String verCamiseta(@PathVariable(value = "id")Long id, Map <String, Object> model , RedirectAttributes flash, Principal principal){
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.put("userId", userId);
+        }
 
         ItemPedido item = new ItemPedido();
 
@@ -100,7 +118,16 @@ public class CamisetaController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/form/{id}")
-    public String editarCamiseta(@PathVariable(value = "id") Long id,Map<String , Object> model , RedirectAttributes flash){
+    public String editarCamiseta(@PathVariable(value = "id") Long id,
+                                 Map<String , Object> model ,
+                                 RedirectAttributes flash,
+                                 Principal principal){
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.put("userId", userId);
+        }
+
         Camiseta camiseta = null;
         if(id>0){
             camiseta = camisetaService.findOne(id);
@@ -124,7 +151,13 @@ public class CamisetaController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/form")
-    public String crearCamiseta(Map<String , Object>model){    
+    public String crearCamiseta(Map<String , Object> model, Principal principal){
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.put("userId", userId);
+        }
+
         Camiseta camiseta = new Camiseta(); 
         model.put("camiseta" , camiseta); 
         model.put("titulo", "Agregar Camiseta");
@@ -208,7 +241,14 @@ public class CamisetaController {
 
     @GetMapping("/busqueda")
     public String buscarCamisetas(@RequestParam(name = "page", defaultValue = "0") int page,
-                                  Model model, @RequestParam(value = "query", required = false) String q) {
+                                  Model model,
+                                  @RequestParam(value = "query", required = false) String q,
+                                  Principal principal) {
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
+
         Pageable pageRequest = PageRequest.of(page, 6);
 
         Page<Camiseta> camisetas = camisetaService.findByNombre(q, pageRequest);
@@ -222,11 +262,6 @@ public class CamisetaController {
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
         return "mostrar/busqueda";
-    }
-
-    @GetMapping(value = "/cargar-camisetas/{term}", produces = {"application/json"})
-    public @ResponseBody List<Camiseta> cargarCamisetas(@PathVariable String term){
-        return camisetaService.findByNombre(term);
     }
 
 }

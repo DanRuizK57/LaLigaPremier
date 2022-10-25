@@ -9,6 +9,7 @@ import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
 import com.proyecto.laligapremier.service.ICarritoService;
 import com.proyecto.laligapremier.service.IItemPedidoService;
+import com.proyecto.laligapremier.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -26,15 +28,20 @@ public class CarritoController {
 
     @Autowired
     private ICarritoService carritoService;
-
     @Autowired
     private ICamisetaService camisetaService;
-
     @Autowired
     private IItemPedidoService itemPedidoService;
+    @Autowired
+    private IUsuarioService usuarioService;
 
     @GetMapping("/carrito")
-    public String shoppingCart(Model model) {
+    public String mostrarCarrito(Model model, Principal principal) {
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
 
         model.addAttribute("items", carritoService.obtenerItemsDelCarrito());
         model.addAttribute("totalItems", carritoService.contadorItems().toString());
@@ -43,17 +50,23 @@ public class CarritoController {
     }
 
     @PostMapping("/ver-camiseta/{camisetaId}")
-    public String addProductToCart(@Valid ItemPedido item,
+    public String agregarCamiseta(@Valid ItemPedido item,
                                    BindingResult result,
                                    @PathVariable("camisetaId") Long camisetaId,
                                    Model model,
-                                   SessionStatus status) {
+                                   SessionStatus status,
+                                   Principal principal) {
 
         Camiseta camiseta = camisetaService.findOne(camisetaId);
 
         item.setCamiseta(camiseta);
 
         if(result.hasErrors()){
+            if (principal != null) {
+                int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+                model.addAttribute("userId", userId);
+            }
+
             model.addAttribute("error" , "Completa la cantidad y la talla para continuar.");
             model.addAttribute("tallas", Talla.values());
             model.addAttribute("camiseta", camiseta);
@@ -71,7 +84,7 @@ public class CarritoController {
     }
 
     @GetMapping("/eliminarCamiseta/{itemId}")
-    public String removeProductFromCart(@PathVariable("itemId") Long itemId, Model model) {
+    public String eliminarCamiseta(@PathVariable("itemId") Long itemId, Model model) {
 
         ItemPedido item = itemPedidoService.findOne(itemId);
 

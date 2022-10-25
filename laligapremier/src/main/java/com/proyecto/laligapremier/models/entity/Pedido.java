@@ -11,6 +11,10 @@ import java.util.List;
 
 public class Pedido {
 
+    private Long numPedido;
 
+    private Usuario cliente;
+
+    private List<ItemPedido> itemsPedido;
 
 }

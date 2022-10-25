@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,6 +27,7 @@ public class ItemPedido {
     private Talla talla;
 
     @NotNull
+    @Min(1)
     private Integer cantidad;
 
     public ItemPedido() {

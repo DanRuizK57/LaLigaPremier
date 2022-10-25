@@ -215,10 +215,10 @@ public class CamisetaController {
 
         PageRender<Camiseta> pageRender = new PageRender<>("/busqueda", camisetas);
 
-
         model.addAttribute("camisetas", camisetas);
         model.addAttribute("titulo", "Resultados de búsqueda:");
         model.addAttribute("page", pageRender);
+        model.addAttribute("numCamisetasEncontradas", camisetas.getTotalElements());
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
         return "mostrar/busqueda";

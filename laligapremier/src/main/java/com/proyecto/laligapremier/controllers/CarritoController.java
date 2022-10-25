@@ -54,6 +54,7 @@ public class CarritoController {
         item.setCamiseta(camiseta);
 
         if(result.hasErrors()){
+            model.addAttribute("error" , "Completa la cantidad y la talla para continuar.");
             model.addAttribute("tallas", Talla.values());
             model.addAttribute("camiseta", camiseta);
             model.addAttribute("item", item);

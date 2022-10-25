@@ -25,22 +25,26 @@
 
                         <form th:action="@{/ver-camiseta/} + ${camiseta.id}" th:object="${item}" method="post">
 
+                            <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                            </div>
+
                             <h3 class="titulo-ver-camiseta txt-destacado" th:text="${camiseta.nombre}"></h3>
                             <p class="desc-ver-camiseta" th:text="${camiseta.descripcion}"></p>
                             <h4 class="precio txt-destacado">Precio: <span th:text="'$' + ${camiseta.precio}"></span></h4>
                             <div class="mt-4">
                                 <label>
                                     <h6 class="cantidad txt-destacado">Cantidad <input th:field="*{cantidad}" type="number" min="1" class="casilla-cantidad"></h6>
-                                    <small th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
                                 </label>
+                                <small th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
                             </div>
                             <div class="tallas mt-4">
                                 <h6 class="txt-destacado tallas">Talla</h6>
                                 <label class="radio talla" th:each="talla: ${tallas}">
                                     <input type="radio" name="size" th:field="*{talla}" th:value="${talla}">
                                     <span class="txt-destacado" th:for="${#ids.prev('talla')}" th:text="${talla.talla}"></span>
-                                    <small th:if="${#fields.hasErrors('talla')}" th:errors="*{talla}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
                                 </label>
+                                <small th:if="${#fields.hasErrors('talla')}" th:errors="*{talla}" class="alert alert-danger py-1 my-1 d-flex justify-content-start"></small>
                             </div>
 
                             <div class="action d-flex justify-content-center">

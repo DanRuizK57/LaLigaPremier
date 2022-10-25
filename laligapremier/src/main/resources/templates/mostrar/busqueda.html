@@ -59,15 +59,13 @@
                     </div>
                 </div>
             </div>
-
-            <div th:if="${camisetas.size} == null">
+            <div th:if="${numCamisetasEncontradas} == 0">
                 <h2>No hay resultados</h2>
             </div>
 
         </section>
-        <div th:if="${camisetas.size} != null">
-            <nav th:replace="mostrar/paginador :: paginador"></nav>
-        </div>
+
+        <nav th:replace="mostrar/paginador :: paginador"></nav>
 
     </div>
 </div>

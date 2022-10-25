@@ -78,7 +78,12 @@ public class UsuarioController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/editar-perfil/{id}")
-    public String editarPerfil(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash) {
+    public String editarPerfil(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash, Principal principal) {
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
 
         Usuario usuario = null;
         if(id>0){
@@ -104,9 +109,15 @@ public class UsuarioController {
             BindingResult result,
             Model model,
             RedirectAttributes flash,
-            SessionStatus status
+            SessionStatus status,
+            Principal principal
     ){
         if(result.hasErrors()){
+            if (principal != null) {
+                int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+                model.addAttribute("userId", userId);
+            }
+
             model.addAttribute("titulo" , "Editar Perfil");
         }
 
@@ -120,7 +131,12 @@ public class UsuarioController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value="/cambiar-contraseña/{id}")
-    public String cambiarContraseña(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash) {
+    public String cambiarContraseña(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash, Principal principal) {
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
 
         Usuario usuario = null;
         if(id>0){
@@ -146,9 +162,15 @@ public class UsuarioController {
                                          BindingResult result,
                                          Model model,
                                          RedirectAttributes flash,
-                                         SessionStatus status) {
+                                         SessionStatus status,
+                                         Principal principal) {
 
         if(result.hasErrors()){
+            if (principal != null) {
+                int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+                model.addAttribute("userId", userId);
+            }
+
             model.addAttribute("titulo" , "Cambiar Contraseña");
         }
 

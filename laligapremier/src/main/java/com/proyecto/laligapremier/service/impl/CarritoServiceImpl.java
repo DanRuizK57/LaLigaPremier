@@ -106,6 +106,11 @@ public class CarritoServiceImpl implements ICarritoService {
         return precioTotal;
     }
 
+    @Override
+    public void reiniciarCarrito() {
+        items.clear();
+    }
+
     /**
      * Checkout will rollback if there is not enough of some product in stock
      *

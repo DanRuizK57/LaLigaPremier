@@ -25,4 +25,6 @@ public interface ICarritoService {
 
     Integer calcularPrecioTotal();
 
+    void reiniciarCarrito();
+
 }

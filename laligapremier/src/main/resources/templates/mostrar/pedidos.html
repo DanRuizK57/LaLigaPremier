@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-center row">
+    <div class="col-md-10">
+      <div class="rounded">
+        <div class="table-responsive table-borderless">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>N° Pedido</th>
+              <th>Nombre Cliente</th>
+              <th>Correo Cliente</th>
+              <th>N° Camisetas</th>
+              <th>Precio Total</th>
+              <th>Fecha</th>
+              <th>Detalle</th>
+            </tr>
+            </thead>
+            <tbody class="table-body" th:each="pedido: ${pedidos}">
+            <tr class="cell-1">
+              <td th:text="${pedido.id}"></td>
+              <td th:text="${pedido.usuario.nombre}"></td>
+              <td th:text="${pedido.usuario.correo}"></td>
+              <td th:text="${pedido.numCamisetas}"></td>
+              <td th:text="${pedido.precioTotal}"></td>
+              <td th:text="${pedido.fecha}"></td>
+              <td><a href="#" data-mdb-toggle="tooltip" title="Exportar a PDF"><i class="bi bi-file-earmark-arrow-down-fill text-dark"></i></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <nav th:replace="mostrar/paginador :: paginador"></nav>
+  </div>
+</div>
+
+</body>
+</html>

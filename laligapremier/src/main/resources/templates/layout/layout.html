@@ -41,6 +41,9 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/nosotros}">Nosotros</a>
                     </li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                        <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search" th:action="@{/busqueda}">
                     <input class="form-control me-2" type="search" placeholder="Buscar"

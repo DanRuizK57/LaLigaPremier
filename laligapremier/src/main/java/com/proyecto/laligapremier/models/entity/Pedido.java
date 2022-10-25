@@ -9,12 +9,14 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "pedidos")
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "numero_pedido" , nullable = false)
-    private Long numPedido;
+    private Long id;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha")
@@ -24,10 +26,15 @@ public class Pedido {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pedido_id")
+    @JoinColumn(name = "items")
     private List<ItemPedido> items;
+
+    @Column(name = "num_camisetas")
+    private Integer numCamisetas;
+
+    @Column(name = "precio_total")
+    private Integer precioTotal;
 
     public Pedido() {
         this.items = new ArrayList<ItemPedido>();

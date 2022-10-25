@@ -76,7 +76,6 @@ public class CarritoController {
 
         if (camiseta != null) {
             carritoService.añadirItem(item);
-            itemPedidoService.save(item);
             status.setComplete();
             return "redirect:/carrito";
         }

@@ -60,6 +60,7 @@ public class CarritoController {
         Camiseta camiseta = camisetaService.findOne(camisetaId);
 
         item.setCamiseta(camiseta);
+        itemPedidoService.save(item);
 
         if(result.hasErrors()){
             if (principal != null) {

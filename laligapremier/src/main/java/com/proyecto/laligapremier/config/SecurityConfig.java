@@ -16,10 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     // Configurar Spring Security para que no esté por defecto
 
-    // Creación de usuarios:
-    // 1. InMemoryUserDetailsManager: Crear un usuario en memoria
-    // 2. JpaUserDetailsManager: Crear usuario en JPA
-
     private final JpaUserDetailsService jpaUserDetailsService;
 
     public SecurityConfig(JpaUserDetailsService jpaUserDetailsService) {
@@ -36,7 +32,8 @@ public class SecurityConfig {
                         .mvcMatchers("/", "/index", "/registro",
                                 "/nosotros", "/carrito-de-compras", "/selecciones",
                                 "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}",
-                                "/busqueda", "/recuperar-contraseña",
+                                "/busqueda", "/recuperar-contraseña", "/forgot_password",
+                                "/reset_password",
                                 // Cargar archivos ccs e imágenes
                                 "/css/**", "/image/**", "/js/**", "/resources/sql/**").permitAll()
                         .anyRequest().authenticated())

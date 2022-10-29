@@ -6,7 +6,7 @@
 <h4 class="titulo">Recuperar Contraseña</h4>
 <!--Cuerpo de la página-->
 <div class="formato-datos-cuenta">
-    <form>
+    <form th:action="@{/forgot_password}" method="post">
         <div class="form-group">
             <label for="correo">Correo Electrónico</label>
             <input type="email" class="form-control casilla" id="correo" aria-describedby="emailHelp"
@@ -14,7 +14,7 @@
         </div>
         <br>
         <div class="d-flex justify-content-center">
-            <a type="submit" class="btn" th:href="@{/}" style="background-color: #c8d6e0;">Enviar</a>
+            <button type="submit" class="btn" style="background-color: #c8d6e0;">Enviar</button>
         </div>
     </form>
 </div>

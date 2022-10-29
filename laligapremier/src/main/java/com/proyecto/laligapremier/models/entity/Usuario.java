@@ -31,6 +31,9 @@ public class Usuario {
 
     private String nuevaClave;
 
+    @Column(name = "token_recuperar_clave")
+    private String tokenRecuperarClave;
+
     //@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //private List<Pedido> pedidos;
 

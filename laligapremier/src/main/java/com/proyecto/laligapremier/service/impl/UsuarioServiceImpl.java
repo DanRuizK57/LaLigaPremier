@@ -1,5 +1,6 @@
 package com.proyecto.laligapremier.service.impl;
 
+import com.proyecto.laligapremier.exceptions.UsuarioNoEncontradoException;
 import com.proyecto.laligapremier.models.dao.IUsuarioDao;
 import com.proyecto.laligapremier.models.entity.Usuario;
 import com.proyecto.laligapremier.service.IUsuarioService;
@@ -15,6 +16,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Autowired
     private IUsuarioDao usuarioDao;
+
     @Override
     public List<Usuario> listar() {
         return (List<Usuario>) usuarioDao.findAll();
@@ -47,6 +49,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
+    public Usuario findByCorreo(String correo) {
+        return usuarioDao.findByCorreo(correo).orElse(null);
+    }
+
+    @Override
     public boolean compararClavesActuales(String claveActual, String claveEncriptada) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder.matches(claveActual, claveEncriptada);
@@ -55,6 +62,32 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public boolean compararClaves(String clave, String repetirClave) {
         return clave.equals(repetirClave);
+    }
+
+    @Override
+    public void updateResetPasswordToken(String token, String correo) throws UsuarioNoEncontradoException {
+        Usuario usuario = findByCorreo(correo);
+        if (usuario != null) {
+            usuario.setTokenRecuperarClave(token);
+            usuarioDao.save(usuario);
+        } else {
+            throw new UsuarioNoEncontradoException(correo);
+        }
+    }
+
+    @Override
+    public Usuario getByResetPasswordToken(String token) {
+        return usuarioDao.findByTokenRecuperarClave(token);
+    }
+
+    @Override
+    public void updatePassword(Usuario usuario, String nuevaClave) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String claveEncriptada = passwordEncoder.encode(nuevaClave);
+        usuario.setClave(claveEncriptada);
+
+        usuario.setTokenRecuperarClave(null);
+        usuarioDao.save(usuario);
     }
 
 }

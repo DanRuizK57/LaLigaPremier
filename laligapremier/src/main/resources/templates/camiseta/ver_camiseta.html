@@ -23,7 +23,7 @@
                     <!-- Descripción Camiseta-->
                     <div class="details col-md-6">
 
-                        <form th:action="@{/ver-camiseta/} + ${camiseta.id}" th:object="${item}" method="post">
+                        <form th:action="@{/agregar-camiseta/} + ${camiseta.id}" th:object="${item}" method="post">
 
                             <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                                 <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>

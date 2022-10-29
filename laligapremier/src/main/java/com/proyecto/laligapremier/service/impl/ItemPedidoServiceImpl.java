@@ -2,6 +2,7 @@ package com.proyecto.laligapremier.service.impl;
 
 import com.proyecto.laligapremier.models.dao.IItemPedidoDao;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
+import com.proyecto.laligapremier.service.ICarritoService;
 import com.proyecto.laligapremier.service.IItemPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class ItemPedidoServiceImpl implements IItemPedidoService {
 
     @Autowired
     private IItemPedidoDao itemPedidoDao;
+
+    @Autowired
+    private ICarritoService carritoService;
 
     @Override
     public List<ItemPedido> findAll() {
@@ -35,8 +39,18 @@ public class ItemPedidoServiceImpl implements IItemPedidoService {
     }
 
     @Override
+    public void deleteAll() {
+        itemPedidoDao.deleteAll(findAll());
+    }
+
+    @Override
     public void flush() {
         itemPedidoDao.flush();
+    }
+
+    @Override
+    public void agregarAlCarrito(ItemPedido item) {
+        carritoService.añadirItem(item);
     }
 
 }

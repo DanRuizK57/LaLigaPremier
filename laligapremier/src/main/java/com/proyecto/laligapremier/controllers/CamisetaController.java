@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
+import com.proyecto.laligapremier.service.IItemPedidoService;
 import com.proyecto.laligapremier.service.IUploadFileService;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
@@ -41,7 +42,6 @@ public class CamisetaController {
     private IUploadFileService uploadFileService;
     @Autowired
     private IUsuarioService usuarioService;
-
 
     @GetMapping(value = "/selecciones")
     public String ListarSelecciones(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
@@ -112,7 +112,6 @@ public class CamisetaController {
         model.put("tallas", Talla.values());
         model.put("camiseta", camiseta);
         model.put("item", item);
-        model.put("titulo", "detalle de la camiseta " + camiseta.getEquipo() + "del jugador " + camiseta.getJugador());
         return "camiseta/ver_camiseta";
     }
 

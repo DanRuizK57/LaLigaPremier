@@ -1,11 +1,8 @@
 package com.proyecto.laligapremier.controllers;
 
-import com.proyecto.laligapremier.exceptions.SinStockException;
-import com.proyecto.laligapremier.models.dao.IItemPedidoDao;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.models.enums.Talla;
-import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
 import com.proyecto.laligapremier.service.ICarritoService;
 import com.proyecto.laligapremier.service.IItemPedidoService;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Optional;
 
 @Controller
 @SessionAttributes("item")
@@ -49,7 +45,7 @@ public class CarritoController {
         return "mostrar/carrito";
     }
 
-    @PostMapping("/ver-camiseta/{camisetaId}")
+    @PostMapping("/agregar-camiseta/{camisetaId}")
     public String agregarCamiseta(@Valid ItemPedido item,
                                    BindingResult result,
                                    @PathVariable("camisetaId") Long camisetaId,
@@ -58,9 +54,7 @@ public class CarritoController {
                                    Principal principal) {
 
         Camiseta camiseta = camisetaService.findOne(camisetaId);
-
         item.setCamiseta(camiseta);
-        itemPedidoService.save(item);
 
         if(result.hasErrors()){
             if (principal != null) {
@@ -77,6 +71,7 @@ public class CarritoController {
 
         if (camiseta != null) {
             carritoService.añadirItem(item);
+            itemPedidoService.save(item);
             status.setComplete();
             return "redirect:/carrito";
         }
@@ -107,18 +102,6 @@ public class CarritoController {
         carritoService.restarCantidad(itemId);
         return "redirect:/carrito";
     }
-
-    // Cantidad de camisetas en revisión de implementación
-    /*@GetMapping("/shoppingCart/checkout")
-    public String checkout(Model model) {
-        try {
-            carritoService.checkout();
-        } catch (SinStockException e) {
-            model.addAttribute("outOfStockMessage", e.getMessage());
-            return "mostrar/carrito";
-        }
-        return "redirect:/";
-    }*/
 
 
 

@@ -18,9 +18,6 @@ import java.util.*;
 @Transactional
 public class CarritoServiceImpl implements ICarritoService {
 
-    @Autowired
-    private IItemPedidoService itemPedidoService;
-
     private List<ItemPedido> items = new ArrayList<>();
 
     /**

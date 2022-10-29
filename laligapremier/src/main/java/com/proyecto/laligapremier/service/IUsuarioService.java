@@ -17,8 +17,17 @@ public interface IUsuarioService {
 
     public Usuario findByNombre(String nombre);
 
+    public Usuario findByCorreo(String correo);
+
     public boolean compararClavesActuales(String claveActual, String claveEncriptada);
 
     public boolean compararClaves(String clave, String repetirClave);
+
+    public void updateResetPasswordToken(String token, String correo);
+
+    public Usuario getByResetPasswordToken(String token);
+
+    public void updatePassword(Usuario usuario, String nuevaClave);
+
 
 }

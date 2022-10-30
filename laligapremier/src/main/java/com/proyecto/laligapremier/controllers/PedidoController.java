@@ -1,5 +1,7 @@
 package com.proyecto.laligapremier.controllers;
 
+import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.Item;
 import com.proyecto.laligapremier.models.entity.Pedido;
 import com.proyecto.laligapremier.service.ICarritoService;
 import com.proyecto.laligapremier.service.IPedidoService;
@@ -13,10 +15,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 public class PedidoController {
@@ -54,7 +59,21 @@ public class PedidoController {
     public String guardarPedido(Principal principal, RedirectAttributes flash) {
         Pedido pedido = new Pedido();
 
-        //pedido.setItems(carritoService.obtenerItemsDelCarrito());
+        pedido.setCodigo(UUID.randomUUID().toString());
+
+        carritoService.obtenerItemsDelCarrito().stream().forEach(
+                p -> {
+                    Item item = new Item();
+                    item.setNombre(p.getCamiseta().getNombre());
+                    item.setDescripcion(p.getCamiseta().getDescripcion());
+                    item.setNombreJugador(p.getCamiseta().getJugador());
+                    item.setTalla(p.getCamiseta().getTalla());
+                    item.setCantidad(p.getCantidad());
+                    item.setCodigo(pedido.getCodigo());
+                    itemService.save(item);
+                }
+        );
+
         pedido.setUsuario(usuarioService.findByNombre(principal.getName()));
         pedido.setPrecioTotal(carritoService.calcularPrecioTotal());
         pedido.setNumCamisetas(carritoService.contadorItems());

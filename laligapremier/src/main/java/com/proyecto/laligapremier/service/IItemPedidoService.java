@@ -13,6 +13,9 @@ public interface IItemPedidoService {
     void delete(Long id);
     ItemPedido findOne(Long id);
     void save(ItemPedido item);
+    void deleteAll();
     void flush();
+
+    void agregarAlCarrito(ItemPedido item);
 
 }

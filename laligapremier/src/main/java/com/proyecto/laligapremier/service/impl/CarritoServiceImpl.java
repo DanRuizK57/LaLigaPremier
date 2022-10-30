@@ -1,10 +1,7 @@
 package com.proyecto.laligapremier.service.impl;
 
-import com.proyecto.laligapremier.exceptions.SinStockException;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.service.ICarritoService;
-import com.proyecto.laligapremier.service.IItemPedidoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -17,9 +14,6 @@ import java.util.*;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class CarritoServiceImpl implements ICarritoService {
-
-    @Autowired
-    private IItemPedidoService itemPedidoService;
 
     private List<ItemPedido> items = new ArrayList<>();
 
@@ -111,31 +105,4 @@ public class CarritoServiceImpl implements ICarritoService {
         items.clear();
     }
 
-    /**
-     * Checkout will rollback if there is not enough of some product in stock
-     *
-     * @throws SinStockException
-
-    @Override
-    public void checkout() throws SinStockException {
-        ItemPedido item;
-        for (List<ItemPedido> entry : items) {
-            // Refresh quantity for every product before checking
-            item = itemPedidoService.findOne(entry.getId());
-            if (item.getCantidad() < entry.getValue())
-                throw new SinStockException(item);
-            entry.getKey().setCantidad(item.getCantidad() - entry.getValue());
-        }
-        itemPedidoService.save((ItemPedido) items.keySet());
-        itemPedidoService.flush();
-        items.clear();
-    }
-
-    @Override
-    public BigDecimal getTotal() {
-        return items.stream()
-                .map(entry -> entry.getCamiseta().getPrecio().multiply
-                .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
-    }*/
 }

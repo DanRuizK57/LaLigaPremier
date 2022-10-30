@@ -1,6 +1,5 @@
 package com.proyecto.laligapremier.controllers;
 
-import com.proyecto.laligapremier.models.dao.IUsuarioDao;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
@@ -25,9 +24,6 @@ public class IndexController {
 
     @Autowired
     private IUsuarioService usuarioService;
-
-    @Autowired
-    private IUsuarioDao usuarioDao;
 
     @GetMapping(value = {"/index", "/"})
     public String index(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){

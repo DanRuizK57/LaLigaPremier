@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 @SessionAttributes("usuario")
@@ -212,10 +214,5 @@ public class UsuarioController {
         return "cuenta/cambiar-contraseña";
     }
 
-    @GetMapping(value="/recuperar-contraseña")
-    public String recuperarContraseña(Model model) {
-        model.addAttribute("titulo" , "Recuperar Contraseña");
-        return "cuenta/recuperar-contraseña";
-    }
 
 }

@@ -1,10 +1,12 @@
 package com.proyecto.laligapremier.controllers;
 
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.Item;
 import com.proyecto.laligapremier.models.entity.Pedido;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 import com.proyecto.laligapremier.service.ICarritoService;
+import com.proyecto.laligapremier.service.IItemService;
 import com.proyecto.laligapremier.service.IPedidoService;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
@@ -16,11 +18,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class PedidoController {
@@ -31,6 +37,9 @@ public class PedidoController {
     private ICarritoService carritoService;
     @Autowired
     private IPedidoService pedidoService;
+
+    @Autowired
+    private IItemService itemService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/pedidos")
@@ -58,7 +67,22 @@ public class PedidoController {
     public String guardarPedido(Principal principal, RedirectAttributes flash) {
         Pedido pedido = new Pedido();
 
-        pedido.setItems(carritoService.obtenerItemsDelCarrito());
+        pedido.setCodigo(UUID.randomUUID().toString());
+
+        carritoService.obtenerItemsDelCarrito().stream().forEach(
+                p -> {
+                    Item item = new Item();
+                    item.setNombre(p.getCamiseta().getNombre());
+                    item.setDescripcion(p.getCamiseta().getDescripcion());
+                    item.setNombreJugador(p.getCamiseta().getJugador());
+                    item.setTalla(p.getCamiseta().getTalla());
+                    item.setCantidad(p.getCantidad());
+                    item.setCodigo(pedido.getCodigo());
+                    itemService.save(item);
+                }
+        );
+
+        //pedido.setItems(carritoService.obtenerItemsDelCarrito());
         pedido.setUsuario(usuarioService.findByNombre(principal.getName()));
         pedido.setPrecioTotal(carritoService.calcularPrecioTotal());
         pedido.setNumCamisetas(carritoService.contadorItems());
@@ -67,6 +91,20 @@ public class PedidoController {
         carritoService.reiniciarCarrito();
         flash.addFlashAttribute("success", "Pedido registrado correctamente.");
         return "redirect:/";
+    }
+
+    @GetMapping("ver-pedido/{id}")
+    public String mostrarPedido(@PathVariable(value = "id")Long id, Map<String, Object> model){
+        Pedido pedido = pedidoService.findOne(id);
+        List<Item> items  = itemService.listar().stream()
+                .filter(p -> p.getCodigo()
+                        .equals(pedido.getCodigo()))
+                .toList();
+        model.put("cantidad" , "cantidad de camisetas pedidas:  " + pedido.getNumCamisetas());
+        model.put("precio" , "precio total del pedido: " + pedido.getPrecioTotal());
+        model.put("titulo" , "items del pedido N° "  + pedido.getId());
+        model.put("items" , items );
+        return "mostrar/mostrar_pedidos";
     }
 
 }

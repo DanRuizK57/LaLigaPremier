@@ -13,6 +13,7 @@
           <table class="table">
             <thead>
             <tr>
+              <th>CODIGO</th>
               <th>N° Pedido</th>
               <th>Nombre Cliente</th>
               <th>Correo Cliente</th>
@@ -24,13 +25,15 @@
             </thead>
             <tbody class="table-body" th:each="pedido: ${pedidos}">
             <tr class="cell-1">
+              <td th:text="${pedido.codigo}"></td>
               <td th:text="${pedido.id}"></td>
               <td th:text="${pedido.usuario.nombre}"></td>
               <td th:text="${pedido.usuario.correo}"></td>
               <td th:text="${pedido.numCamisetas}"></td>
               <td th:text="${pedido.precioTotal}"></td>
               <td th:text="${pedido.fecha}"></td>
-              <td><a href="#" data-mdb-toggle="tooltip" title="Exportar a PDF"><i class="bi bi-file-earmark-arrow-down-fill text-dark"></i></a></td>
+              <td> <a class="btn btn-primary btn-xs" th:href="@{/ver-pedido/} + ${pedido.id}" th:text="'VER'"></a></td>
+
             </tr>
             </tbody>
           </table>

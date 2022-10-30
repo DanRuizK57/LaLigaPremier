@@ -88,47 +88,62 @@
 </header>
 
 <!-- Filtros -->
-<section id="sidebar" th:fragment="filtros">
-    <div class="py-3">
-        <h5 class="font-weight-bold">Marca</h5>
-        <form class="brand" th:each="marca : ${marcas}">
-            <div class="form-inline d-flex align-items-center py-1">
-                <label class="tick">
-                    <input th:text="${marca.nombre}" th:value="${marca}" type="checkbox" />
-                    <span class="check"></span>
-                </label>
+<form th:action="@{/filtro}" th:object="${objectoFiltro}" method="post">
+    <section id="sidebar" th:fragment="filtros">
+        <div class="py-3">
+            <h5 class="font-weight-bold">Marca</h5>
+            <div class="form-group row py-2">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Marca</label>
+                    <div class="col-sm-6">
+                        <select th:field="*{objetoFiltro.marca}">
+                            <option th:each="marca : ${marcas}"
+                                    th:text="${marca.nombre}"
+                                    th:value="${marca}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+        </div>
+        <div class="py-3">
+            <h5 class="font-weight-bold">Talla</h5>
+            <div class="form-group row py-2">
+                <label class="col-sm-2 col-form-label">Talla</label>
+                <div class="col-sm-6">
+                    <select th:field="*{objetoFiltro.talla}">
+                        <option th:each="talla : ${tallas}"
+                                th:text="${talla.talla}"
+                                th:value="${talla}">
+                        </option>
+                    </select>
+                </div>
             </div>
-        </form>
-    </div>
-    <div class="py-3">
-        <h5 class="font-weight-bold">Talla</h5>
-        <form class="brand" th:each="talla : ${tallas}">
-            <div class="form-inline d-flex align-items-center py-1">
-                <label class="tick">
-                    <input th:text="${talla.talla}" th:value="${talla}" type="checkbox">
-                    <span class="check"></span>
-                </label>
+        <div class="py-3">
+            <h5 class="font-weight-bold">Rango de precios</h5>
+            <div class="form-group row py-2">
+                <label class="col-sm-2 col-form-label">Talla</label>
+                <div class="col-sm-6">
+                    <select th:field="*{objetoFiltro.precio}">
+                        <option th:each="precio : ${precios}"
+                                th:text="${precio.precio}"
+                                th:value="${precio}">
+                        </option>
+                    </select>
+                </div>
             </div>
+        <div class="filters">
+            <input  type="submit" class="btn btn-aplicar-filtros">Aplicar Filtros</input>
+        </div>
+        <div class="filters">
+            <div class="btn btn-eliminar-filtros">Eliminar Filtros</div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
 
-        </form>
-    </div>
-    <div class="py-3">
-        <h5 class="font-weight-bold">Rango de precios</h5>
-        <form class="brand">
-            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $30.000 <input type="checkbox"> <span class="check"></span> </label> </div>
-            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $50.000 <input type="checkbox"> <span class="check"></span> </label> </div>
-            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $80.000 <input type="checkbox"> <span class="check"></span> </label> </div>
-            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Hasta $100.000 <input type="checkbox"> <span class="check"></span> </label> </div>
-            <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Más de $100.000 <input type="checkbox"> <span class="check"></span> </label> </div>
-        </form>
-    </div>
-    <div class="filters">
-        <div class="btn btn-aplicar-filtros">Aplicar Filtros</div>
-    </div>
-    <div class="filters">
-        <div class="btn btn-eliminar-filtros">Eliminar Filtros</div>
-    </div>
-</section>
+</form>
+
 
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted border-top footer" th:fragment="footer">

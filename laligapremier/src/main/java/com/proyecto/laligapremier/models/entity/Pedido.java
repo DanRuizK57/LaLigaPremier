@@ -45,4 +45,8 @@ public class Pedido {
         fecha = new Date();
     }
 
+    @Column(name = "codigo")
+    private String codigo;
+
+
 }

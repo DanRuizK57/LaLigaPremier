@@ -34,9 +34,6 @@ public class Usuario {
     @Column(name = "token_recuperar_clave")
     private String tokenRecuperarClave;
 
-    //@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //private List<Pedido> pedidos;
-
     public Usuario() {
     }
 
@@ -59,6 +56,10 @@ public class Usuario {
         this.clave = clave;
         this.repetirClave = repetirClave;
         this.roles = roles;
+    }
+
+    public Usuario(String correo) {
+        this.correo = correo;
     }
 
     @Override

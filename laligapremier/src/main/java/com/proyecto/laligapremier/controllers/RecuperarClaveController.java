@@ -11,12 +11,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -29,28 +31,31 @@ public class RecuperarClaveController {
     private IUsuarioService usuarioService;
 
     @GetMapping("/forgot_password")
-    public String showForgotPasswordForm() {
+    public String showForgotPasswordForm(Model model) {
+        model.addAttribute("usuario", new Usuario());
         return "cuenta/recuperar-contraseña";
     }
 
     @PostMapping("/forgot_password")
-    public String processForgotPassword(HttpServletRequest request, Model model) {
-        String correo = request.getParameter("email");
+    public String processForgotPassword(@Valid Usuario usuario, BindingResult result, HttpServletRequest request, Model model) {
+        String correo = usuario.getCorreo();
         String token = RandomString.make(30);
 
         try {
             usuarioService.updateResetPasswordToken(token, correo);
-            String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
-            sendEmail(correo, resetPasswordLink);
-            model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
+            String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+            sendEmail(correo, link);
+            model.addAttribute("message", "Te enviamos al correo un link para cambiar tu contraseña. Por favor revísalo.");
 
         } catch (UsuarioNoEncontradoException ex) {
             model.addAttribute("error", ex.getMessage());
+            System.out.println("********** Usuario no encontrado: " + ex);
         } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("error", "Error while sending email");
+            model.addAttribute("error", "Error mientras se enviaba el correo");
+            System.out.println("********** Excepción encontrada: " + e);
         }
 
-        return "cuenta/recuperar-contraseña";
+        return "cuenta/mensaje-enviado";
     }
 
     public void sendEmail(String correo, String link)
@@ -58,10 +63,10 @@ public class RecuperarClaveController {
         MimeMessage mensaje = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
 
-        helper.setFrom("laliga.premier01@gmail.com", "LaLiga Premier Support");
+        helper.setFrom("laliga.premier01@gmail.com", "Soporte LaLiga Premier");
         helper.setTo(correo);
 
-        String asunto = "Here's the link to reset your password";
+        String asunto = "Link para cambiar tu contraseña";
 
         String contenido = "<p>Hola,</p>"
                 + "<p>Has solicitado recuperar tu contraseña</p>"
@@ -102,14 +107,14 @@ public class RecuperarClaveController {
 
         if (usuario == null) {
             model.addAttribute("message", "Token Incorrecto");
-            return "message";
+            return "redirect:/forgot_password";
         } else {
             usuarioService.updatePassword(usuario, password);
 
             model.addAttribute("message", "¡Has cambiado tu contraseña correctamente!");
+            return "redirect:/";
         }
 
-        return "message";
     }
 
 }

@@ -6,10 +6,10 @@
 <h4 class="titulo">Recuperar Contraseña</h4>
 <!--Cuerpo de la página-->
 <div class="formato-datos-cuenta">
-    <form th:action="@{/forgot_password}" method="post">
+    <form th:action="@{/forgot_password}" th:object="${usuario}" method="post">
         <div class="form-group">
             <label for="correo">Correo Electrónico</label>
-            <input type="email" class="form-control casilla" id="correo" aria-describedby="emailHelp"
+            <input type="email" th:field="*{correo}" class="form-control casilla" id="correo" aria-describedby="emailHelp"
                    placeholder="Ingresa email">
         </div>
         <br>

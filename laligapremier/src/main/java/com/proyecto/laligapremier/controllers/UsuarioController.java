@@ -4,6 +4,9 @@ import com.proyecto.laligapremier.models.entity.Usuario;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,10 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.UUID;
 
 @Controller
 @SessionAttributes("usuario")
@@ -65,7 +66,7 @@ public class UsuarioController {
         if(usuarioService.compararClaves(usuario.getClave() , usuario.getRepetirClave())){
             //Pasar nueva contraseña cifrada
             usuario.setClave((usuarioService.cifrarClave(usuario.getClave())));
-
+            usuario.setRepetirClave(null);
             usuario.setRoles("ROLE_USER");
 
             usuarioService.guardar(usuario);
@@ -125,6 +126,8 @@ public class UsuarioController {
 
             String mensajeFlash = (usuario.getId() != null) ? "¡Usuario editado con éxito!" : "¡Usuario agregado con éxito!";
             usuarioService.guardar(usuario);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(usuario, usuario.getNombre());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             status.setComplete();
             flash.addFlashAttribute("info" , mensajeFlash);
 

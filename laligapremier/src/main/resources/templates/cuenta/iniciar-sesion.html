@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="layout/layout :: head"></head>
 <body>
-
+<div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
 <section class="vh-100">
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">

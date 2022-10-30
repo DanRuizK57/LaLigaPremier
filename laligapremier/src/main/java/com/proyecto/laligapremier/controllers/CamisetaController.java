@@ -9,11 +9,9 @@ import com.proyecto.laligapremier.service.ICamisetaService;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.security.Principal;
-import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
-import com.proyecto.laligapremier.service.IItemPedidoService;
 import com.proyecto.laligapremier.service.IUploadFileService;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;

@@ -1,9 +1,6 @@
 package com.proyecto.laligapremier.service;
 
-import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

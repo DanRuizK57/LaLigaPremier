@@ -2,7 +2,6 @@ package com.proyecto.laligapremier.service.impl;
 
 import com.proyecto.laligapremier.models.dao.IItemDao;
 import com.proyecto.laligapremier.models.entity.Item;
-import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.service.IItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

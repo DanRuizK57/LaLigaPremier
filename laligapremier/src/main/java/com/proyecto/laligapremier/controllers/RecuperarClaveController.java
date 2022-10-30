@@ -2,7 +2,6 @@ package com.proyecto.laligapremier.controllers;
 
 import com.proyecto.laligapremier.exceptions.UsuarioNoEncontradoException;
 import com.proyecto.laligapremier.models.entity.Usuario;
-import com.proyecto.laligapremier.models.entity.Utility;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,14 +38,13 @@ public class RecuperarClaveController {
     }
 
     @PostMapping("/recuperar-contraseña")
-    public String generarToken(@Valid Usuario usuario, BindingResult result, HttpServletRequest request, Model model) {
+    public String generarToken(@Valid Usuario usuario, BindingResult result, Model model) {
         String correo = usuario.getCorreo();
         String token = RandomString.make(30);
 
         try {
             usuarioService.actualizarToken(token, correo);
             String link = "http://localhost:8080/nueva-contraseña?token=" + token;
-            System.out.println("***** LINK: " + link);
             enviarCorreo(correo, link);
             model.addAttribute("message", "Te enviamos al correo un link para cambiar tu contraseña. Por favor revísalo.");
 
@@ -90,6 +89,7 @@ public class RecuperarClaveController {
     public String formularioCambiarContraseña(@Param(value = "token") String token, Model model) {
         Usuario usuario = usuarioService.obtenerPorToken(token);
         model.addAttribute("token", token);
+        model.addAttribute("usuarioClave", new Usuario());
 
         if (usuario == null) {
             model.addAttribute("error", "Token Incorrecto");
@@ -100,7 +100,7 @@ public class RecuperarClaveController {
     }
 
     @PostMapping("/nueva-contraseña")
-    public String cambiarContraseña(HttpServletRequest request, Model model, RedirectAttributes flash) {
+    public String cambiarContraseña(@Valid @ModelAttribute("usuarioClave") Usuario usuarioClave, BindingResult result, HttpServletRequest request, Model model) {
         String token = request.getParameter("token");
         String password = request.getParameter("password");
 
@@ -110,11 +110,16 @@ public class RecuperarClaveController {
         if (usuario == null) {
             model.addAttribute("error", "Token Incorrecto");
             return "redirect:/recuperar-contraseña";
-        } else {
-            usuarioService.actualizarClave(usuario, password);
+        }
 
-            flash.addFlashAttribute("success", "¡Has cambiado tu contraseña correctamente!");
-            return "redirect:/iniciar-sesion";
+        if (usuarioClave.getNuevaClave().equals(usuarioClave.getRepetirClave())) {
+            usuarioService.actualizarClave(usuario, usuarioClave.getNuevaClave());
+
+            model.addAttribute("success", "¡Has cambiado tu contraseña correctamente!");
+            return "cuenta/iniciar-sesion";
+        }else {
+            model.addAttribute("error", "¡Las contraseñas no coinciden!");
+            return "cuenta/cambiar-contraseña-olvidada";
         }
 
     }

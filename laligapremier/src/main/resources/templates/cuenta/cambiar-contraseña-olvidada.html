@@ -7,16 +7,16 @@
 <h4 class="titulo">Cambiar Contraseña</h4>
 <!--Cuerpo de la página-->
 <div class="formato-datos-cuenta">
-    <form th:action="@{/nueva-contraseña}" method="post">
+    <form th:action="@{/nueva-contraseña}" th:object="${usuarioClave}" method="post">
         <input type="hidden" name="token" th:value="${token}" />
         <div class="form-group">
             <label for="clave">Contraseña Nueva</label>
-            <input type="password" name="password" id="clave" class="form-control casilla" placeholder="************" required autofocus>
+            <input type="password" th:field="*{nuevaClave}" name="password" id="clave" class="form-control casilla" placeholder="************" required>
         </div>
         <br>
         <div class="form-group">
             <label for="claveNueva2">Confirmar Contraseña Nueva</label>
-            <input type="password" class="form-control casilla" id="claveNueva2" required oninput="checkPasswordMatch(this);" placeholder="************">
+            <input type="password" th:field="*{repetirClave}" class="form-control casilla" id="claveNueva2" required placeholder="************">
         </div>
         <br>
         <div class="d-flex justify-content-center">

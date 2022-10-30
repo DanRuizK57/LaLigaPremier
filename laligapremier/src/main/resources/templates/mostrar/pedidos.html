@@ -7,13 +7,13 @@
 
 <div class="container mt-5">
   <div class="d-flex justify-content-center row">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="rounded">
         <div class="table-responsive table-borderless">
           <table class="table">
             <thead>
             <tr>
-              <th>CODIGO</th>
+              <th>Código</th>
               <th>N° Pedido</th>
               <th>Nombre Cliente</th>
               <th>Correo Cliente</th>
@@ -30,7 +30,7 @@
               <td th:text="${pedido.usuario.nombre}"></td>
               <td th:text="${pedido.usuario.correo}"></td>
               <td th:text="${pedido.numCamisetas}"></td>
-              <td th:text="${pedido.precioTotal}"></td>
+              <td th:text="'$' + ${pedido.precioTotal}"></td>
               <td th:text="${pedido.fecha}"></td>
               <td> <a class="btn btn-primary btn-xs" th:href="@{/ver-pedido/} + ${pedido.id}" th:text="'VER'"></a></td>
 

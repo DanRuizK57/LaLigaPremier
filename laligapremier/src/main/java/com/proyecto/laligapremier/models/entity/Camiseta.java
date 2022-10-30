@@ -11,10 +11,6 @@ import javax.validation.constraints.NotNull;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
-
 @Entity
 @Table(name = "camisetas")
 @Getter

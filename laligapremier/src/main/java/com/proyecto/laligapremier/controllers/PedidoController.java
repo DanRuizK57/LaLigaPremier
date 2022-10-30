@@ -4,6 +4,7 @@ import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.Item;
 import com.proyecto.laligapremier.models.entity.Pedido;
 import com.proyecto.laligapremier.service.ICarritoService;
+import com.proyecto.laligapremier.service.IItemService;
 import com.proyecto.laligapremier.service.IPedidoService;
 import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
@@ -32,6 +33,9 @@ public class PedidoController {
     private ICarritoService carritoService;
     @Autowired
     private IPedidoService pedidoService;
+
+    @Autowired
+    private IItemService itemService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/pedidos")
@@ -82,6 +86,20 @@ public class PedidoController {
         carritoService.reiniciarCarrito();
         flash.addFlashAttribute("success", "Pedido registrado correctamente.");
         return "redirect:/";
+    }
+
+    @GetMapping("ver-pedido/{id}")
+    public String mostrarPedido(@PathVariable(value = "id")Long id, Map<String, Object> model){
+        Pedido pedido = pedidoService.findOne(id);
+        List<Item> items  = itemService.listar().stream()
+                .filter(p -> p.getCodigo()
+                        .equals(pedido.getCodigo()))
+                .toList();
+        model.put("cantidad" , "cantidad de camisetas pedidas:  " + pedido.getNumCamisetas());
+        model.put("precio" , "precio total del pedido: " + pedido.getPrecioTotal());
+        model.put("titulo" , "items del pedido N° "  + pedido.getId());
+        model.put("items" , items );
+        return "mostrar/mostrar_pedidos";
     }
 
 }

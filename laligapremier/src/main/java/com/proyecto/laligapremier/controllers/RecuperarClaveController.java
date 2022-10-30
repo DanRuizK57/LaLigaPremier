@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -30,35 +31,36 @@ public class RecuperarClaveController {
     @Autowired
     private IUsuarioService usuarioService;
 
-    @GetMapping("/forgot_password")
-    public String showForgotPasswordForm(Model model) {
+    @GetMapping("/recuperar-contraseña")
+    public String mostrarOlvidarContraseña(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "cuenta/recuperar-contraseña";
     }
 
-    @PostMapping("/forgot_password")
-    public String processForgotPassword(@Valid Usuario usuario, BindingResult result, HttpServletRequest request, Model model) {
+    @PostMapping("/recuperar-contraseña")
+    public String generarToken(@Valid Usuario usuario, BindingResult result, HttpServletRequest request, Model model) {
         String correo = usuario.getCorreo();
         String token = RandomString.make(30);
 
         try {
-            usuarioService.updateResetPasswordToken(token, correo);
-            String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
-            sendEmail(correo, link);
+            usuarioService.actualizarToken(token, correo);
+            String link = "http://localhost:8080/nueva-contraseña?token=" + token;
+            System.out.println("***** LINK: " + link);
+            enviarCorreo(correo, link);
             model.addAttribute("message", "Te enviamos al correo un link para cambiar tu contraseña. Por favor revísalo.");
 
         } catch (UsuarioNoEncontradoException ex) {
             model.addAttribute("error", ex.getMessage());
-            System.out.println("********** Usuario no encontrado: " + ex);
+            return "cuenta/recuperar-contraseña";
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("error", "Error mientras se enviaba el correo");
-            System.out.println("********** Excepción encontrada: " + e);
+            return "cuenta/recuperar-contraseña";
         }
 
         return "cuenta/mensaje-enviado";
     }
 
-    public void sendEmail(String correo, String link)
+    public void enviarCorreo(String correo, String link)
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage mensaje = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
@@ -84,35 +86,35 @@ public class RecuperarClaveController {
     }
 
 
-    @GetMapping("/reset_password")
-    public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
-        Usuario usuario = usuarioService.getByResetPasswordToken(token);
+    @GetMapping("/nueva-contraseña")
+    public String formularioCambiarContraseña(@Param(value = "token") String token, Model model) {
+        Usuario usuario = usuarioService.obtenerPorToken(token);
         model.addAttribute("token", token);
 
         if (usuario == null) {
-            model.addAttribute("message", "Token Incorrecto");
-            return "message";
+            model.addAttribute("error", "Token Incorrecto");
+            return "redirect:/recuperar-contraseña";
         }
 
         return "cuenta/cambiar-contraseña-olvidada";
     }
 
-    @PostMapping("/reset_password")
-    public String processResetPassword(HttpServletRequest request, Model model) {
+    @PostMapping("/nueva-contraseña")
+    public String cambiarContraseña(HttpServletRequest request, Model model, RedirectAttributes flash) {
         String token = request.getParameter("token");
         String password = request.getParameter("password");
 
-        Usuario usuario = usuarioService.getByResetPasswordToken(token);
-        model.addAttribute("title", "Cambia tu contraseña");
+        Usuario usuario = usuarioService.obtenerPorToken(token);
+        model.addAttribute("titulo", "Cambia tu contraseña");
 
         if (usuario == null) {
-            model.addAttribute("message", "Token Incorrecto");
-            return "redirect:/forgot_password";
+            model.addAttribute("error", "Token Incorrecto");
+            return "redirect:/recuperar-contraseña";
         } else {
-            usuarioService.updatePassword(usuario, password);
+            usuarioService.actualizarClave(usuario, password);
 
-            model.addAttribute("message", "¡Has cambiado tu contraseña correctamente!");
-            return "redirect:/";
+            flash.addFlashAttribute("success", "¡Has cambiado tu contraseña correctamente!");
+            return "redirect:/iniciar-sesion";
         }
 
     }

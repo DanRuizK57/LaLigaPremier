@@ -23,11 +23,11 @@ public interface IUsuarioService {
 
     public boolean compararClaves(String clave, String repetirClave);
 
-    public void updateResetPasswordToken(String token, String correo);
+    public void actualizarToken(String token, String correo);
 
-    public Usuario getByResetPasswordToken(String token);
+    public Usuario obtenerPorToken(String token);
 
-    public void updatePassword(Usuario usuario, String nuevaClave);
+    public void actualizarClave(Usuario usuario, String nuevaClave);
 
 
 }

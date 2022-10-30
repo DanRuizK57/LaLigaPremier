@@ -1,43 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="layout/layout :: head"></head>
 <body>
+<header th:replace="layout/layout :: header"></header>
 
-<div>
-    <h2>Reset Your Password</h2>
-</div>
-
-<form th:action="@{/reset_password}" method="post" style="max-width: 350px; margin: 0 auto;">
-    <input type="hidden" name="token" th:value="${token}" />
-    <div class="border border-secondary rounded p-3">
-        <div>
-            <p>
-                <input type="password" name="password" id="password" class="form-control"
-                       placeholder="Enter your new password" required autofocus />
-            </p>
-            <p>
-                <input type="password" class="form-control" placeholder="Confirm your new password"
-                       required oninput="checkPasswordMatch(this);" />
-            </p>
-            <p class="text-center">
-                <input type="submit" value="Change Password" class="btn btn-primary" />
-            </p>
+<h4 class="titulo">Cambiar Contraseña</h4>
+<!--Cuerpo de la página-->
+<div class="formato-datos-cuenta">
+    <form th:action="@{/nueva-contraseña}" method="post">
+        <input type="hidden" name="token" th:value="${token}" />
+        <div class="form-group">
+            <label for="clave">Contraseña Nueva</label>
+            <input type="password" name="password" id="clave" class="form-control casilla" placeholder="************" required autofocus>
         </div>
-    </div>
-</form>
-
-<script>
-    function checkPasswordMatch(fieldConfirmPassword) {
-        if (fieldConfirmPassword.value != $("#password").val()) {
-            fieldConfirmPassword.setCustomValidity("Passwords do not match!");
-        } else {
-            fieldConfirmPassword.setCustomValidity("");
-        }
-    }
-</script>
+        <br>
+        <div class="form-group">
+            <label for="claveNueva2">Confirmar Contraseña Nueva</label>
+            <input type="password" class="form-control casilla" id="claveNueva2" required oninput="checkPasswordMatch(this);" placeholder="************">
+        </div>
+        <br>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn" style="background-color: #c8d6e0;">Enviar</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
 
 </body>
 </html>

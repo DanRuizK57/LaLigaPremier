@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="layout/layout :: head"></head>
 <body>
 <header th:replace="layout/layout :: header"></header>
 <h4 class="titulo">Recuperar Contraseña</h4>
 <!--Cuerpo de la página-->
 <div class="formato-datos-cuenta">
-    <form th:action="@{/forgot_password}" th:object="${usuario}" method="post">
+    <form th:action="@{/recuperar-contraseña}" th:object="${usuario}" method="post">
         <div class="form-group">
             <label for="correo">Correo Electrónico</label>
             <input type="email" th:field="*{correo}" class="form-control casilla" id="correo" aria-describedby="emailHelp"

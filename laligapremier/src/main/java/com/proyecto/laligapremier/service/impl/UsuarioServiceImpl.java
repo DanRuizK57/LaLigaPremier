@@ -65,7 +65,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public void updateResetPasswordToken(String token, String correo) throws UsuarioNoEncontradoException {
+    public void actualizarToken(String token, String correo) throws UsuarioNoEncontradoException {
         Usuario usuario = findByCorreo(correo);
         if (usuario != null) {
             usuario.setTokenRecuperarClave(token);
@@ -76,12 +76,12 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public Usuario getByResetPasswordToken(String token) {
+    public Usuario obtenerPorToken(String token) {
         return usuarioDao.findByTokenRecuperarClave(token);
     }
 
     @Override
-    public void updatePassword(Usuario usuario, String nuevaClave) {
+    public void actualizarClave(Usuario usuario, String nuevaClave) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String claveEncriptada = passwordEncoder.encode(nuevaClave);
         usuario.setClave(claveEncriptada);

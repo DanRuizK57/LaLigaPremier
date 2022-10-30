@@ -214,11 +214,5 @@ public class UsuarioController {
         return "cuenta/cambiar-contraseña";
     }
 
-    @GetMapping(value="/recuperar-contraseña")
-    public String recuperarContraseña(Model model) {
-        model.addAttribute("titulo" , "Recuperar Contraseña");
-        return "cuenta/recuperar-contraseña";
-    }
-
 
 }

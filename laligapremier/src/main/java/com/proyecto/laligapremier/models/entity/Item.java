@@ -1,5 +1,6 @@
 package com.proyecto.laligapremier.models.entity;
 
+import com.proyecto.laligapremier.models.enums.Talla;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,18 @@ public class Item {
     private String nombre;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "Codigo")
+
+    @Column(name = "nombre_jugador")
+    private String nombreJugador;
+
+    @Column(name = "odigo")
     private String codigo;
+
+    @Column(name = "talla")
+    @Enumerated(EnumType.STRING)
+    private Talla talla;
+
+    @Column(name = "cantidad_camisetas")
+    private Integer cantidad;
 
 }

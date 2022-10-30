@@ -73,6 +73,10 @@ public class PedidoController {
                 p -> {
                     Item item = new Item();
                     item.setNombre(p.getCamiseta().getNombre());
+                    item.setDescripcion(p.getCamiseta().getDescripcion());
+                    item.setNombreJugador(p.getCamiseta().getJugador());
+                    item.setTalla(p.getCamiseta().getTalla());
+                    item.setCantidad(p.getCantidad());
                     item.setCodigo(pedido.getCodigo());
                     itemService.save(item);
                 }
@@ -92,15 +96,13 @@ public class PedidoController {
     @GetMapping("ver-pedido/{id}")
     public String mostrarPedido(@PathVariable(value = "id")Long id, Map<String, Object> model){
         Pedido pedido = pedidoService.findOne(id);
-
-
-
         List<Item> items  = itemService.listar().stream()
                 .filter(p -> p.getCodigo()
                         .equals(pedido.getCodigo()))
                 .toList();
-
-        model.put("titulo" , "items del pedido "  + pedido.getId());
+        model.put("cantidad" , "cantidad de camisetas pedidas:  " + pedido.getNumCamisetas());
+        model.put("precio" , "precio total del pedido: " + pedido.getPrecioTotal());
+        model.put("titulo" , "items del pedido N° "  + pedido.getId());
         model.put("items" , items );
         return "mostrar/mostrar_pedidos";
     }

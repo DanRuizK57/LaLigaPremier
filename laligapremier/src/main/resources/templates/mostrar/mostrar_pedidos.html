@@ -8,11 +8,17 @@
   <div class="card bg-light">
     <div class="card-header" th:text="${titulo}"></div>
     <div class="card-body">
+      <div class="card-header" th:text="${cantidad}"></div>
       <table class="table table-striped">
         <thead>
         <tr>
           <th>id</th>
           <th>CODIGO</th>
+          <th>NOMBRE</th>
+          <th>JUGADOR</th>
+          <th>DESCRIPCION</th>
+          <th>TALLA</th>
+          <th>CANTIDAD</th>
         </tr>
         </thead>
         <tbody>
@@ -20,10 +26,16 @@
           <td th:text="${item.id}"></td>
           <td th:text="${item.codigo}"></td>
           <td th:text="${item.nombre}"></td>
+          <td th:text="${item.nombreJugador}"></td>
+          <td th:text="${item.descripcion}"></td>
+          <td th:text="${item.talla}"></td>
+          <td th:text="${item.cantidad}"></td>
         </tr>
         </tbody>
       </table>
+
     </div>
+    <div class="card-header" th:text="${precio}"></div>
   </div>
 </div>
 <footer th:replace="layout/layout :: footer"></footer>

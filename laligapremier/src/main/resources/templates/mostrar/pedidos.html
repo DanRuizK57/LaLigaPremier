@@ -32,8 +32,8 @@
               <td th:text="${pedido.numCamisetas}"></td>
               <td th:text="${pedido.precioTotal}"></td>
               <td th:text="${pedido.fecha}"></td>
-              <td><a href="#" data-mdb-toggle="tooltip" title="Exportar a PDF"><i class="bi bi-file-earmark-arrow-down-fill text-dark"></i></a></td>
               <td> <a class="btn btn-primary btn-xs" th:href="@{/ver-pedido/} + ${pedido.id}" th:text="'VER'"></a></td>
+
             </tr>
             </tbody>
           </table>

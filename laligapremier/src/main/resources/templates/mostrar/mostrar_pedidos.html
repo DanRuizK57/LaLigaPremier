@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+
+<div class="container py-4">
+  <div class="card bg-light">
+    <div class="card-header" th:text="${titulo}"></div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>id</th>
+          <th>CODIGO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${items}">
+          <td th:text="${item.id}"></td>
+          <td th:text="${item.codigo}"></td>
+          <td th:text="${item.nombre}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

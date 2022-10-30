@@ -60,7 +60,7 @@ public class CarritoController {
         Camiseta camiseta = camisetaService.findOne(camisetaId);
 
         item.setCamiseta(camiseta);
-        itemPedidoService.save(item);
+
 
         if(result.hasErrors()){
             if (principal != null) {
@@ -77,6 +77,7 @@ public class CarritoController {
 
         if (camiseta != null) {
             carritoService.añadirItem(item);
+            itemPedidoService.save(item);
             status.setComplete();
             return "redirect:/carrito";
         }

@@ -119,12 +119,10 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Transactional(readOnly = true)
     public List<Camiseta> listarPorFiltros(Filtro objetoFiltro) {
         List<Camiseta> camisetasFiltradas =  camisetaDao.findAll().stream()
-                .filter(p -> p.getTalla()
-                        .equals(objetoFiltro.getTalla())
-                        &&
-                        p.getMarca()
+                .filter(p -> p.getMarca()
                                 .equals(objetoFiltro.getMarca())
-                        &&      p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
+                        &&
+                        p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
                 )
                 .toList();
 
@@ -135,12 +133,10 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Transactional(readOnly = true)
     public Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable) {
         List<Camiseta> camisetasFiltradas =  camisetaDao.findAll(pageable).stream()
-                .filter(p -> p.getTalla()
-                        .equals(objetoFiltro.getTalla())
-                        &&
-                        p.getMarca()
+                .filter(p -> p.getMarca()
                                 .equals(objetoFiltro.getMarca())
-                        &&      p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
+                        &&
+                        p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
                 )
                 .toList();
         Page<Camiseta> camisetasFiltradasPage = new PageImpl<>(camisetasFiltradas);

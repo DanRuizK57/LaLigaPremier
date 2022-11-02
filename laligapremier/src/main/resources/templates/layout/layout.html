@@ -92,7 +92,6 @@
         <div class="d-sm-flex align-items-sm-center pt-2 clear" th:if="${objetoFiltro} != null">
             <div class="text-muted filter-label">Filtros Aplicados:</div>
             <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0 my-sm-0 my-2" th:each="marca : ${marcas}" th:if="${objetoFiltro.marca} == ${marca} " th:text="${marca.nombre}"><span class=" px-1 close">&times;</span> </div>
-            <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0" th:text="${objetoFiltro.talla}"><span class=" px-1 close">&times;</span> </div>
             <div class="green-label font-weight-bold p-0 px-1 mx-sm-1 mx-0" th:each="precio : ${precios}" th:if="${objetoFiltro.precio} == ${precio} " th:text="'Hasta $' + ${precio.precio}"><span class=" px-1 close">&times;</span> </div>
         </div>
     </section>
@@ -100,7 +99,7 @@
 
     <section id="sidebar" th:fragment="filtros">
         <form th:action="@{/filtro}" th:object="${objetoFiltro}" method="post">
-        <div class="py-3">
+        <div class="py-5">
             <h5 class="font-weight-bold">Marca</h5>
             <div class="form-group row py-2">
                 <div class="form-group row">
@@ -114,19 +113,7 @@
                     </div>
                 </div>
         </div>
-        <div class="py-3">
-            <h5 class="font-weight-bold">Talla</h5>
-            <div class="form-group row py-2">
-                <div class="col-sm-6">
-                    <select th:field="*{talla}">
-                        <option th:each="talla : ${tallas}"
-                                th:text="${talla.talla}"
-                                th:value="${talla}">
-                        </option>
-                    </select>
-                </div>
-            </div>
-        <div class="py-3">
+        <div class="py-4">
             <h5 class="font-weight-bold">Rango de precios</h5>
             <div class="form-group row py-2">
                 <div class="col-sm-6">
@@ -138,13 +125,13 @@
                     </select>
                 </div>
             </div>
-        <div class="filters">
-            <button type="submit" class="btn btn-aplicar-filtros">Aplicar Filtros</button>
         </div>
-        <div class="filters">
-            <a th:href="@{/}" class="btn btn-eliminar-filtros">Eliminar Filtros</a>
-        </div>
-        </div>
+            <div class="filters">
+                <button type="submit" class="btn btn-aplicar-filtros">Aplicar Filtros</button>
+            </div>
+            <div class="filters">
+                <a th:href="@{/}" class="btn btn-eliminar-filtros">Eliminar Filtros</a>
+            </div>
         </div>
         </div>
         </form>

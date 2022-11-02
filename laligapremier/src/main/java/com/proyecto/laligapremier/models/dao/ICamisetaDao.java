@@ -17,4 +17,5 @@ public interface ICamisetaDao extends JpaRepository<Camiseta, Long> {
     @Query(value = "SELECT * FROM camisetas WHERE camisetas.nombre LIKE %:q%", nativeQuery = true)
     public Page<Camiseta> findByNombre(@Param("q")String q, Pageable pageable);
 
+
 }

@@ -1,9 +1,11 @@
 package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.Filtro;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 import com.proyecto.laligapremier.models.enums.TipoCamiseta;
+import com.proyecto.laligapremier.models.enums.TipoPrecio;
 import com.proyecto.laligapremier.service.ICamisetaService;
 
 import java.io.IOException;
@@ -59,6 +61,8 @@ public class CamisetaController {
         model.addAttribute("page", pageRender);
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
+        model.addAttribute("precios", TipoPrecio.values());
+        model.addAttribute("objetoFiltro" , new Filtro());
         return "mostrar/selecciones";
     }
 
@@ -80,6 +84,8 @@ public class CamisetaController {
         model.addAttribute("page", pageRender);
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
+        model.addAttribute("precios", TipoPrecio.values());
+        model.addAttribute("objetoFiltro" , new Filtro());
         return "mostrar/equipos";
     }
 

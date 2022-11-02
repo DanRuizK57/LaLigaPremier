@@ -64,7 +64,7 @@ public class RecuperarClaveController {
         MimeMessage mensaje = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
 
-        helper.setFrom("laliga.premier01@gmail.com", "Soporte LaLiga Premier");
+        helper.setFrom("soporte.laligapremier.01@gmail.com", "Soporte LaLiga Premier");
         helper.setTo(correo);
 
         String asunto = "Link para cambiar tu contraseña";
@@ -100,27 +100,41 @@ public class RecuperarClaveController {
     }
 
     @PostMapping("/nueva-contraseña")
-    public String cambiarContraseña(@Valid @ModelAttribute("usuarioClave") Usuario usuarioClave, BindingResult result, HttpServletRequest request, Model model) {
+    public String cambiarContraseña(@Valid @ModelAttribute("usuarioClave") Usuario usuarioClave,
+                                    BindingResult result,
+                                    HttpServletRequest request,
+                                    Model model,
+                                    RedirectAttributes flash) {
         String token = request.getParameter("token");
+        System.out.println("**** TOKEN: " + token);
         String password = request.getParameter("password");
 
         Usuario usuario = usuarioService.obtenerPorToken(token);
         model.addAttribute("titulo", "Cambia tu contraseña");
 
+
         if (usuario == null) {
             model.addAttribute("error", "Token Incorrecto");
             return "redirect:/recuperar-contraseña";
+        }
+        System.out.println("**** NUEVA CLAVE: " + usuarioClave.getNuevaClave());
+        System.out.println("**** CLAVE REPETIDA: " + usuarioClave.getRepetirClave());
+        System.out.println("**** COMPARACIÓN: " + usuarioClave.getNuevaClave().equals(usuarioClave.getRepetirClave()));
+
+        if (result.hasErrors()) {
+            model.addAttribute("usuarioClave", new Usuario());
+            return "cuenta/cambiar-contraseña-olvidada";
         }
 
         if (usuarioClave.getNuevaClave().equals(usuarioClave.getRepetirClave())) {
             usuarioService.actualizarClave(usuario, usuarioClave.getNuevaClave());
 
-            model.addAttribute("success", "¡Has cambiado tu contraseña correctamente!");
-            return "cuenta/iniciar-sesion";
-        }else {
-            model.addAttribute("error", "¡Las contraseñas no coinciden!");
-            return "cuenta/cambiar-contraseña-olvidada";
+            flash.addFlashAttribute("success", "¡Has cambiado tu contraseña correctamente!");
+            return "redirect:/iniciar-sesion";
         }
+        model.addAttribute("usuarioClave", new Usuario());
+        model.addAttribute("error", "¡Las contraseñas no coinciden! Vuelve a enviar el token.");
+        return "cuenta/cambiar-contraseña-olvidada";
 
     }
 

@@ -1,5 +1,6 @@
 package com.proyecto.laligapremier.service;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.Filtro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -28,6 +29,10 @@ public interface ICamisetaService {
     Page<Camiseta> findByNombre(String term, Pageable pageable);
 
     Optional<Camiseta> findById(Long id);
+
+    public List<Camiseta> listarPorFiltros(Filtro objetoFiltro);
+
+    public Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable);
 
 
 }

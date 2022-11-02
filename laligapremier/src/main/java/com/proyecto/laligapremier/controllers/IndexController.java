@@ -10,6 +10,7 @@ import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -70,28 +71,18 @@ public class IndexController {
             Model model,
             Principal principal){
 
-        List<Camiseta> camisetasFiltradas =  camisetaService.findAll().stream()
-                .filter(p -> p.getTalla()
-                        .equals(objetoFiltro.getTalla())
-                        &&
-                        p.getMarca()
-                                .equals(objetoFiltro.getMarca())
-                        &&      p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
-                )
-                .toList();
-
         Pageable pageRequest = PageRequest.of(page, 6);
 
-        Page<Camiseta> camisetas = camisetaService.findAll(pageRequest); // Lista paginada
+        Page<Camiseta> camisetasPage = camisetaService.listarPorFiltros(objetoFiltro, pageRequest);
 
-        PageRender<Camiseta> pageRender = new PageRender<>("/", camisetas);
+        PageRender<Camiseta> pageRender = new PageRender<>("/filtro", camisetasPage);
 
         if (principal != null) {
             int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
             model.addAttribute("userId", userId);
         }
 
-        model.addAttribute("camisetas" ,camisetasFiltradas);
+        model.addAttribute("camisetas" , camisetasPage);
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());

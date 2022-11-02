@@ -1,6 +1,7 @@
 package com.proyecto.laligapremier.service.impl;
 import com.proyecto.laligapremier.models.dao.ICamisetaDao;
 import com.proyecto.laligapremier.models.entity.Camiseta;
+import com.proyecto.laligapremier.models.entity.Filtro;
 import com.proyecto.laligapremier.service.ICamisetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -112,5 +113,38 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Override
     public Optional<Camiseta> findById(Long id) {
         return camisetaDao.findById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Camiseta> listarPorFiltros(Filtro objetoFiltro) {
+        List<Camiseta> camisetasFiltradas =  camisetaDao.findAll().stream()
+                .filter(p -> p.getTalla()
+                        .equals(objetoFiltro.getTalla())
+                        &&
+                        p.getMarca()
+                                .equals(objetoFiltro.getMarca())
+                        &&      p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
+                )
+                .toList();
+
+        return camisetasFiltradas;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable) {
+        List<Camiseta> camisetasFiltradas =  camisetaDao.findAll(pageable).stream()
+                .filter(p -> p.getTalla()
+                        .equals(objetoFiltro.getTalla())
+                        &&
+                        p.getMarca()
+                                .equals(objetoFiltro.getMarca())
+                        &&      p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
+                )
+                .toList();
+        Page<Camiseta> camisetasFiltradasPage = new PageImpl<>(camisetasFiltradas);
+
+        return camisetasFiltradasPage;
     }
 }

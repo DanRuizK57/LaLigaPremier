@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public enum TipoPrecio {
 
-    PRECIO_1("10000"),
-    PRECIO_2("20000"),
-    PRECIO_3("30000"),
-    PRECIO_4("40000");
+    PRECIO_1("30000"),
+    PRECIO_2("50000"),
+    PRECIO_3("80000"),
+    PRECIO_4("100000");
 
 
     private final String precio;

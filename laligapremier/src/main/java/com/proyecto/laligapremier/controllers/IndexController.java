@@ -51,37 +51,52 @@ public class IndexController {
         }
 
 
-        model.addAttribute("objetoFiltro" , filtro);
+
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetas);
         model.addAttribute("page", pageRender);
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
         model.addAttribute("precios", TipoPrecio.values());
-
+        model.addAttribute("objetoFiltro" , new Filtro());
 
         return "mostrar/index";
     }
-    @PostMapping(name="/filtro")
-    public String ejecutarFiltro(@Valid @ModelAttribute("objetoFiltro") Filtro objetoFiltro,
-            BindingResult result
-            , Model model){
+    @PostMapping("/filtro")
+    public String ejecutarFiltro(
+            @Valid @ModelAttribute("objetoFiltro") Filtro objetoFiltro,
+            BindingResult result,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            Model model,
+            Principal principal){
 
         List<Camiseta> camisetasFiltradas =  camisetaService.findAll().stream()
-                .filter(p -> p.getTalla().getTalla()
-                        .equals(objetoFiltro.getMarca())
+                .filter(p -> p.getTalla()
+                        .equals(objetoFiltro.getTalla())
                         &&
-                        p.getMarca().getNombre()
+                        p.getMarca()
                                 .equals(objetoFiltro.getMarca())
                         &&      p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
                 )
                 .toList();
-        System.out.println("***************************** LLEGO HASTA AQI *****************************");
+
+        Pageable pageRequest = PageRequest.of(page, 6);
+
+        Page<Camiseta> camisetas = camisetaService.findAll(pageRequest); // Lista paginada
+
+        PageRender<Camiseta> pageRender = new PageRender<>("/", camisetas);
+
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
+
         model.addAttribute("camisetas" ,camisetasFiltradas);
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
         model.addAttribute("precios", TipoPrecio.values());
+        model.addAttribute("page", pageRender);
         return "mostrar/index";
     }
 }

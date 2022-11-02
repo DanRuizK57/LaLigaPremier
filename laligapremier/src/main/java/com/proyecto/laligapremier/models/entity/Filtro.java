@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 
 @Getter
@@ -18,12 +17,13 @@ public class Filtro {
     @Enumerated(EnumType.STRING)
     private Talla talla;
 
-
     @Enumerated(EnumType.STRING)
     private Marca marca;
 
     @Enumerated(EnumType.STRING)
     private TipoPrecio precio;
+
+
 
 
 

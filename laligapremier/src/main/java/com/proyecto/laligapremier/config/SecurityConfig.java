@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .mvcMatchers("/", "/index", "/registro",
                                 "/nosotros", "/carrito-de-compras", "/selecciones",
                                 "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}",
-                                "/busqueda", "/recuperar-contraseña", "/nueva-contraseña",
+                                "/busqueda", "/recuperar-contraseña", "/nueva-contraseña", "/filtro",
                                 // Cargar archivos ccs e imágenes
                                 "/css/**", "/image/**", "/js/**").permitAll()
                         .anyRequest().authenticated())

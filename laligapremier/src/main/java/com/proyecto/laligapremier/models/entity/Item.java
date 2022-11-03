@@ -22,7 +22,7 @@ public class Item {
     @Column(name = "nombre_jugador")
     private String nombreJugador;
 
-    @Column(name = "odigo")
+    @Column(name = "codigo")
     private String codigo;
 
     @Column(name = "talla")

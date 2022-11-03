@@ -264,6 +264,8 @@ public class CamisetaController {
         model.addAttribute("numCamisetasEncontradas", camisetas.getTotalElements());
         model.addAttribute("marcas" , Marca.values());
         model.addAttribute("tallas" , Talla.values());
+        model.addAttribute("precios", TipoPrecio.values());
+        model.addAttribute("objetoFiltro" , new Filtro());
         return "mostrar/busqueda";
     }
 

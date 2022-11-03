@@ -35,6 +35,9 @@ public class Pedido {
     @Column(name = "precio_total")
     private Integer precioTotal;
 
+    @Column(name = "codigo")
+    private String codigo;
+
     public Pedido() {
         this.items = new ArrayList<ItemPedido>();
     }
@@ -44,8 +47,16 @@ public class Pedido {
         fecha = new Date();
     }
 
-    @Column(name = "codigo")
-    private String codigo;
-
-
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", fecha=" + fecha +
+                ", usuario=" + usuario +
+                ", items=" + items +
+                ", numCamisetas=" + numCamisetas +
+                ", precioTotal=" + precioTotal +
+                ", codigo='" + codigo + '\'' +
+                '}';
+    }
 }

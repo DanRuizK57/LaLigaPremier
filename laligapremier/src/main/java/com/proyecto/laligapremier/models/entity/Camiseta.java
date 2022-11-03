@@ -71,10 +71,6 @@ public class Camiseta {
     @Column(name = "tipo_camiseta")
     private TipoCamiseta tipoCamiseta;
 
-    @Column(name = "cantidad", nullable = false)
-    @Min(value = 0, message = "*Quantity has to be non negative number")
-    private Integer cantidad;
-
     private static final long serialVersionUID = 1L;
 }
 

@@ -116,18 +116,10 @@
                             </div>
                         </div>
                         <div class="form-group row py-2">
-                            <label class="col-sm-2 col-form-label">Cantidad</label>
-                            <div class="col-sm-6">
-                                <input type="text" th:field="*{cantidad}" class="form-control"
-                                       th:errorclass="'form-control alert-danger'" /> <small
-                                    class="form-text text-danger"
-                                    th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></small>
-                            </div>
-                        </div>
-                        <div class="form-group row py-2">
                             <label for="file" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-6">
                                 <input type="file" name="file" class="form-control"/>
+                                <small class="form-text text-danger" th:text="${errorImagen}"></small>
                             </div>
                         </div>
                     <div class="form-group row">

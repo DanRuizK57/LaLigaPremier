@@ -11,6 +11,7 @@ import com.proyecto.laligapremier.service.ICamisetaService;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
@@ -43,51 +44,6 @@ public class CamisetaController {
     @Autowired
     private IUsuarioService usuarioService;
 
-    @GetMapping(value = "/selecciones")
-    public String ListarSelecciones(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
-        Pageable pageRequest = PageRequest.of(page, 6);
-
-        Page<Camiseta> camisetas = camisetaService.listarSelecciones(pageRequest);
-
-        PageRender<Camiseta> pageRender = new PageRender<>("/selecciones", camisetas);
-
-        if (principal != null) {
-            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-            model.addAttribute("userId", userId);
-        }
-
-        model.addAttribute("titulo" , "Listado de camisetas de selecciones");
-        model.addAttribute("camisetas" , camisetas);
-        model.addAttribute("page", pageRender);
-        model.addAttribute("marcas" , Marca.values());
-        model.addAttribute("tallas" , Talla.values());
-        model.addAttribute("precios", TipoPrecio.values());
-        model.addAttribute("objetoFiltro" , new Filtro());
-        return "mostrar/selecciones";
-    }
-
-    @GetMapping(value = "/equipos")
-    public String ListarEquipos(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
-        Pageable pageRequest = PageRequest.of(page, 6);
-
-        Page<Camiseta> camisetas = camisetaService.listarEquipos(pageRequest);
-
-        PageRender<Camiseta> pageRender = new PageRender<>("/equipos", camisetas);
-
-        if (principal != null) {
-            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-            model.addAttribute("userId", userId);
-        }
-
-        model.addAttribute("titulo" , "Listado de camisetas de equipos");
-        model.addAttribute("camisetas" , camisetas);
-        model.addAttribute("page", pageRender);
-        model.addAttribute("marcas" , Marca.values());
-        model.addAttribute("tallas" , Talla.values());
-        model.addAttribute("precios", TipoPrecio.values());
-        model.addAttribute("objetoFiltro" , new Filtro());
-        return "mostrar/equipos";
-    }
 
     /**
      * Metodo controlador encargado de la buscar una camiseta consultada por el id
@@ -240,33 +196,6 @@ public class CamisetaController {
                                 " eliminada con éxito" );
             }
         return "redirect:/";
-    }
-
-    @GetMapping("/busqueda")
-    public String buscarCamisetas(@RequestParam(name = "page", defaultValue = "0") int page,
-                                  Model model,
-                                  @RequestParam(value = "query", required = false) String q,
-                                  Principal principal) {
-        if (principal != null) {
-            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-            model.addAttribute("userId", userId);
-        }
-
-        Pageable pageRequest = PageRequest.of(page, 6);
-
-        Page<Camiseta> camisetas = camisetaService.findByNombre(q, pageRequest);
-
-        PageRender<Camiseta> pageRender = new PageRender<>("/busqueda", camisetas);
-
-        model.addAttribute("camisetas", camisetas);
-        model.addAttribute("titulo", "Resultados de búsqueda:");
-        model.addAttribute("page", pageRender);
-        model.addAttribute("numCamisetasEncontradas", camisetas.getTotalElements());
-        model.addAttribute("marcas" , Marca.values());
-        model.addAttribute("tallas" , Talla.values());
-        model.addAttribute("precios", TipoPrecio.values());
-        model.addAttribute("objetoFiltro" , new Filtro());
-        return "mostrar/busqueda";
     }
 
 }

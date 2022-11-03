@@ -1,6 +1,7 @@
 package com.proyecto.laligapremier.service;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.Filtro;
+import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,14 +17,6 @@ public interface ICamisetaService {
 
     void flush();
 
-    List<Camiseta> listarEquipos();
-
-    Page<Camiseta> listarEquipos(Pageable pageable);
-
-    List<Camiseta> listarSelecciones();
-
-    Page<Camiseta> listarSelecciones(Pageable pageable);
-
     public List<Camiseta> findByNombre(String term);
 
     Page<Camiseta> findByNombre(String term, Pageable pageable);
@@ -34,5 +27,8 @@ public interface ICamisetaService {
 
     public Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable);
 
+    List<Camiseta> listarPorTipo(TipoCamiseta tipoCamiseta);
+
+    Page<Camiseta> listarPorTipo(TipoCamiseta tipoCamiseta, Pageable pageable);
 
 }

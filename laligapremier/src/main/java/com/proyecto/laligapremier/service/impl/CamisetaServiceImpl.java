@@ -2,6 +2,7 @@ package com.proyecto.laligapremier.service.impl;
 import com.proyecto.laligapremier.models.dao.ICamisetaDao;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.Filtro;
+import com.proyecto.laligapremier.models.enums.TipoCamiseta;
 import com.proyecto.laligapremier.service.ICamisetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,49 +56,6 @@ public class CamisetaServiceImpl implements ICamisetaService {
         camisetaDao.flush();
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Camiseta> listarEquipos() {
-        return findAll().stream()
-                .filter(p -> p.getTipoCamiseta()
-                        .getTipo()
-                        .equalsIgnoreCase("equipo"))
-                .toList();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Camiseta> listarEquipos(Pageable pageable) {
-        List<Camiseta> equipos = findAll(pageable).stream()
-                .filter(p -> p.getTipoCamiseta()
-                        .getTipo()
-                        .equalsIgnoreCase("equipo")).toList();
-        Page<Camiseta> equiposPage = new PageImpl<>(equipos);
-
-        return equiposPage;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Camiseta> listarSelecciones() {
-        return findAll().stream()
-                .filter(p -> p.getTipoCamiseta()
-                        .getTipo()
-                        .equalsIgnoreCase("seleccion"))
-                .toList();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Camiseta> listarSelecciones(Pageable pageable) {
-        List<Camiseta> selecciones = findAll(pageable).stream()
-                .filter(p -> p.getTipoCamiseta()
-                        .getTipo()
-                        .equalsIgnoreCase("seleccion")).toList();
-        Page<Camiseta> seleccionesPage = new PageImpl<>(selecciones);
-
-        return seleccionesPage;
-    }
 
     @Override
     @Transactional()
@@ -118,13 +77,8 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Override
     @Transactional(readOnly = true)
     public List<Camiseta> listarPorFiltros(Filtro objetoFiltro) {
-        List<Camiseta> camisetasFiltradas =  camisetaDao.findAll().stream()
-                .filter(p -> p.getMarca()
-                                .equals(objetoFiltro.getMarca())
-                        &&
-                        p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
-                )
-                .toList();
+
+        List<Camiseta> camisetasFiltradas = camisetaDao.listarPorMarcaYPrecio(objetoFiltro.getMarca(), Integer.parseInt(objetoFiltro.getPrecio().getPrecio()));
 
         return camisetasFiltradas;
     }
@@ -132,15 +86,24 @@ public class CamisetaServiceImpl implements ICamisetaService {
     @Override
     @Transactional(readOnly = true)
     public Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable) {
-        List<Camiseta> camisetasFiltradas =  camisetaDao.findAll(pageable).stream()
-                .filter(p -> p.getMarca()
-                                .equals(objetoFiltro.getMarca())
-                        &&
-                        p.getPrecio() <= Integer.parseInt(objetoFiltro.getPrecio().getPrecio())
-                )
-                .toList();
+
+        List<Camiseta> camisetasFiltradas = camisetaDao.listarPorMarcaYPrecio(objetoFiltro.getMarca(), Integer.parseInt(objetoFiltro.getPrecio().getPrecio()));
+
         Page<Camiseta> camisetasFiltradasPage = new PageImpl<>(camisetasFiltradas);
 
         return camisetasFiltradasPage;
+    }
+
+    @Override
+    public List<Camiseta> listarPorTipo(TipoCamiseta tipoCamiseta) {
+        List<Camiseta> camisetas = camisetaDao.listarPorTipo(tipoCamiseta);
+        return camisetas;
+    }
+
+    @Override
+    public Page<Camiseta> listarPorTipo(TipoCamiseta tipoCamiseta, Pageable pageable) {
+        List<Camiseta> camisetas = camisetaDao.listarPorTipo(tipoCamiseta);
+        Page<Camiseta> camisetasPorTipoPage = new PageImpl<>(camisetas);
+        return camisetasPorTipoPage;
     }
 }

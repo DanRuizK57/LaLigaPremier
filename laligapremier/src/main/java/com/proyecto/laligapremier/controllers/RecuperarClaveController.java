@@ -121,20 +121,18 @@ public class RecuperarClaveController {
         System.out.println("**** CLAVE REPETIDA: " + usuarioClave.getRepetirClave());
         System.out.println("**** COMPARACIÓN: " + usuarioClave.getNuevaClave().equals(usuarioClave.getRepetirClave()));
 
-        if (result.hasErrors()) {
-            model.addAttribute("usuarioClave", new Usuario());
-            return "cuenta/cambiar-contraseña-olvidada";
-        }
 
-        if (usuarioClave.getNuevaClave().equals(usuarioClave.getRepetirClave())) {
+        if (usuarioService.compararClaves(usuarioClave.getNuevaClave(), usuarioClave.getRepetirClave())) {
             usuarioService.actualizarClave(usuario, usuarioClave.getNuevaClave());
 
             flash.addFlashAttribute("success", "¡Has cambiado tu contraseña correctamente!");
             return "redirect:/iniciar-sesion";
+        }else {
+            model.addAttribute("error", "¡Las contraseñas no coinciden! Vuelve a hacer clic en el enlace.");
+            model.addAttribute("token", token);
+            model.addAttribute("usuario", new Usuario());
+            return "cuenta/cambiar-contraseña-olvidada";
         }
-        model.addAttribute("usuarioClave", new Usuario());
-        model.addAttribute("error", "¡Las contraseñas no coinciden! Vuelve a enviar el token.");
-        return "cuenta/cambiar-contraseña-olvidada";
 
     }
 

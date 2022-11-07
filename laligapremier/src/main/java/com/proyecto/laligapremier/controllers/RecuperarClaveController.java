@@ -128,7 +128,7 @@ public class RecuperarClaveController {
             flash.addFlashAttribute("success", "¡Has cambiado tu contraseña correctamente!");
             return "redirect:/iniciar-sesion";
         }else {
-            model.addAttribute("error", "¡Las contraseñas no coinciden! Vuelve a hacer clic en el enlace.");
+            model.addAttribute("error", "¡Las contraseñas no coinciden!");
             model.addAttribute("token", token);
             model.addAttribute("usuario", new Usuario());
             return "cuenta/cambiar-contraseña-olvidada";

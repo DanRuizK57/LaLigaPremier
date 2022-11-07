@@ -162,7 +162,6 @@ public class CamisetaController {
             flash.addFlashAttribute("info" , mensajeFlash);
         }
         String mensajeFlash = (camiseta.getId() != null) ? "Camiseta editada con éxito" : "¡Camiseta agregada con éxito!";
-        camiseta.setImagen("");
         camisetaService.save(camiseta);
         status.setComplete();
         flash.addFlashAttribute("info" , mensajeFlash);

@@ -8,13 +8,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementación de la clase de UserDetailsService, donde se dan lógica a sus métodos.
+ */
+
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
 
+    /**
+     * Inyección de la clase IUsuarioDao para acceder a sus métodos y así realizar consultas a la base de datos.
+     */
     @Autowired
     private IUsuarioDao usuarioDao;
 
-    // Busca si el usuario está registrado
+    /**
+     * Método que buscar si el correo pertenece a algún usuario registrado en la base de datos.
+     * @param correo Objeto de tipo String, usado para buscar un Usuario.
+     * @return Objeto del tipo Usuario.
+     */
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
        return usuarioDao

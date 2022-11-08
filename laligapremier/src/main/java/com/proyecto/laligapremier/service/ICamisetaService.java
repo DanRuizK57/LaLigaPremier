@@ -8,6 +8,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interfaz de la clase Camiseta donde se establecen sus métodos para luego ser implementados
+ * en la clase CamisetaServiceImpl.
+ */
+
 public interface ICamisetaService {
     List<Camiseta> findAll();
     Page<Camiseta> findAll(Pageable pageable);

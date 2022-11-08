@@ -4,6 +4,11 @@ import com.proyecto.laligapremier.models.entity.ItemPedido;
 
 import java.util.List;
 
+/**
+ * Interfaz de la clase ItemPedido donde se establecen sus métodos para luego ser implementados
+ * en la clase ItemPedidoServiceImpl.
+ */
+
 public interface IItemPedidoService {
 
     List<ItemPedido> findAll();

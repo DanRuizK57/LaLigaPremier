@@ -11,8 +11,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ICamisetaDao extends JpaRepository<Camiseta, Long> {
+/**
+ * Clase que establece conexión directa con la base de datos e interactúa con la entidad Camiseta.
+ */
 
+public interface ICamisetaDao extends JpaRepository<Camiseta, Long> {
     @Query(value = "SELECT * FROM camisetas WHERE camisetas.nombre LIKE %:q%", nativeQuery = true)
     List<Camiseta> findByNombre(@Param("q") String q);
 

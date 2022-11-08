@@ -10,6 +10,10 @@ import javax.validation.constraints.NotNull;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 
+/**
+ * Clase Entidad Camiseta que representa la tabla camisetas en la base de datos
+ * Getters y Setters fueron generados con la etiqueta de lombok
+ */
 @Entity
 @Table(name = "camisetas")
 @Getter

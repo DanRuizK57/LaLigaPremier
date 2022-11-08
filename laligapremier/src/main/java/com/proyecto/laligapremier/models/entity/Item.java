@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+/**
+ * Clase Entidad <i>@Entity</i> que representa la tabla item en la base de datos.
+ * Getters y Setters fueron generados con la etiqueta de lombok
+ */
 @Entity
 @Getter
 @Setter

@@ -5,6 +5,9 @@ import org.springframework.data.domain.Page;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que establece los parámetros del paginador.
+ */
 public class PageRender<T> {
 
     private String url;
@@ -14,6 +17,9 @@ public class PageRender<T> {
     private int paginaActual;
     private List<PageItem> paginas;
 
+    /**
+     * Método que establece la ruta, la cantidad de páginas y el posicionamiento del paginador.
+     */
     public PageRender(String url, Page<T> page) {
         this.url = url;
         this.page = page;

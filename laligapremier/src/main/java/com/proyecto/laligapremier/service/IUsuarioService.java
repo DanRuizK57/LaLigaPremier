@@ -5,6 +5,11 @@ import com.proyecto.laligapremier.models.entity.Usuario;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interfaz de la clase Usuario donde se establecen sus métodos para luego ser implementados
+ * en la clase UsuarioServiceImpl.
+ */
+
 public interface IUsuarioService {
 
     List<Usuario> listar();

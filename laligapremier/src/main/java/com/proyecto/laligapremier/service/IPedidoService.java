@@ -6,6 +6,11 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+/**
+ * Interfaz de la clase Pedido donde se establecen sus métodos para luego ser implementados
+ * en la clase PedidoServiceImpl.
+ */
+
 public interface IPedidoService {
 
     List<Pedido> findAll();

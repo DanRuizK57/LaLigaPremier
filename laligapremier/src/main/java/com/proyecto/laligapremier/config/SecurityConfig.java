@@ -10,11 +10,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Clase encargada de manejar la configuración de Spring Security
+ */
+
 @Configuration
-@EnableWebSecurity // Habilitar seguridad web
+@EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    // Configurar Spring Security para que no esté por defecto
+
+    /**
+     * Inyección de la clase JpaUserDetailsService para acceder a sus métodos.
+     */
 
     private final JpaUserDetailsService jpaUserDetailsService;
 
@@ -22,13 +29,15 @@ public class SecurityConfig {
         this.jpaUserDetailsService = jpaUserDetailsService;
     }
 
-    // Filtro de seguridad
+    /**
+     * Método que establece ciertas características del Spring security como las solicitudes permitidas sin registro,
+     * cargar detalles del Usuario, establecer la solicitud del login y el logout.
+     * @param http Solicitud HTTP específica de seguridad.
+     */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                // No permite solicitudes a menos que el usuario esté registrado
                 .authorizeRequests(consulta -> consulta
-                        // Se añaden excepciones, donde se podrá ingresar sin autenticación
                         .mvcMatchers("/", "/index", "/registro",
                                 "/nosotros", "/carrito-de-compras", "/selecciones",
                                 "/equipos", "/ver-camiseta/{id}", "/uploads/{filename:.+}",
@@ -36,14 +45,10 @@ public class SecurityConfig {
                                 // Cargar archivos ccs e imágenes
                                 "/css/**", "/image/**", "/js/**").permitAll()
                         .anyRequest().authenticated())
-                // Así spring security identifica como obtener los datos de los usuarios
                 .userDetailsService(jpaUserDetailsService)
                 .headers(headers -> headers.frameOptions().sameOrigin())
-                // Autenticación básica HTTP, puede ser así (logeo básico) o un form de inicio de sesión
                 .formLogin((formulario) -> formulario
-                        // permite acceso a todos
                         .loginPage("/iniciar-sesion")
-                        // Utilizar otro atributo para iniciar sesión
                         .usernameParameter("correo")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
@@ -52,7 +57,9 @@ public class SecurityConfig {
                 .build();
     }
 
-    //Cifrar contraseña
+    /**
+     * Creación del Bean para cifrar contraseñas, utilizado en el arranque de la aplicación.
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

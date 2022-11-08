@@ -1,5 +1,8 @@
 package com.proyecto.laligapremier.util.paginator;
 
+/**
+ * Clase que indica una página del paginador.
+ */
 public class PageItem {
 
     private int numero;

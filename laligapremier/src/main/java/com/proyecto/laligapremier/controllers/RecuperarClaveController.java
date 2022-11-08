@@ -22,8 +22,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * Clase controladora para recuperar contraseña en caso de ser olvidada
+ */
+
 @Controller
 public class RecuperarClaveController {
+
+    /**
+     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     */
 
     @Autowired
     private JavaMailSender mailSender;
@@ -31,11 +39,24 @@ public class RecuperarClaveController {
     @Autowired
     private IUsuarioService usuarioService;
 
+    /**
+     * Metodo que muestra la vista de recuperar contraseña
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @return vista recuperar contraseña
+     */
     @GetMapping("/recuperar-contraseña")
     public String mostrarOlvidarContraseña(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "cuenta/recuperar-contraseña";
     }
+
+    /**
+     * Metodo que genera un token unico para recuperar la contraseña
+     * @param usuario parametro de tipo Usuario, usado para crear el token para ese usuario
+     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @return retorna vista del mensaje enviado para recuperar contraseña
+     */
 
     @PostMapping("/recuperar-contraseña")
     public String generarToken(@Valid Usuario usuario, BindingResult result, Model model) {
@@ -59,6 +80,11 @@ public class RecuperarClaveController {
         return "cuenta/mensaje-enviado";
     }
 
+    /**
+     * Metodo que envia el correo para recuperar la contraseña
+     * @param correo parametro de tipo String, usado para obtener el correo del usuario para recuperar la contraseña.
+     * @param link parametro de tipo String, usado para mostrar el link para recuperar contraseña en el mail
+     */
     public void enviarCorreo(String correo, String link)
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage mensaje = mailSender.createMimeMessage();
@@ -84,7 +110,12 @@ public class RecuperarClaveController {
         mailSender.send(mensaje);
     }
 
-
+    /**
+     * Metodo que muestra el formulario de recuperar contraseña una vez presionado el link.
+     * @param token parametro de tipo String, usado para obtener un usuario por el token.
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @return retorna vista del formulario para recuperar contraseña.
+     */
     @GetMapping("/nueva-contraseña")
     public String formularioCambiarContraseña(@Param(value = "token") String token, Model model) {
         Usuario usuario = usuarioService.obtenerPorToken(token);
@@ -98,6 +129,16 @@ public class RecuperarClaveController {
 
         return "cuenta/cambiar-contraseña-olvidada";
     }
+
+    /**
+     * Metodo utilizado para cambiar la contraseña del usuario
+     * @param usuarioClave parametro de tipo Usuario, usado para validar y actualizar la contraseña.
+     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
+     * @param request parametro de tipo HttpServeletRequest, usado para obtener los datos de la solicitud actual.
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
+     * @return vista para cambiar la contraseña olvidada
+     */
 
     @PostMapping("/nueva-contraseña")
     public String cambiarContraseña(@Valid @ModelAttribute("usuarioClave") Usuario usuarioClave,

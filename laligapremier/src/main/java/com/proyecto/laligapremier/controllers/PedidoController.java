@@ -24,8 +24,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Clase controladora de los pedidos. lista, guarda, muestra en detalle los pedidos.
+ */
 @Controller
 public class PedidoController {
+
+    /**
+     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     */
 
     @Autowired
     private IUsuarioService usuarioService;
@@ -37,9 +44,16 @@ public class PedidoController {
     @Autowired
     private IItemService itemService;
 
+    /**
+     * Metodo que lista la totalidad de los pedidos en la base de datos.
+     * @param page parametro de tipo int, usado para el paginador.
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * @return vista de pedidos de los usuarios
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/pedidos")
-    public String index(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
+    public String listaPedidos(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
 
         Pageable pageRequest = PageRequest.of(page, 10);
 
@@ -59,6 +73,12 @@ public class PedidoController {
         return "mostrar/pedidos";
     }
 
+    /**
+     * Metodo que guarda un pedido en la base de datos.
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
+     * @return vista principal de la aplicacion
+     */
     @GetMapping(value = "/guardar-pedido")
     public String guardarPedido(Principal principal, RedirectAttributes flash) {
         Pedido pedido = new Pedido();
@@ -88,6 +108,12 @@ public class PedidoController {
         return "redirect:/";
     }
 
+    /**
+     * Metodo que muestra el detalle de un pedido desde la base de datos
+     * @param id parametro de tipo Long, usado para obtener el pedido desde la base de datos
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @return vista que muestra el detalle del pedido.
+     */
     @GetMapping("ver-pedido/{id}")
     public String mostrarPedido(@PathVariable(value = "id")Long id, Map<String, Object> model){
         Pedido pedido = pedidoService.findOne(id);

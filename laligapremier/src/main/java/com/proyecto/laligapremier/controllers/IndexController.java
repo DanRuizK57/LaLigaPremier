@@ -10,7 +10,6 @@ import com.proyecto.laligapremier.service.IUsuarioService;
 import com.proyecto.laligapremier.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -23,16 +22,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
+
+/**
+ * Clase controladora de la vista principal de la aplicacion.
+ */
 
 @Controller
 public class IndexController {
+
+    /**
+     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     */
     @Autowired
     private ICamisetaService camisetaService;
 
     @Autowired
     private IUsuarioService usuarioService;
 
+    /**
+     * Metodo que muestra elementos de la base de datos y la aplicacion a la vista principal.
+     * @param page parametro de tipo int, usado para el paginador.
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * @return vista principal de la aplicacion
+     */
     @GetMapping(value = {"/index", "/"})
     public String index(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
 
@@ -59,6 +72,16 @@ public class IndexController {
 
         return "mostrar/index";
     }
+
+    /**
+     * Metodo para usar un filtro personalizado en la vista principal
+     * @param objetoFiltro parametro de tipo Filtro, utilizado como auxiliar para aplicar el filtro.
+     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
+     * @param page parametro de tipo int, usado para el paginador.
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * @return vista principal de la aplicacion.
+     */
     @PostMapping("/filtro")
     public String ejecutarFiltro(
             @Valid @ModelAttribute("objetoFiltro") Filtro objetoFiltro,

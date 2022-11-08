@@ -27,9 +27,17 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Clase controladora de la entidad camiseta. Enruta, muestra, agrega y borra camisetas.
+ */
 @Controller
 @SessionAttributes("camiseta")
 public class CamisetaController {
+
+    /**
+     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     */
+
     @Autowired
     private ICamisetaService camisetaService;
     @Autowired
@@ -40,10 +48,11 @@ public class CamisetaController {
 
     /**
      * Metodo controlador encargado de la buscar una camiseta consultada por el id
-     * Metodo que hay que revisar, debido a que puede tener multiples vistas dependiendo de la camiseta
-     * @param id
-     * @param model
-     * @param flash
+     * Recibe como parametro el id para despues buscarlo en la base de datos
+     * @param id parametro de tipo Long, usado para encontrar el objeto en la base de datos
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista
+     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
      * @return vista que muestra las camisetas
      */
     @GetMapping(value = "/ver-camiseta/{id}")
@@ -68,6 +77,15 @@ public class CamisetaController {
         return "camiseta/ver_camiseta";
     }
 
+    /**
+     *
+     * Metodo que edita camiseta solicitada por el id para posteriormente.
+     * @param id parametro de tipo Long, usado para encontrar el objeto en la base de datos.
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * @return vista del formulario crear camiseta.
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/form/{id}")
     public String editarCamiseta(@PathVariable(value = "id") Long id,
@@ -101,6 +119,12 @@ public class CamisetaController {
         return "camiseta/form_camiseta";
     }
 
+    /**
+     * Metodo que crea una camiseta para posteriormente guardarla en la base de datos
+     * @param model parametro de tipo Map, usado para recibir o entregar parametros desde una vista.
+     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * @return vista del formulario
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/form")
     public String crearCamiseta(Map<String , Object> model, Principal principal){
@@ -118,6 +142,17 @@ public class CamisetaController {
         model.put("marcas", Marca.values());
         return "camiseta/form_camiseta";
     }
+
+    /**
+     * Metodo encargado de almacenar una camiseta en la base de datos
+     * @param camiseta parametro tipo Camiseta, usado para guardar la camiseta en la base de datos
+     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
+     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * @param imagen parametro de tipo MultiPartFile, usado para guardar la camiseta con una imagen en la base de datos
+     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
+     * @param status parametro de tipo SessionStatusm usado para indicar que el estado de la sesion esta completa
+     * @return vista principal de la aplicacion
+     */
     @PostMapping(value = "/form")
     public String guardar(
         @Valid Camiseta camiseta,
@@ -161,9 +196,14 @@ public class CamisetaController {
         return "redirect:/";
     }
 
+    /**
+     * Metodo muestra la imagen de cada camiseta
+     * @param filename parametro de tipo String que indica la ruta de la imagen
+     * @return objeto ResponseEntity
+     */
     @GetMapping(value="/uploads/{filename:.+}")
     public ResponseEntity<Resource> verImagen(@PathVariable String filename){
-        Resource recurso = null;
+        Resource recurso;
         try {
             recurso = uploadFileService.load(filename);
         } catch (MalformedURLException e) {
@@ -177,6 +217,12 @@ public class CamisetaController {
                 .body(recurso);
     }
 
+    /**
+     * Metodo que elimina una camiseta de la base de datos
+     * @param id parametro de tipo Long, usado para encontrar el objeto en la base de datos.
+     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
+     * @return vista principal de la aplicacion
+     */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/eliminar/{id}")
     public String eliminar(@PathVariable(value = "id") Long id , RedirectAttributes flash){

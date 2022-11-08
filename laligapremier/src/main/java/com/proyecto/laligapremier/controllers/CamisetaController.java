@@ -1,28 +1,21 @@
 package com.proyecto.laligapremier.controllers;
 import com.proyecto.laligapremier.models.entity.Camiseta;
-import com.proyecto.laligapremier.models.entity.Filtro;
 import com.proyecto.laligapremier.models.entity.ItemPedido;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
 import com.proyecto.laligapremier.models.enums.TipoCamiseta;
-import com.proyecto.laligapremier.models.enums.TipoPrecio;
 import com.proyecto.laligapremier.service.ICamisetaService;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.security.Principal;
-import java.util.List;
+import java.security.Principal;;
 import java.util.Map;
 import javax.validation.Valid;
 
 import com.proyecto.laligapremier.service.IUploadFileService;
 import com.proyecto.laligapremier.service.IUsuarioService;
-import com.proyecto.laligapremier.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -106,9 +106,6 @@ public class RecuperarClaveController {
                                     Model model,
                                     RedirectAttributes flash) {
         String token = request.getParameter("token");
-        System.out.println("**** TOKEN: " + token);
-        String password = request.getParameter("password");
-
         Usuario usuario = usuarioService.obtenerPorToken(token);
         model.addAttribute("titulo", "Cambia tu contraseña");
 
@@ -117,9 +114,6 @@ public class RecuperarClaveController {
             model.addAttribute("error", "Token Incorrecto");
             return "redirect:/recuperar-contraseña";
         }
-        System.out.println("**** NUEVA CLAVE: " + usuarioClave.getNuevaClave());
-        System.out.println("**** CLAVE REPETIDA: " + usuarioClave.getRepetirClave());
-        System.out.println("**** COMPARACIÓN: " + usuarioClave.getNuevaClave().equals(usuarioClave.getRepetirClave()));
 
 
         if (usuarioService.compararClaves(usuarioClave.getNuevaClave(), usuarioClave.getRepetirClave())) {

@@ -38,8 +38,6 @@ public class IndexController {
 
         Filtro filtro = new Filtro();
 
-
-
         Pageable pageRequest = PageRequest.of(page, 6); // 6 elementos por página
 
         Page<Camiseta> camisetas = camisetaService.findAll(pageRequest); // Lista paginada
@@ -50,8 +48,6 @@ public class IndexController {
             int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
             model.addAttribute("userId", userId);
         }
-
-
 
         model.addAttribute("titulo" , "Camisetas disponibles");
         model.addAttribute("camisetas" , camisetas);

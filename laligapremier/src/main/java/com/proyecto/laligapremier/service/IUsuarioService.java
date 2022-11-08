@@ -7,27 +7,27 @@ import java.util.Optional;
 
 public interface IUsuarioService {
 
-    public List<Usuario> listar();
-    public Optional<Usuario> listarId(Long id);
+    List<Usuario> listar();
+    Optional<Usuario> listarId(Long id);
 
     Usuario findOne(Long id);
-    public void guardar(Usuario u);
+    void guardar(Usuario u);
 
-    public String cifrarClave(String clave);
+    String cifrarClave(String clave);
 
-    public Usuario findByNombre(String nombre);
+    Usuario findByNombre(String nombre);
 
-    public Usuario findByCorreo(String correo);
+    Usuario findByCorreo(String correo);
 
-    public boolean compararClavesActuales(String claveActual, String claveEncriptada);
+    boolean compararClavesActuales(String claveActual, String claveEncriptada);
 
-    public boolean compararClaves(String clave, String repetirClave);
+    boolean compararClaves(String clave, String repetirClave);
 
-    public void actualizarToken(String token, String correo);
+    void actualizarToken(String token, String correo);
 
-    public Usuario obtenerPorToken(String token);
+    Usuario obtenerPorToken(String token);
 
-    public void actualizarClave(Usuario usuario, String nuevaClave);
+    void actualizarClave(Usuario usuario, String nuevaClave);
 
 
 }

@@ -17,15 +17,15 @@ public interface ICamisetaService {
 
     void flush();
 
-    public List<Camiseta> findByNombre(String term);
+    List<Camiseta> findByNombre(String term);
 
     Page<Camiseta> findByNombre(String term, Pageable pageable);
 
     Optional<Camiseta> findById(Long id);
 
-    public List<Camiseta> listarPorFiltros(Filtro objetoFiltro);
+    List<Camiseta> listarPorFiltros(Filtro objetoFiltro);
 
-    public Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable);
+    Page<Camiseta> listarPorFiltros(Filtro objetoFiltro, Pageable pageable);
 
     List<Camiseta> listarPorTipo(TipoCamiseta tipoCamiseta);
 

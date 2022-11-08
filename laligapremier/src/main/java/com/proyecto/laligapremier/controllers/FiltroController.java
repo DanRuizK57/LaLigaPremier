@@ -44,12 +44,7 @@ public class FiltroController {
         }
 
         model.addAttribute("titulo" , "Listado de camisetas de selecciones");
-        model.addAttribute("camisetas" , camisetas);
-        model.addAttribute("page", pageRender);
-        model.addAttribute("marcas" , Marca.values());
-        model.addAttribute("tallas" , Talla.values());
-        model.addAttribute("precios", TipoPrecio.values());
-        model.addAttribute("objetoFiltro" , new Filtro());
+        modelsAtributosVista(model, camisetas, pageRender);
         return "mostrar/selecciones";
     }
 
@@ -67,12 +62,7 @@ public class FiltroController {
         }
 
         model.addAttribute("titulo" , "Listado de camisetas de equipos");
-        model.addAttribute("camisetas" , camisetas);
-        model.addAttribute("page", pageRender);
-        model.addAttribute("marcas" , Marca.values());
-        model.addAttribute("tallas" , Talla.values());
-        model.addAttribute("precios", TipoPrecio.values());
-        model.addAttribute("objetoFiltro" , new Filtro());
+        modelsAtributosVista(model, camisetas, pageRender);
         return "mostrar/equipos";
     }
 
@@ -101,6 +91,15 @@ public class FiltroController {
         model.addAttribute("precios", TipoPrecio.values());
         model.addAttribute("objetoFiltro" , new Filtro());
         return "mostrar/busqueda";
+    }
+
+    private static void modelsAtributosVista(Model model, Page<Camiseta> camisetas, PageRender<Camiseta> pageRender) {
+        model.addAttribute("camisetas" , camisetas);
+        model.addAttribute("page", pageRender);
+        model.addAttribute("marcas" , Marca.values());
+        model.addAttribute("tallas" , Talla.values());
+        model.addAttribute("precios", TipoPrecio.values());
+        model.addAttribute("objetoFiltro" , new Filtro());
     }
 
 }

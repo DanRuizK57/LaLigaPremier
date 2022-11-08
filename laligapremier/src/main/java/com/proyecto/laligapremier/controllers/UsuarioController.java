@@ -83,10 +83,7 @@ public class UsuarioController {
     @GetMapping(value="/editar-perfil/{id}")
     public String editarPerfil(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash, Principal principal) {
 
-        if (principal != null) {
-            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-            model.addAttribute("userId", userId);
-        }
+        principalNotNull(model, principal);
 
         Usuario usuario = null;
         if(id>0){
@@ -116,10 +113,7 @@ public class UsuarioController {
             Principal principal
     ){
         if(result.hasErrors()){
-            if (principal != null) {
-                int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-                model.addAttribute("userId", userId);
-            }
+            principalNotNull(model, principal);
 
             model.addAttribute("titulo" , "Editar Perfil");
         }
@@ -138,10 +132,7 @@ public class UsuarioController {
     @GetMapping(value="/cambiar-contraseña/{id}")
     public String cambiarContraseña(@PathVariable(value = "id") Long id, Model model , RedirectAttributes flash, Principal principal) {
 
-        if (principal != null) {
-            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-            model.addAttribute("userId", userId);
-        }
+        principalNotNull(model, principal);
 
         Usuario usuario = null;
         if(id>0){
@@ -171,10 +162,7 @@ public class UsuarioController {
                                          Principal principal) {
 
         if(result.hasErrors()){
-            if (principal != null) {
-                int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
-                model.addAttribute("userId", userId);
-            }
+            principalNotNull(model, principal);
 
             model.addAttribute("titulo" , "Cambiar Contraseña");
         }
@@ -215,6 +203,13 @@ public class UsuarioController {
         model.addAttribute("error" , "¡La contraseña actual es incorrecta!");
         model.addAttribute("titulo" , "Cambiar Contraseña");
         return "cuenta/cambiar-contraseña";
+    }
+
+    private void principalNotNull(Model model, Principal principal) {
+        if (principal != null) {
+            int userId = Math.toIntExact(usuarioService.findByNombre(principal.getName()).getId());
+            model.addAttribute("userId", userId);
+        }
     }
 
 

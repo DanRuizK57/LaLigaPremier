@@ -29,7 +29,7 @@ public class UploadFileServiceImpl implements IUploadFileService {
     public Resource load(String filename) throws MalformedURLException {
         Path pathImagen = getPath(filename);
         log.info("pathImagen " + pathImagen);
-        Resource recurso = null;
+        Resource recurso;
         recurso = new UrlResource(pathImagen.toUri());
         if(!recurso.exists() && !recurso.isReadable())
             throw new RuntimeException("Error : No se puede cargar la imagen " + pathImagen.toString());

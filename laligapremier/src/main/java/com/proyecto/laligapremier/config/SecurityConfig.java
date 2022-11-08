@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Clase encargada de manejar la configuración de Spring Security
+ * Clase encargada de manejar la configuración de Spring Security.
  */
 
 @Configuration

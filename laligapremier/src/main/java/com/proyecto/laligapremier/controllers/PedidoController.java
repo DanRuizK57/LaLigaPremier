@@ -25,13 +25,13 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Clase controladora de los pedidos. lista, guarda, muestra en detalle los pedidos.
+ * Clase controladora de los pedidos. Lista, guarda, muestra en detalle los pedidos.
  */
 @Controller
 public class PedidoController {
 
     /**
-     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     * Inyección de interfaces de la lógica de servicios para usar la lógica de la aplicación.
      */
 
     @Autowired
@@ -45,11 +45,11 @@ public class PedidoController {
     private IItemService itemService;
 
     /**
-     * Metodo que lista la totalidad de los pedidos en la base de datos.
-     * @param page parametro de tipo int, usado para el paginador.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista de pedidos de los usuarios
+     * Método que lista la totalidad de los pedidos en la base de datos.
+     * @param page parámetro de tipo int, usado para el paginador.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista de pedidos de los usuarios.
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/pedidos")
@@ -74,10 +74,10 @@ public class PedidoController {
     }
 
     /**
-     * Metodo que guarda un pedido en la base de datos.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @return vista principal de la aplicacion
+     * Método que guarda un pedido en la base de datos.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @return vista principal de la aplicación.
      */
     @GetMapping(value = "/guardar-pedido")
     public String guardarPedido(Principal principal, RedirectAttributes flash) {
@@ -109,9 +109,9 @@ public class PedidoController {
     }
 
     /**
-     * Metodo que muestra el detalle de un pedido desde la base de datos
-     * @param id parametro de tipo Long, usado para obtener el pedido desde la base de datos
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * Método que muestra el detalle de un pedido desde la base de datos.
+     * @param id parámetro de tipo Long, usado para obtener el pedido desde la base de datos.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
      * @return vista que muestra el detalle del pedido.
      */
     @GetMapping("ver-pedido/{id}")

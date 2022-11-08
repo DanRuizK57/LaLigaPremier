@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 /**
- * Clase controladora del usuario, utilizada para iniciar sesion, el registro, guardar, editar y recuperar contraseña de
+ * Clase controladora del usuario, utilizada para iniciar sesión, el registro, guardar, editar y recuperar contraseña de
  * un usuario.
  */
 @Controller
@@ -26,20 +26,20 @@ import java.security.Principal;
 public class UsuarioController {
 
     /**
-     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     * Inyección de interfaces de la lógica de servicios para usar la lógica de la aplicación.
      */
 
     @Autowired
     private IUsuarioService usuarioService;
 
     /**
-     * Metodo para el inicio de sesion con el usuario.
-     * @param error parametro de tipo String, usado para verificar si existe error al iniciar sesion
-     * @param logout parametro de tipo String, usado para verificar que el usuario ha cerrado sesion
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @return retorna la vista de inicio de sesion.
+     * Método para el inicio de sesión con el usuario.
+     * @param error parámetro de tipo String, usado para verificar si existe error al iniciar sesión.
+     * @param logout parámetro de tipo String, usado para verificar que el usuario ha cerrado sesión.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @return retorna la vista de inicio de sesión.
      */
     @GetMapping(value="/iniciar-sesion")
     public String iniciarSesion(@RequestParam(value = "error", required = false) String error,
@@ -65,8 +65,8 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo que registra un usuario a la aplicacion
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * Método que registra un usuario a la aplicación.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
      * @return vista registro del usuario.
      */
     @GetMapping(value="/registro")
@@ -78,13 +78,13 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo que guarda un usuario en la base de datos.
-     * @param usuario parametro de tipo Usuario, usado para guardarlo en la base de datos.
-     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param status parametro de tipo SessionStatusm usado para indicar que el estado de la sesion esta completa.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @return vista del registro de la aplicacion.
+     * Método que guarda un usuario en la base de datos.
+     * @param usuario parámetro de tipo Usuario, usado para guardarlo en la base de datos.
+     * @param result parámetro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param status parámetro de tipo SessionStatus usado para indicar que el estado de la sesión está completa.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @return vista del registro de la aplicación.
      */
     @PostMapping("/registro")
     public String guardarUsuario(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status, RedirectAttributes flash) {
@@ -111,11 +111,11 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo que edita el perfil del usuario, actualizando parametro de estos.
-     * @param id parametro de tipo Long, usado para obtener el usuario solicitado desde la base de datos.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * Método que edita el perfil del usuario, actualizando parámetro de estos.
+     * @param id parámetro de tipo Long, usado para obtener el usuario solicitado desde la base de datos.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
      * @return vista para editar el perfil del usuario.
      */
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -143,14 +143,14 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo que guarda el perfil editado en la base de datos
-     * @param usuario parametro de tipo Usuario, usado para guardar los parametros en la base de datos.
-     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @param status parametro de tipo SessionStatusm usado para indicar que el estado de la sesion esta completa.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista principal de la aplicacion.
+     * Método que guarda el perfil editado en la base de datos.
+     * @param usuario parámetro de tipo Usuario, usado para guardar los parámetros en la base de datos.
+     * @param result parámetro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @param status parámetro de tipo SessionStatus usado para indicar que el estado de la sesión está completa.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista principal de la aplicación.
      */
     @PostMapping(value = "/perfil")
     public String guardarPerfil(
@@ -178,11 +178,11 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo encargado del cambio de contraseña del usuario.
-     * @param id parametro de tipo Long, usado para obtener el usuario desde la base de datos.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * Método encargado del cambio de contraseña del usuario.
+     * @param id parámetro de tipo Long, usado para obtener el usuario desde la base de datos.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
      * @return vista para cambiar contraseña.
      */
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -210,13 +210,13 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo que guarda la nueva contraseña en la base de datos.
-     * @param usuario parametro de tipo Usuario, usado para obtener las contraseñas y guardarlas a la base de datos.
-     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista
-     * @param status parametro de tipo SessionStatusm usado para indicar que el estado de la sesion esta completa
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * Método que guarda la nueva contraseña en la base de datos.
+     * @param usuario parámetro de tipo Usuario, usado para obtener las contraseñas y guardarlas a la base de datos.
+     * @param result parámetro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista
+     * @param status parámetro de tipo SessionStatus usado para indicar que el estado de la sesión está completa.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
      * @return vista para cambiar la contraseña.
      */
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -273,9 +273,9 @@ public class UsuarioController {
     }
 
     /**
-     * Metodo para validad que principal no sea null
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * Método para validar que principal no sea null.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
      */
     private void principalNotNull(Model model, Principal principal) {
         if (principal != null) {

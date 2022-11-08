@@ -6,9 +6,9 @@ import lombok.Getter;
  * Clase tipo Enum de TipoPrecio
  * Nos permite ingresar los precios para los filtros correctamente en el formulario para filtrar.
  *
- * Las clases tipo Enum en la aplicacion son importantes, ya que estos nos permite crear distitas intancias
+ * Las clases tipo Enum en la aplicación son importantes, ya que estos nos permite crear distintas instancias
  * de objetos que tengan atributos ya definidos en el mundo real y que haya consistencia en estos.
- * Los Getter de la clase fueron creados con la etiqueta lombok
+ * Los Getter de la clase fueron creados con la etiqueta lombok.
  */
 @Getter
 public enum TipoPrecio {
@@ -22,8 +22,8 @@ public enum TipoPrecio {
     private final String precio;
 
     /**
-     * Constructor de la clase TipoPrecio
-     * @param precio parametro de tipo String, usado para indicar el precio que se va a ingrear en el filtro.
+     * Constructor de la clase TipoPrecio.
+     * @param precio parámetro de tipo String, usado para indicar el precio que se va a ingresar en el filtro.
      */
     TipoPrecio(String precio) {
         this.precio = precio;

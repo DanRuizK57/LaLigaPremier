@@ -18,15 +18,15 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 /**
- * Clase controladora del carrito de la aplicacion. Muestra, agrega, elimina, suma y resta elementos del carrito
- * para mostrarlos en la vista
+ * Clase controladora del carrito de la aplicación. Muestra, agrega, elimina, suma y resta elementos del carrito
+ * para mostrarlos en la vista.
  */
 
 @Controller
 @SessionAttributes("item")
 public class CarritoController {
     /**
-     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     * Inyección de interfaces de la lógica de servicios para usar la lógica de la aplicación.
      */
 
     @Autowired
@@ -39,10 +39,10 @@ public class CarritoController {
     private IUsuarioService usuarioService;
 
     /**
-     *Metodo que muestra la instancia creada del carrito con los items, el total de items y el precio total.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista del carrito
+     * Método que muestra la instancia creada del carrito con los items, el total de items y el precio total.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista del carrito.
      */
     @GetMapping("/carrito")
     public String mostrarCarrito(Model model, Principal principal) {
@@ -59,14 +59,14 @@ public class CarritoController {
     }
 
     /**
-     * Metodo que agrega una camiseta al carrito de compras.
-     * @param item parametro de tipo ItemPedido, usado para ser agregado al carrito.
-     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
-     * @param camisetaId parametro de tipo Long, usado para obtener una camiseta desde la base de datos
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param status parametro de tipo SessionStatusm usado para indicar que el estado de la sesion esta completa
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista principal de la aplicacion.
+     * Método que agrega una camiseta al carrito de compras.
+     * @param item parámetro de tipo ItemPedido, usado para ser agregado al carrito.
+     * @param result parámetro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
+     * @param camisetaId parámetro de tipo Long, usado para obtener una camiseta desde la base de datos.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param status parámetro de tipo SessionStatus usado para indicar que el estado de la sesión está completa.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista principal de la aplicación.
      */
     @PostMapping("/agregar-camiseta/{camisetaId}")
     public String agregarCamiseta(@Valid ItemPedido item,
@@ -102,9 +102,9 @@ public class CarritoController {
     }
 
     /**
-     * Metodo que elimina una camiseta del carrito de compras
-     * @param itemId parametro de tipo Long, usado para encontrar el item solicitado
-     * @return vista principal de la aplicacion
+     * Método que elimina una camiseta del carrito de compras.
+     * @param itemId parámetro de tipo Long, usado para encontrar el item solicitado.
+     * @return vista principal de la aplicación.
      */
     @GetMapping("/eliminarCamiseta/{itemId}")
     public String eliminarCamiseta(@PathVariable("itemId") Long itemId) {
@@ -120,9 +120,9 @@ public class CarritoController {
     }
 
     /**
-     * Metodo que suma en 1 la cantidad de un producto seleccionado
-     * @param itemId pamaretro de tipo Long, usado para sumar la cantida
-     * @param itemId pamaretro de tipo Long, usado para sumar la cantida del item solicitado
+     * Metodo que suma en 1 la cantidad de un producto seleccionado.
+     * @param itemId parámetro de tipo Long, usado para sumar la cantidad.
+     * @param itemId parámetro de tipo Long, usado para sumar la cantidad del item solicitado.
      * @return
      */
 
@@ -133,9 +133,9 @@ public class CarritoController {
     }
 
     /**
-     * Metodo que resta en 1 la cantidad de un producto seleccionado.
-     * @param itemId pamaretro de tipo Long, usado para restar la cantida
-     * @param itemId pamaretro de tipo Long, usado para restar la cantida del item solicitado
+     * Método que resta en 1 la cantidad de un producto seleccionado.
+     * @param itemId parámetro de tipo Long, usado para restar la cantidad.
+     * @param itemId parámetro de tipo Long, usado para restar la cantidad del item solicitado.
      * @return
      */
 

@@ -24,14 +24,14 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 /**
- * Clase controladora de la vista principal de la aplicacion.
+ * Clase controladora de la vista principal de la aplicación.
  */
 
 @Controller
 public class IndexController {
 
     /**
-     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     * Inyección de interfaces de la lógica de servicios para usar la lógica de la aplicación.
      */
     @Autowired
     private ICamisetaService camisetaService;
@@ -40,11 +40,11 @@ public class IndexController {
     private IUsuarioService usuarioService;
 
     /**
-     * Metodo que muestra elementos de la base de datos y la aplicacion a la vista principal.
-     * @param page parametro de tipo int, usado para el paginador.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista principal de la aplicacion
+     * Método que muestra elementos de la base de datos y la aplicación a la vista principal.
+     * @param page parámetro de tipo int, usado para el paginador.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista principal de la aplicación.
      */
     @GetMapping(value = {"/index", "/"})
     public String index(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
@@ -74,13 +74,13 @@ public class IndexController {
     }
 
     /**
-     * Metodo para usar un filtro personalizado en la vista principal
-     * @param objetoFiltro parametro de tipo Filtro, utilizado como auxiliar para aplicar el filtro.
-     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
-     * @param page parametro de tipo int, usado para el paginador.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista principal de la aplicacion.
+     * Método para usar un filtro personalizado en la vista principal.
+     * @param objetoFiltro parámetro de tipo Filtro, utilizado como auxiliar para aplicar el filtro.
+     * @param result parámetro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
+     * @param page parámetro de tipo int, usado para el paginador.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista principal de la aplicación.
      */
     @PostMapping("/filtro")
     public String ejecutarFiltro(

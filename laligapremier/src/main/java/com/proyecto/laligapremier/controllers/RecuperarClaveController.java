@@ -111,9 +111,9 @@ public class RecuperarClaveController {
     }
 
     /**
-     * Metodo que muestra el formulario de recuperar contraseña una vez presionado el link.
-     * @param token parametro de tipo String, usado para obtener un usuario por el token.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
+     * Método que muestra el formulario de recuperar contraseña una vez presionado el link.
+     * @param token parámetro de tipo String, usado para obtener un usuario por el token.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
      * @return retorna vista del formulario para recuperar contraseña.
      */
     @GetMapping("/nueva-contraseña")
@@ -131,13 +131,13 @@ public class RecuperarClaveController {
     }
 
     /**
-     * Metodo utilizado para cambiar la contraseña del usuario
-     * @param usuarioClave parametro de tipo Usuario, usado para validar y actualizar la contraseña.
-     * @param result parametro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse
-     * @param request parametro de tipo HttpServeletRequest, usado para obtener los datos de la solicitud actual.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param flash parametro de tipo RedirectAttributesm usado para mostrar mensajes flash en la vista.
-     * @return vista para cambiar la contraseña olvidada
+     * Método utilizado para cambiar la contraseña del usuario.
+     * @param usuarioClave parámetro de tipo Usuario, usado para validar y actualizar la contraseña.
+     * @param result parámetro de tipo BindingResult, usado para validar el objeto y contener errores que pueden producirse.
+     * @param request parámetro de tipo HttpServletRequest, usado para obtener los datos de la solicitud actual.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param flash parámetro de tipo RedirectAttributes usado para mostrar mensajes flash en la vista.
+     * @return vista para cambiar la contraseña olvidada.
      */
 
     @PostMapping("/nueva-contraseña")

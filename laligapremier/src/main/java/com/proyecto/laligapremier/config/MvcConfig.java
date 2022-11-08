@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.nio.file.Paths;
 
 /**
- * Clase de Configuracion MvcConfig. Nos permite guardar imagenes en rutas externas al proyecto.
+ * Clase de Configuración MvcConfig. Nos permite guardar imágenes en rutas externas al proyecto.
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -18,8 +18,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     /**
      * Metodo que agrega directorios a nuestro proyecto.
-     * @param registry parametro de tipo ResourceHandlerRegistry que nos ayuda a registrar una nueva ruta para los recursos
-     * estaticos.
+     * @param registry parámetro de tipo ResourceHandlerRegistry que nos ayuda a registrar una nueva ruta para los recursos
+     * estáticos.
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

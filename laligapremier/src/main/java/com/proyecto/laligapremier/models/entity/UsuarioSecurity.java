@@ -7,6 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * Clase que conecta a la entidad Usuario con la de UserDetails, para que el Usuario pueda ser
+ * reconocido por el Spring Security.
+ * Métodos fueron generados para sobreescribir los métodos de la clase UserDetails.
+ */
+
 public class UsuarioSecurity implements UserDetails {
 
     private Usuario usuario;

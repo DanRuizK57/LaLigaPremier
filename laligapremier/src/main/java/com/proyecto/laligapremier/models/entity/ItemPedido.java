@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Clase Entidad <i>@Entity</i> que representa la tabla item_pedidos en la base de datos
- * Getters y Setters fueron generados con la etiqueta de lombok
+ * Getters y Setters fueron generados con la etiqueta de lombok.
  */
 @Entity
 @Getter

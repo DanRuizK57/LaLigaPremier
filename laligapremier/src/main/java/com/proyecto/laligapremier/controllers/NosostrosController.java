@@ -15,16 +15,16 @@ import java.security.Principal;
 public class NosostrosController {
 
     /**
-     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     * Inyección de interfaz de la lógica de servicios para usar la lógica de la aplicación.
      */
 
     @Autowired
     private IUsuarioService usuarioService;
 
     /**
-     * Metodo que envia los datos de los creadores de la aplicacion a la vista nosotros.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
+     * Método que envía los datos de los creadores de la aplicación a la vista nosotros.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
      * @return vista de nosotros.
      */
     @GetMapping(value = "/nosotros")

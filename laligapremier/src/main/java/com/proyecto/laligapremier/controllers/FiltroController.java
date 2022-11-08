@@ -22,15 +22,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.security.Principal;
 
 /**
- * Clase controladora de los filtros predeterminados que hay en la aplicacion, muestra las camisetas por selecciones,
- * por equipos (clubes) y tambien busca especifica.
+ * Clase controladora de los filtros predeterminados que hay en la aplicación, muestra las camisetas por selecciones,
+ * por equipos (clubes) y también busca específica.
  */
 @Controller
 @SessionAttributes("camiseta")
 public class FiltroController {
 
     /**
-     * Inyeccion de interfaces de la logica de servicios para usar la logica de la aplicacion.
+     * Inyección de interfaces de la lógica de servicios para usar la lógica de la aplicación.
      */
 
     @Autowired
@@ -39,11 +39,11 @@ public class FiltroController {
     private IUsuarioService usuarioService;
 
     /**
-     * Metodo que muestra la lista de camisetas de tipo seleccion.
-     * @param page parametro de tipo int, usado para el paginador.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista de las selecciones que estan en la base de datos
+     * Método que muestra la lista de camisetas de tipo selección.
+     * @param page parámetro de tipo int, usado para el paginador.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista de las selecciones que están en la base de datos.
      */
     @GetMapping(value = "/selecciones")
     public String ListarSelecciones(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
@@ -64,11 +64,11 @@ public class FiltroController {
     }
 
     /**
-     *Metodo que muestra la lista de camisetas de tipo equipo (clubes)
-     * @param page parametro de tipo int, usado para el paginador.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista de los equipos que estan en la base de datos
+     * Método que muestra la lista de camisetas de tipo equipo (clubes).
+     * @param page parámetro de tipo int, usado para el paginador.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista de los equipos que están en la base de datos.
      */
     @GetMapping(value = "/equipos")
     public String ListarEquipos(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal){
@@ -89,12 +89,12 @@ public class FiltroController {
     }
 
     /**
-     * Metodo que filtra por la barra de busqueda de la aplicacion.
-     * @param page parametro de tipo int, usado para el paginador.
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.
-     * @param q parametro de tipo String, usado para filtrar las camisetas mediante una "query".
-     * @param principal parametro de tipo Principal, usado para obtener al usuario en la sesion activa.
-     * @return vista de los resultados obtenidos de la busqueda.
+     * Método que filtra por la barra de búsqueda de la aplicación.
+     * @param page parámetro de tipo int, usado para el paginador.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param q parámetro de tipo String, usado para filtrar las camisetas mediante una "query".
+     * @param principal parámetro de tipo Principal, usado para obtener al usuario en la sesión activa.
+     * @return vista de los resultados obtenidos de la búsqueda.
      */
     @GetMapping("/busqueda")
     public String buscarCamisetas(@RequestParam(name = "page", defaultValue = "0") int page,
@@ -124,10 +124,10 @@ public class FiltroController {
     }
 
     /**
-     * Metodo que muestra los atributos y camisetas mediante el objeto model, utilizado para evitar tener codigo duplicado
-     * @param model parametro de tipo Model, usado para recibir o entregar parametros desde una vista.el
-     * @param camisetas parametro de tipo Page, usado para pasarle las camisetas al model y mostrarlos en la vista
-     * @param pageRender parametro de tipo PageRender, usado para determinar el numero de elementos en una vista.
+     * Método que muestra los atributos y camisetas mediante el objeto model, utilizado para evitar tener codigo duplicado.
+     * @param model parámetro de tipo Model, usado para recibir o entregar parámetros desde una vista.
+     * @param camisetas parámetro de tipo Page, usado para pasarle las camisetas al model y mostrarlos en la vista.
+     * @param pageRender parámetro de tipo PageRender, usado para determinar el número de elementos en una vista.
      */
     private static void modelsAtributosVista(Model model, Page<Camiseta> camisetas, PageRender<Camiseta> pageRender) {
         model.addAttribute("camisetas" , camisetas);

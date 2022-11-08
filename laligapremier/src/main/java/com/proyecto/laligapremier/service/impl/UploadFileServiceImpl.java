@@ -83,7 +83,7 @@ public class UploadFileServiceImpl implements IUploadFileService {
     }
 
     /**
-     * Método que elimina todas las imágenes de una ruta .
+     * Método que elimina todas las imágenes de una ruta.
      */
     @Override
     public void deleteAll() {

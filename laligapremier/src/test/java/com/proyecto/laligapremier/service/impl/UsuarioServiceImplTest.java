@@ -40,26 +40,6 @@ class UsuarioServiceImplTest {
     void findByCorreo() {
     }
 
-    @Test
-    void compararClavesActuales() {
-    }
-
-    @Test
-    void compararClaves() {
-    }
-
-    @Test
-    void actualizarToken() {
-    }
-
-    @Test
-    void obtenerPorToken() {
-    }
-
-    @Test
-    void actualizarClave() {
-    }
-
     @AfterEach
     void terminoPrueba(TestInfo testInfo) {
         System.out.println("**** " + testInfo.getDisplayName() + " Finalizado. ****");

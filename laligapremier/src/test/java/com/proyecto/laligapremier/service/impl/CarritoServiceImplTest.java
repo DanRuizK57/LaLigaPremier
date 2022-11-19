@@ -28,25 +28,11 @@ class CarritoServiceImplTest {
     void obtenerItemsDelCarrito() {
     }
 
-    @Test
-    void sumarCantidad() {
-    }
-
-    @Test
-    void restarCantidad() {
-    }
-
-    @Test
-    void contadorItems() {
-    }
 
     @Test
     void calcularPrecioTotal() {
     }
 
-    @Test
-    void reiniciarCarrito() {
-    }
 
     @AfterEach
     void terminoPrueba(TestInfo testInfo) {

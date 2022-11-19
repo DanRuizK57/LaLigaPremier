@@ -33,10 +33,6 @@ class ItemPedidoServiceImplTest {
     }
 
     @Test
-    void deleteAll() {
-    }
-
-    @Test
     void agregarAlCarrito() {
     }
 

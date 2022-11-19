@@ -21,23 +21,7 @@ class UploadFileServiceImplTest {
     }
 
     @Test
-    void copy() {
-    }
-
-    @Test
     void delete() {
-    }
-
-    @Test
-    void deleteAll() {
-    }
-
-    @Test
-    void init() {
-    }
-
-    @Test
-    void getPath() {
     }
 
     @AfterEach

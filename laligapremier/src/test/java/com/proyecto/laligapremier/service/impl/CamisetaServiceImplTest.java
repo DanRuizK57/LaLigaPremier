@@ -1,6 +1,6 @@
 package com.proyecto.laligapremier.service.impl;
 
-import com.proyecto.laligapremier.exceptions.CamisetaNoEncontradaException;
+
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.enums.Marca;
 import com.proyecto.laligapremier.models.enums.Talla;
@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class CamisetaServiceImplTest {
@@ -25,6 +28,8 @@ class CamisetaServiceImplTest {
     private int size;
     private static Camiseta camiseta;
 
+    private Camiseta camisetaTest;
+
 
     @BeforeEach
     void inicioPrueba(TestInfo testInfo) {
@@ -34,7 +39,12 @@ class CamisetaServiceImplTest {
         System.out.println(" **** Lista creada ");
 
         System.out.println("**** Camiseta test creada");
-        CrearCamisetaTest();
+        crearCamisetaTest();
+
+
+        camiseta = camisetaService.findOne(5L);
+
+
     }
     @AfterEach
     void terminoPrueba(TestInfo testInfo) {
@@ -42,22 +52,21 @@ class CamisetaServiceImplTest {
         camisetas = null;
     }
 
-    private void CrearCamisetaTest() {
-        camiseta = new Camiseta();
-        camiseta.setId(10L);
-        camiseta.setTipoCamiseta(TipoCamiseta.EQUIPO);
-        camiseta.setMarca(Marca.NIKE);
-        camiseta.setLiga("Liga premier");
-        camiseta.setDorsal(10);
-        camiseta.setPrecio(10000);
-        camiseta.setJugador("HALAND");
-        camiseta.setDescripcion("camiseta de haland");
-        camiseta.setNombre("camiseta haland");
-        camiseta.setImagen("");
-        camiseta.setTemporada("2022");
-        camiseta.setTalla(Talla.S);
-        camiseta.setEquipo("colocolo el mas grande");
-        camisetaService.save(camiseta);
+    private void crearCamisetaTest() {
+        camisetaTest = new Camiseta();
+        camisetaTest.setId(30L);
+        camisetaTest.setTipoCamiseta(TipoCamiseta.EQUIPO);
+        camisetaTest.setMarca(Marca.NIKE);
+        camisetaTest.setLiga("Liga premier");
+        camisetaTest.setDorsal(10);
+        camisetaTest.setPrecio(10000);
+        camisetaTest.setJugador("HALAND");
+        camisetaTest.setDescripcion("camiseta de haland");
+        camisetaTest.setNombre("camiseta haland");
+        camisetaTest.setImagen("");
+        camisetaTest.setTemporada("2022");
+        camisetaTest.setTalla(Talla.S);
+        camisetaTest.setEquipo("colocolo el mas grande");
     }
 
     @Test
@@ -109,12 +118,106 @@ class CamisetaServiceImplTest {
 
 
     @Test
-    void findOne() {
+    @DisplayName("objeto obtenido no es null")
+    void findOne_T1() {
+        assertNotNull(camiseta);
     }
 
     @Test
-    void save() {
+    @DisplayName("Camiseta obtenida desde la base de datos tiene parametros no nulos")
+    void findOne_T2() {
+        assertNotNull(camiseta.getId());
+        assertNotNull(camiseta.getPrecio());
+        assertNotNull(camiseta.getMarca());
+        assertNotNull(camiseta.getTalla());
+        assertNotNull(camiseta.getDescripcion());
+        assertNotNull(camiseta.getTipoCamiseta());
+        assertNotNull(camiseta.getNombre());
+        assertNotNull(camiseta.getEquipo());
+        assertNotNull(camiseta.getJugador());
+        assertNotNull(camiseta.getLiga());
+        assertNotNull(camiseta.getTemporada());
+        assertNotNull(camiseta.getDorsal());
     }
+
+
+    @Test
+    @DisplayName("No se puede obtener camiseta con ID inexistente")
+    void findOne_T3() {
+        Camiseta camisetaNoExistente = camisetaService.findOne(20L);
+        assertNull(camisetaNoExistente);
+    }
+
+
+    @Test
+    @DisplayName("Obtenemos el objeto que estamos buscando")
+    void findOne_T4() {
+        Long id = 5L;
+        assertEquals(id , camiseta.getId());
+    }
+
+    @Test
+    @DisplayName("El producto se guarda en la base de datos correctamente")
+    void save_T1() {
+        camisetaService.save(camisetaTest);
+        var camisetaGuardad = camisetaService.findOne(30L);
+        assertNotNull(camisetaGuardad);
+
+    }
+    @Test
+    @DisplayName("No deja guardar un producto sin parametros en la base de datos")
+    void save_T2() {
+        Camiseta camisetaNueva = new Camiseta();
+        assertThrows(ConstraintViolationException.class , ()->{
+            camisetaService.save(camisetaNueva);
+        });
+    }
+
+    @Test
+    @DisplayName("Lanza exeption cuando el producto tiene precio negativo")
+    void save_T3() {
+        Camiseta camisetaNueva = new Camiseta();
+        camisetaNueva.setId(12L);
+        camisetaNueva.setTipoCamiseta(TipoCamiseta.EQUIPO);
+        camisetaNueva.setMarca(Marca.NIKE);
+        camisetaNueva.setLiga("Liga premier");
+        camisetaNueva.setDorsal(10);
+        camisetaNueva.setPrecio(-10000);
+        camisetaNueva.setJugador("HALAND");
+        camisetaNueva.setDescripcion("camiseta de haland");
+        camisetaNueva.setNombre("camiseta haland");
+        camisetaNueva.setImagen("a");
+        camisetaNueva.setTemporada("2022");
+        camisetaNueva.setTalla(Talla.S);
+        camisetaNueva.setEquipo("colocolo el mas grande");
+        assertThrows(ConstraintViolationException.class, () ->{
+            camisetaService.save(camisetaNueva);
+        });
+
+    }
+    @Test
+    @DisplayName("ID no puede ser null al guardar")
+    void save_T4() {
+        Camiseta camisetaNueva = new Camiseta();
+        camisetaNueva.setId(null);
+        camisetaNueva.setTipoCamiseta(TipoCamiseta.EQUIPO);
+        camisetaNueva.setMarca(Marca.NIKE);
+        camisetaNueva.setLiga("Liga premier");
+        camisetaNueva.setDorsal(10);
+        camisetaNueva.setPrecio(-10000);
+        camisetaNueva.setJugador("HALAND");
+        camisetaNueva.setDescripcion("camiseta de haland");
+        camisetaNueva.setNombre("camiseta haland");
+        camisetaNueva.setImagen("a");
+        camisetaNueva.setTemporada("2022");
+        camisetaNueva.setTalla(Talla.S);
+        camisetaNueva.setEquipo("colocolo el mas grande");
+        assertThrows(ConstraintViolationException.class, () ->{
+            camisetaService.save(camisetaNueva);
+        });
+    }
+
+
 
     @Test
     void findByNombre() {

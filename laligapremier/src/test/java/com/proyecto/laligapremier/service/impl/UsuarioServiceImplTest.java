@@ -94,9 +94,6 @@ class UsuarioServiceImplTest {
         Usuario usuario1 = new Usuario("usuario2", "usuario2@mail.cl", "12", "ROLE_USER");
         usuarioService.guardar(usuario1);
         List<Usuario> usuarios = usuarioService.listar();
-        for (int i = 0; i < usuarios.size(); i++) {
-            System.out.println(usuarios.get(i).toString());
-        }
         Usuario usuarioObtenido = usuarioService.findOne(18L);
         assertNotEquals(usuario1.getCorreo(), usuarioObtenido.getCorreo());
     }
@@ -144,9 +141,6 @@ class UsuarioServiceImplTest {
     void guardar_T4() {
         usuarioService.guardar(usuario);
         List<Usuario> usuarios = usuarioService.listar();
-        for (int i = 0; i < usuarios.size(); i++) {
-            System.out.println(usuarios.get(i).toString());
-        }
         assertTrue(usuarios.size() > 0);
     }
 

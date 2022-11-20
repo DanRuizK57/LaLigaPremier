@@ -74,6 +74,25 @@ public class Camiseta {
     @Column(name = "tipo_camiseta")
     private TipoCamiseta tipoCamiseta;
 
+    public Camiseta() {
+    }
+
+    public Camiseta(Long id, String equipo, String liga, Integer dorsal, String jugador, String temporada, Integer precio, String imagen, String nombre, String descripcion, Talla talla, Marca marca, TipoCamiseta tipoCamiseta) {
+        this.id = id;
+        this.equipo = equipo;
+        this.liga = liga;
+        this.dorsal = dorsal;
+        this.jugador = jugador;
+        this.temporada = temporada;
+        this.precio = precio;
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.talla = talla;
+        this.marca = marca;
+        this.tipoCamiseta = tipoCamiseta;
+    }
+
     private static final long serialVersionUID = 1L;
 }
 

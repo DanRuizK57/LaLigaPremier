@@ -102,6 +102,15 @@ class CarritoServiceImplTest {
     }
 
     @Test
+    @DisplayName("Añadir items, eliminarlos y verificar que la lista no sea mayor a 1")
+    void eliminarItem_2() {
+        carritoService.añadirItem(itemPedido);
+        carritoService.eliminarItem(itemPedido.getId());
+        List<ItemPedido> items = carritoService.obtenerItemsDelCarrito();
+        assertFalse(items.size() > 1);
+    }
+
+    @Test
     @DisplayName("Añadir items, eliminar 1 y verificar que no sea el numero de items de un principio")
     void eliminarItem_T3() {
         carritoService.añadirItem(itemPedido);

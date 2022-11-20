@@ -47,6 +47,11 @@ public class Pedido {
         this.items = new ArrayList<ItemPedido>();
     }
 
+    public Pedido(Long id) {
+        this.id = id;
+        this.items = new ArrayList<ItemPedido>();
+    }
+
     @PrePersist
     public void prePersist() {
         fecha = new Date();

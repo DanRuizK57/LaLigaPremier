@@ -1,4 +1,5 @@
 package com.proyecto.laligapremier.service.impl;
+import com.proyecto.laligapremier.exceptions.CamisetaNoEncontradaException;
 import com.proyecto.laligapremier.models.dao.ICamisetaDao;
 import com.proyecto.laligapremier.models.entity.Camiseta;
 import com.proyecto.laligapremier.models.entity.Filtro;
@@ -55,7 +56,7 @@ public class CamisetaServiceImpl implements ICamisetaService {
      */
     @Override
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long id) throws CamisetaNoEncontradaException {
         camisetaDao.deleteById(id);
     }
 

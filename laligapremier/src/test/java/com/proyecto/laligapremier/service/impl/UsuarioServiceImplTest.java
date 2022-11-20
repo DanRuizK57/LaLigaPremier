@@ -1,8 +1,7 @@
 package com.proyecto.laligapremier.service.impl;
 
-import com.proyecto.laligapremier.models.entity.Pedido;
+import com.proyecto.laligapremier.models.dao.IUsuarioDao;
 import com.proyecto.laligapremier.models.entity.Usuario;
-import com.proyecto.laligapremier.models.entity.UsuarioSecurity;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class UsuarioServiceImplTest {
+
+    @Autowired
+    private IUsuarioDao usuarioDao;
 
     @Autowired
     private UsuarioServiceImpl usuarioService;
@@ -28,13 +30,14 @@ class UsuarioServiceImplTest {
     @BeforeEach
     void inicioPrueba(TestInfo testInfo) {
         System.out.println("**** Iniciando " + testInfo.getDisplayName() + " ****");
+        usuarioDao.deleteAll();
     }
 
     @Test
     @DisplayName("Sin añadir ningún usuario aparte del admin por defecto, que el tamaño de la lista sea 1")
     void listar_T1() {
         List<Usuario> usuarios = usuarioService.listar();
-        assertEquals(1, usuarios.size());
+        assertEquals(0, usuarios.size());
     }
 
     @Test
@@ -72,15 +75,15 @@ class UsuarioServiceImplTest {
     @DisplayName("Comprobar usuario estático y obtenido de la base de datos")
     void findOne_T1() {
         usuarioService.guardar(usuario);
-        Usuario usuario2 = usuarioService.findOne(2L);
-        assertEquals(usuario.toString(), usuario2.toString());
+        Usuario usuario2 = usuarioService.findOne(16L);
+        assertEquals(usuario.getNombre(), usuario2.getNombre());
     }
 
     @Test
     @DisplayName("Comprobar usuario encontrado no sea nulo")
     void findOne_T2() {
         usuarioService.guardar(usuario);
-        Usuario usuarioObtenido = usuarioService.findOne(2L);
+        Usuario usuarioObtenido = usuarioService.findOne(17L);
         assertNotNull(usuarioObtenido);
     }
 
@@ -90,7 +93,11 @@ class UsuarioServiceImplTest {
         usuarioService.guardar(usuario);
         Usuario usuario1 = new Usuario("usuario2", "usuario2@mail.cl", "12", "ROLE_USER");
         usuarioService.guardar(usuario1);
-        Usuario usuarioObtenido = usuarioService.findOne(2L);
+        List<Usuario> usuarios = usuarioService.listar();
+        for (int i = 0; i < usuarios.size(); i++) {
+            System.out.println(usuarios.get(i).toString());
+        }
+        Usuario usuarioObtenido = usuarioService.findOne(18L);
         assertNotEquals(usuario1.getCorreo(), usuarioObtenido.getCorreo());
     }
 
@@ -105,14 +112,7 @@ class UsuarioServiceImplTest {
     @DisplayName("Añadir usuario y comprobar que el id del usuario guardado sea el mismo")
     void guardar_T1() {
         usuarioService.guardar(usuario);
-        List<Usuario> usuarios = usuarioService.listar();
-        Usuario usuarioObtenido = null;
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == usuario.getId()){
-                usuarioObtenido = usuarios.get(i);
-            }
-        }
-        assertEquals(usuario.toString(), usuarioObtenido.toString());
+        assertEquals(usuario.getNombre(), usuarioService.findByCorreo(usuario.getCorreo()).getNombre());
     }
 
     @Test
@@ -135,14 +135,8 @@ class UsuarioServiceImplTest {
     @DisplayName("Añadir usuario y comprobar que no sea nulo")
     void guardar_T3() {
         usuarioService.guardar(usuario);
-        List<Usuario> usuarios = usuarioService.listar();
-        Usuario usuarioObtenido = null;
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == usuario.getId()){
-                usuarioObtenido = usuarios.get(i);
-            }
-        }
-        assertNotNull(usuarioObtenido);
+
+        assertNotNull(usuarioService.findByNombre(usuario.getNombre()));
     }
 
     @Test
@@ -150,6 +144,9 @@ class UsuarioServiceImplTest {
     void guardar_T4() {
         usuarioService.guardar(usuario);
         List<Usuario> usuarios = usuarioService.listar();
+        for (int i = 0; i < usuarios.size(); i++) {
+            System.out.println(usuarios.get(i).toString());
+        }
         assertTrue(usuarios.size() > 0);
     }
 
@@ -182,7 +179,7 @@ class UsuarioServiceImplTest {
     void findByNombre_T1() {
         usuarioService.guardar(usuario);
         Usuario usuario2 = usuarioService.findByNombre("usuario");
-        assertEquals(usuario.toString(), usuario2.toString());
+        assertEquals(usuario.getNombre(), usuario2.getNombre());
     }
 
     @Test
@@ -215,7 +212,7 @@ class UsuarioServiceImplTest {
     void findByCorreo_T1() {
         usuarioService.guardar(usuario);
         Usuario usuario2 = usuarioService.findByCorreo("usuario@mail.cl");
-        assertEquals(usuario.toString(), usuario2.toString());
+        assertEquals(usuario.getCorreo(), usuario2.getCorreo());
     }
 
     @Test
@@ -246,5 +243,6 @@ class UsuarioServiceImplTest {
     @AfterEach
     void terminoPrueba(TestInfo testInfo) {
         System.out.println("**** " + testInfo.getDisplayName() + " Finalizado. ****");
+        usuarioDao.deleteAll();
     }
 }

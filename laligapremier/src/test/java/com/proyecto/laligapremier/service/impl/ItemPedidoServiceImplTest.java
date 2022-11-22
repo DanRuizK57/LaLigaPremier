@@ -13,7 +13,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
 class ItemPedidoServiceImplTest {
 
     @Autowired
@@ -27,6 +26,7 @@ class ItemPedidoServiceImplTest {
     private List<ItemPedido> listaPedidoItem;
 
     private  ItemPedido itemPedido2;
+
 
     @BeforeEach
     @Transactional
@@ -54,7 +54,6 @@ class ItemPedidoServiceImplTest {
     @AfterEach
     void terminoPrueba(TestInfo testInfo) {
         System.out.println("**** " + testInfo.getDisplayName() + " Finalizado. ****");
-        listaPedidoItem = null;
     }
 
 
@@ -77,53 +76,66 @@ class ItemPedidoServiceImplTest {
     }
 
     @Test
-    void delete_T1() {
-        assertThrows(EmptyResultDataAccessException.class, () -> itemPedidoService.delete(1000L));
-    }
-    @Test
-    @Transactional
-    void delete_T2() {
-        var camiseta2 = camisetaService.findOne(2L);
-        itemPedido2 = new ItemPedido();
-        itemPedido2.setCantidad(4);
-        itemPedido2.setCamiseta(camiseta2);
-        itemPedido2.setId(401L);
-        itemPedido2.setTalla(camiseta2.getTalla());
-        itemPedidoService.save(itemPedido2);
-        itemPedidoService.delete(400L);
-        assertNull(itemPedido2);
-    }
+    @DisplayName("lista cambia de tamaño")
+    void findAll_T4(){
+        var tamaño = itemPedidoService.findAll().size();
+        var itemPedido4 = new ItemPedido();
+        var camiseta = camisetaService.findOne(5L);
+        itemPedido4 = new ItemPedido();
+        itemPedido4.setCantidad(4);
+        itemPedido4.setCamiseta(camiseta);
+        itemPedido4.setId(1L);
+        itemPedido4.setTalla(camiseta.getTalla());
+        itemPedidoService.save(itemPedido4);
 
-    @Test
-    void findOne_T1() {
-        var itemPedido = itemPedidoService.findOne(1L);
-        assertNotNull(itemPedido);
-    }
+        var tamañoFinal = itemPedidoService.findAll().size();
 
-    @Test
-    void findOne_T2() {
-        var itemPedido = itemPedidoService.findOne(1L);
-        assertTrue(itemPedido.getId().equals(1L));
-    }
+        assertNotEquals(tamañoFinal,tamaño);
 
-    @Test
-    void findOne_T3() {
-
-        assertThrows(EmptyResultDataAccessException.class, ()-> itemPedidoService.findOne(210L) );
 
     }
 
 
-
     @Test
+    @DisplayName("Test guardar ItemPedido")
     void save() {
+        var camiseta3 = camisetaService.findOne(3L);
+        var itemPedidoGuardar = new ItemPedido();
+        assertAll(
+                () -> {
+                    itemPedidoGuardar.setCantidad(4);
+                    itemPedidoGuardar.setCamiseta(camiseta3);
+                    itemPedidoGuardar.setId(5L);
+                    itemPedidoGuardar.setTalla(camiseta3.getTalla());
+                    itemPedidoService.save(itemPedidoGuardar);
+
+                    itemPedidoService.findAll().stream().forEach(p -> System.out.println(p.getId()));
+
+                    assertNotNull(itemPedidoService.findOne(3L));
+                },
+                ()->{
+                    assertNull(itemPedidoService.findOne(200L));
+                },
+                ()->{
+                    assertNotEquals(itemPedidoService.findOne(2L), itemPedidoService.findOne(3L));
+                },
+                ()-> {
+
+                    itemPedidoGuardar.setCantidad(4);
+                    itemPedidoGuardar.setCamiseta(camiseta3);
+                    itemPedidoGuardar.setId(5L);
+                    itemPedidoGuardar.setTalla(camiseta3.getTalla());
+                    itemPedidoService.save(itemPedidoGuardar);
+
+                    itemPedidoService.findAll().stream().forEach(p -> System.out.println(p.getId()));
+
+                    assertTrue(itemPedidoService.findOne(4L).getId().equals(4L));
+
+                }
+
+        );
     }
 
-    @Test
-    void agregarAlCarrito() {
-        itemPedidoService.agregarAlCarrito(itemPedido);
-
-    }
 
 
 }

@@ -48,12 +48,22 @@ class ItemServiceImplTest {
     }
 
     @Test
+    @DisplayName("Metodo listar items")
     void listar() {
 
         assertAll(
                 () -> assertNotNull(lista),
                 () -> assertFalse(lista.isEmpty()),
-                () -> assertTrue(lista.size() > 1)
+                () -> assertTrue(lista.size() > 1),
+                ()->{
+                    var itemPrueba = new Item();
+                    var tamaño = itemService.listar().size();
+
+                    itemService.save(itemPrueba);
+                    var tamañoFinal = itemService.listar().size();
+
+                    assertNotEquals(tamañoFinal , tamaño);
+                }
         );
     }
 

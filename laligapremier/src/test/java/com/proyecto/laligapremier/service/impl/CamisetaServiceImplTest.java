@@ -85,6 +85,32 @@ class CamisetaServiceImplTest {
         assertFalse(camisetas.isEmpty());
     }
 
+    @Test
+    void findAll_T4(){
+        var camisetaTest4 = new Camiseta();
+        camisetaTest4.setId(30L);
+        camisetaTest4.setTipoCamiseta(TipoCamiseta.EQUIPO);
+        camisetaTest4.setMarca(Marca.NIKE);
+        camisetaTest4.setLiga("Liga premier");
+        camisetaTest4.setDorsal(10);
+        camisetaTest4.setPrecio(10000);
+        camisetaTest4.setJugador("HALAND");
+        camisetaTest4.setDescripcion("camiseta de haland");
+        camisetaTest4.setNombre("camiseta haland");
+        camisetaTest4.setImagen("");
+        camisetaTest4.setTemporada("2022");
+        camisetaTest4.setTalla(Talla.S);
+        camisetaTest4.setEquipo("colocolo el mas grande");
+
+        var tamaño = camisetaService.findAll().size();
+        camisetaService.save(camisetaTest4);
+
+        var tamañoFinal = camisetaService.findAll().size();
+
+        assertNotEquals(tamañoFinal, tamaño);
+
+    }
+
 
     @Test
     @DisplayName("Una camiseta es eliminada correctamente")
@@ -106,7 +132,7 @@ class CamisetaServiceImplTest {
     void delete_T3() {
         camisetaService.delete(3L);
         assertThrows(EmptyResultDataAccessException.class, () -> {
-           camisetaService.delete(3L);
+            camisetaService.delete(3L);
         });
     }
 
@@ -114,6 +140,50 @@ class CamisetaServiceImplTest {
     @DisplayName("Aplicacion lanza exception cuando ocurre un error")
     void delete_T4() {
         // TODO : ENCONTRAR UN POSIBLE TEST DELETE 4
+
+        var tamaño = camisetaService.findAll().size();
+
+
+        var camisetaTest4 = new Camiseta();
+        camisetaTest4.setId(31L);
+        camisetaTest4.setTipoCamiseta(TipoCamiseta.EQUIPO);
+        camisetaTest4.setMarca(Marca.NIKE);
+        camisetaTest4.setLiga("Liga premier");
+        camisetaTest4.setDorsal(10);
+        camisetaTest4.setPrecio(10000);
+        camisetaTest4.setJugador("HALAND");
+        camisetaTest4.setDescripcion("camiseta de haland");
+        camisetaTest4.setNombre("camiseta haland");
+        camisetaTest4.setImagen("");
+        camisetaTest4.setTemporada("2022");
+        camisetaTest4.setTalla(Talla.S);
+        camisetaTest4.setEquipo("colocolo el mas grande");
+
+        var camisetaTest5 = new Camiseta();
+        camisetaTest5.setId(32L);
+        camisetaTest5.setTipoCamiseta(TipoCamiseta.EQUIPO);
+        camisetaTest5.setMarca(Marca.NIKE);
+        camisetaTest5.setLiga("Liga premier");
+        camisetaTest5.setDorsal(10);
+        camisetaTest5.setPrecio(10000);
+        camisetaTest5.setJugador("HALAND");
+        camisetaTest5.setDescripcion("camiseta de haland");
+        camisetaTest5.setNombre("camiseta haland");
+        camisetaTest5.setImagen("");
+        camisetaTest5.setTemporada("2022");
+        camisetaTest5.setTalla(Talla.S);
+        camisetaTest5.setEquipo("colocolo el mas grande");
+
+        camisetaService.save(camisetaTest4);
+        camisetaService.save(camisetaTest5);
+
+        camisetaService.delete(7L);
+        camisetaService.delete(8L);
+
+
+        var tamañoActual = camisetaService.findAll().size();
+
+        assertEquals(tamañoActual , tamaño);
     }
 
 
@@ -216,17 +286,6 @@ class CamisetaServiceImplTest {
             camisetaService.save(camisetaNueva);
         });
     }
-
-
-
-    @Test
-    void findByNombre() {
-    }
-
-    @Test
-    void listarPorFiltros() {
-    }
-
     @Test
     @DisplayName("Lista de equipos no es nula")
     void listarEquipos_T1() {

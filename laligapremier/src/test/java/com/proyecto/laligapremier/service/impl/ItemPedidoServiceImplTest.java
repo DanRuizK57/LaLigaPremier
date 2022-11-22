@@ -95,8 +95,25 @@ class ItemPedidoServiceImplTest {
     }
 
     @Test
-    void findOne() {
+    void findOne_T1() {
+        var itemPedido = itemPedidoService.findOne(1L);
+        assertNotNull(itemPedido);
     }
+
+    @Test
+    void findOne_T2() {
+        var itemPedido = itemPedidoService.findOne(1L);
+        assertTrue(itemPedido.getId().equals(1L));
+    }
+
+    @Test
+    void findOne_T3() {
+
+        assertThrows(EmptyResultDataAccessException.class, ()-> itemPedidoService.findOne(210L) );
+
+    }
+
+
 
     @Test
     void save() {

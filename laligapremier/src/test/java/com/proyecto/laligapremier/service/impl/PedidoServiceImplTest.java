@@ -32,6 +32,7 @@ class PedidoServiceImplTest {
     @BeforeEach
     void inicioPrueba(TestInfo testInfo) {
         System.out.println("**** Iniciando " + testInfo.getDisplayName() + " ****");
+        pedidoDao.deleteAll();
     }
 
     @Test
@@ -76,7 +77,7 @@ class PedidoServiceImplTest {
     @DisplayName("Añadir pedido, eliminarlo y verificar que la lista esté vacía")
     void delete_T1() {
         pedidoService.save(new Pedido());
-        pedidoService.delete(5L);
+        pedidoService.delete(7L);
         List<Pedido> pedidos = pedidoService.findAll();
         assertTrue(pedidos.size() < 1);
     }
@@ -87,8 +88,8 @@ class PedidoServiceImplTest {
         pedidoService.save(new Pedido());
         pedidoService.save(new Pedido());
 
-        pedidoService.delete(6L);
-        pedidoService.delete(7L);
+        pedidoService.delete(8L);
+        pedidoService.delete(9L);
         List<Pedido> pedidos = pedidoService.findAll();
         assertFalse(pedidos.size() > 1);
     }
@@ -96,31 +97,23 @@ class PedidoServiceImplTest {
     @Test
     @DisplayName("Añadir pedidos, eliminar 1 y verificar que no sea el numero de pedidos de un principio")
     void delete_T3() {
-        Pedido pedido = new Pedido();
-        pedidoService.save(pedido);
-        Pedido pedido2 = new Pedido();
-        pedidoService.save(pedido2);
+        pedidoService.save(new Pedido());
+        pedidoService.save(new Pedido());
 
-        pedidoService.delete(8L);
+        pedidoService.delete(10L);
         List<Pedido> pedidos = pedidoService.findAll();
-        //List<Pedido> pedidos = pedidoService.findAll();
         assertNotEquals(2, pedidos.size());
     }
 
     @Test
     @DisplayName("Añadir pedidos, eliminar todos y verificar que el numero de pedidos sea 0")
     void delete_T4() {
-        Pedido pedido = new Pedido();
-        pedidoService.save(pedido);
-        Pedido pedido2 = new Pedido(2L, "AFGR23");
-        pedidoService.save(pedido2);
-        pedidoService.delete(10L);
-        pedidoService.delete(11L);
+        pedidoService.save(new Pedido());
+        pedidoService.save(new Pedido());
+        pedidoService.delete(12L);
+        pedidoService.delete(13L);
 
         List<Pedido> pedidos = pedidoService.findAll();
-        for (int i = 0; i < pedidos.size(); i++) {
-            System.out.println(pedidos.get(i).toString());
-        }
         assertEquals(0, pedidos.size());
     }
 
@@ -130,10 +123,7 @@ class PedidoServiceImplTest {
         Pedido pedido = new Pedido(1L, "AG45R3");
         pedidoService.save(pedido);
         List<Pedido> pedidos = pedidoService.findAll();
-        for (int i = 0; i < pedidos.size(); i++) {
-            System.out.println(pedidos.get(i).toString());
-        }
-        Pedido pedidoObtenido = pedidoService.findOne(13L);
+        Pedido pedidoObtenido = pedidoService.findOne(14L);
         assertEquals(pedido.getCodigo(), pedidoObtenido.getCodigo());
     }
 

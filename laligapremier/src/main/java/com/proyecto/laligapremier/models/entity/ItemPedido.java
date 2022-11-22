@@ -42,6 +42,13 @@ public class ItemPedido {
     public ItemPedido() {
     }
 
+    public ItemPedido(Long id, Camiseta camiseta, Talla talla, Integer cantidad) {
+        this.id = id;
+        this.camiseta = camiseta;
+        this.talla = talla;
+        this.cantidad = cantidad;
+    }
+
     /**
      * Metodo que calcula el precio de un item por la cantidad de este.
      * @return precio de un item

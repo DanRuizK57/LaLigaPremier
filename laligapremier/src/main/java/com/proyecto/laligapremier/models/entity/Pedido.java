@@ -47,6 +47,12 @@ public class Pedido {
         this.items = new ArrayList<ItemPedido>();
     }
 
+    public Pedido(Long id, String codigo) {
+        this.id = id;
+        this.codigo = codigo;
+        this.items = new ArrayList<ItemPedido>();
+    }
+
     @PrePersist
     public void prePersist() {
         fecha = new Date();
@@ -58,7 +64,6 @@ public class Pedido {
                 "id=" + id +
                 ", fecha=" + fecha +
                 ", usuario=" + usuario +
-                ", items=" + items +
                 ", numCamisetas=" + numCamisetas +
                 ", precioTotal=" + precioTotal +
                 ", codigo='" + codigo + '\'' +
